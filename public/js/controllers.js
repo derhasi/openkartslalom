@@ -2,20 +2,18 @@
 
 /* Controllers */
 
-function AppCtrl($scope, $http) {
-  $http({method: 'GET', url: '/api/name'}).
-  success(function(data, status, headers, config) {
-    $scope.name = data.name;
-  }).
-  error(function(data, status, headers, config) {
-    $scope.name = 'Error!'
-  });
+function PersonsCtrl($scope, $http) {
+  $http({method: 'GET', url: '/api/persons'}).
+    success(function(data, status, headers, config) {
+      $scope.persons = data;
+    }).
+    error(function(data, status, headers, config) {
+      $scope.persons = [];
+    });
 }
-
-function MyCtrl1() {}
-MyCtrl1.$inject = [];
+PersonsCtrl.$inject = ['$scope', '$http'];
 
 
-function MyCtrl2() {
+function HomeCtrl() {
 }
-MyCtrl2.$inject = [];
+HomeCtrl.$inject = [];

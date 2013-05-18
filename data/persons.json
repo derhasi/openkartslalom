@@ -1,0 +1,24 @@
+{
+  "102": {
+    "id": 102,
+    "zid": 1,
+    "licence": "1045",
+    "name": "Johannes Haseitl",
+    "zip": "30173",
+    "city": "Hannover",
+    "club": "MSC Altenstadt",
+    "rookie": "1994",
+    "status": "original"
+  },
+  "103": {
+    "id": 103,
+    "zid": 1,
+    "licence": "1047",
+    "name": "Matthäus Haseitl",
+    "zip": "86981",
+    "city": "Kinsau",
+    "club": "MSC Lechbruck",
+    "rookie": "1994",
+    "status": "original"
+  }
+}

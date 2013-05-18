@@ -1,19 +1,20 @@
 extends layout
 
 block body
-  div(ng-controller='AppCtrl')
-    h2 Hello {{name}}
+  header
+    h1 openKartSlalom
+  nav
     ul.menu
       li
-        a(href='view1') view1
+        a(href='home') Home
       li
-        a(href='view2') view2
+        a(href='persons') Persons
 
-    div(ng-view)
+  div(ng-view)
 
-    div
-      | Angular seed app: v
-      span(app-version)
+  footer
+    | openKartSlalom app: v
+    span(app-version)
 
   script(src='js/lib/angular/angular.js')
   script(src='js/app.js')
