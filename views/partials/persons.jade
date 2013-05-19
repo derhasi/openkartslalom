@@ -3,6 +3,13 @@ h2 Persons
 div
   | Filter:
   input(ng-model='searchText')
+  | Sort:
+  select(ng-model='sortBY')
+    option(value="")
+    option(value="lastname") Last name
+    option(value="firstname") First name
+    option(value="class") Class
+    option(value="club") Club
 
 table
   tr
@@ -13,7 +20,7 @@ table
     th City
     th Birthday
     th Actions
-  tr(ng-repeat="person in persons | filter:searchText")
+  tr(ng-repeat="person in persons | filter:searchText | orderBy:sortBY")
     td {{person.id}}
     td {{person.class}}
     td {{person.firstname}}
@@ -22,7 +29,8 @@ table
     td {{person.zip}} {{person.city}}
     td {{person.birthday}}
     td
-      i Edit
+      a(href="driver/{{person.__id}}/edit")
+        i Edit
 
 div(class="legend")
 
