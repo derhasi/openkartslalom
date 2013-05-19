@@ -10,6 +10,7 @@ var express = require('express'),
 var app = module.exports = express();
 
 // Configuration
+var config = require('./models/config');
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
@@ -34,9 +35,7 @@ app.get('/', routes.index);
 app.get('/partials/:name', routes.partials);
 
 // JSON API
-app.get('/api/persons', api.persons);
-app.get('/api/personscsv', api.personscsv);
-
+app.get('/api/persons', api.name);
 
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
