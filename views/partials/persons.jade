@@ -1,10 +1,29 @@
 h2 Persons
 
+div
+  | Filter:
+  input(ng-model='searchText')
 
 table
   tr
-    th Name
+    th ID
+    th Class
+    th(colspan=2) Name
     th Club
-  tr(ng-repeat='person in persons')
-    td {{person.name}}
+    th City
+    th Birthday
+    th Actions
+  tr(ng-repeat="person in persons | filter:searchText")
+    td {{person.id}}
+    td {{person.class}}
+    td {{person.firstname}}
+    td {{person.lastname}}
     td {{person.club}}
+    td {{person.zip}} {{person.city}}
+    td {{person.birthday}}
+    td
+      i Edit
+
+div(class="legend")
+
+
