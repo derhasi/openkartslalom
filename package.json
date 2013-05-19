@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "express": "3.0.0",
-    "jade": ">= 0.0.1"
+    "jade": ">= 0.0.1",
+    "csv": "0.3.0"
   }
 }

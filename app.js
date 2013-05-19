@@ -35,6 +35,7 @@ app.get('/partials/:name', routes.partials);
 
 // JSON API
 app.get('/api/persons', api.persons);
+app.get('/api/personscsv', api.personscsv);
 
 
 // redirect all others to the index (HTML5 history)
