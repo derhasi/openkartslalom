@@ -49,7 +49,7 @@ exports.persons = function (req, res) {
  */
 function importPersonsCSV(fromPath, toPath, callback) {
 
-  var persons = {};
+  var persons = [];
   var stream = fs.createReadStream(fromPath);
   var mapping = config.get("personsCSVMapping");
   var headerCount = config.get("personsCSVHeaderCount");
@@ -67,7 +67,8 @@ function importPersonsCSV(fromPath, toPath, callback) {
     })
     .on('record', function(row, index) {
       if (index >= headerCount) {
-        persons['csv-' + index] = row;
+        row.__id = 'csv-' + index;
+        persons.push(row);
       }
     })
     .on('end', function(count){
