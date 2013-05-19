@@ -1,6 +1,6 @@
 {
-  "personsCSV": "data/import/persons.csv",
-  "personsCSVMapping": {
+  "driversCSV": "data/import/drivers.csv",
+  "driversCSVMapping": {
     "id": 0,
     "class": 1,
     "lastname": 2,
@@ -12,5 +12,5 @@
     "birthday": 8,
     "oldLicence": 9
   },
-  "personsCSVHeaderCount": 1
+  "driversCSVHeaderCount": 1
 }

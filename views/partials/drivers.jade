@@ -1,4 +1,4 @@
-h2 Persons
+h2 drivers
 
 div
   | Filter:
@@ -20,16 +20,16 @@ table
     th City
     th Birthday
     th Actions
-  tr(ng-repeat="person in persons | filter:searchText | orderBy:sortBY")
-    td {{person.id}}
-    td {{person.class}}
-    td {{person.firstname}}
-    td {{person.lastname}}
-    td {{person.club}}
-    td {{person.zip}} {{person.city}}
-    td {{person.birthday}}
+  tr(ng-repeat="driver in drivers | filter:searchText | orderBy:sortBY")
+    td {{driver.id}}
+    td {{driver.class}}
+    td {{driver.firstname}}
+    td {{driver.lastname}}
+    td {{driver.club}}
+    td {{driver.zip}} {{driver.city}}
+    td {{driver.birthday}}
     td
-      a(href="driver/{{person.__id}}/edit")
+      a(href="driver/{{driver.__id}}/edit")
         i Edit
 
 div(class="legend")

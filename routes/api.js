@@ -7,29 +7,29 @@ var csv = require('csv');
 var config = require('../models/config');
 
 /**
- * Route callback to show all persons as JSON.
+ * Route callback to show all drivers as JSON.
  *
  * @param req
  * @param res
  */
-exports.persons = function (req, res) {
+exports.drivers = function (req, res) {
 
-  var personCSVPath = config.get("personsCSV");
+  var driverCSVPath = config.get("driversCSV");
 
-  if (fs.existsSync('data/current/persons.json')) {
-    console.log('persons.json found in data/current.');
-    var persons = require('../data/current/persons.json');
-    res.json(persons);
+  if (fs.existsSync('data/current/drivers.json')) {
+    console.log('drivers.json found in data/current.');
+    var drivers = require('../data/current/drivers.json');
+    res.json(drivers);
   }
-  else if (personCSVPath && fs.existsSync(personCSVPath)) {
-    importPersonsCSV('data/import/persons.csv', 'data/current/persons.json', function(err, count) {
+  else if (driverCSVPath && fs.existsSync(driverCSVPath)) {
+    importdriversCSV('data/import/drivers.csv', 'data/current/drivers.json', function(err, count) {
       if (err) {
-        console.log('Error on converting persons.csv to persons.json: ', err);
+        console.log('Error on converting drivers.csv to drivers.json: ', err);
         res.json({});
       }
       else {
-        console.log('Converted %s to persons.json.', personCSVPath);
-        var content = fs.readFileSync('data/current/persons.json');
+        console.log('Converted %s to drivers.json.', driverCSVPath);
+        var content = fs.readFileSync('data/current/drivers.json');
         res.json(JSON.parse(content));
       }
     });
@@ -47,12 +47,12 @@ exports.persons = function (req, res) {
  * @param toPath
  * @param callback
  */
-function importPersonsCSV(fromPath, toPath, callback) {
+function importdriversCSV(fromPath, toPath, callback) {
 
-  var persons = [];
+  var drivers = [];
   var stream = fs.createReadStream(fromPath);
-  var mapping = config.get("personsCSVMapping");
-  var headerCount = config.get("personsCSVHeaderCount");
+  var mapping = config.get("driversCSVMapping");
+  var headerCount = config.get("driversCSVHeaderCount");
 
   csv()
     .from(stream)
@@ -68,11 +68,11 @@ function importPersonsCSV(fromPath, toPath, callback) {
     .on('record', function(row, index) {
       if (index >= headerCount) {
         row.__id = 'csv-' + index;
-        persons.push(row);
+        drivers.push(row);
       }
     })
     .on('end', function(count){
-      fs.writeFileSync(toPath, JSON.stringify(persons, null, " "));
+      fs.writeFileSync(toPath, JSON.stringify(drivers, null, " "));
       callback(null, count);
     })
     .on('error', function(err){

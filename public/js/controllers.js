@@ -2,17 +2,17 @@
 
 /* Controllers */
 
-function PersonsCtrl($scope, $http) {
-  $http({method: 'GET', url: '/api/persons'}).
+function driversCtrl($scope, $http) {
+  $http({method: 'GET', url: '/api/drivers'}).
     success(function(data, status, headers, config) {
-      $scope.persons = data;
-      console.log($scope.persons);
+      $scope.drivers = data;
+      console.log($scope.drivers);
     }).
     error(function(data, status, headers, config) {
-      $scope.persons = [];
+      $scope.drivers = [];
     });
 }
-PersonsCtrl.$inject = ['$scope', '$http'];
+driversCtrl.$inject = ['$scope', '$http'];
 
 
 function HomeCtrl() {
