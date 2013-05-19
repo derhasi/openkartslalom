@@ -18,14 +18,60 @@ GET /api/drivers
 {
     "csv-370": {
         "id": "Z00001",
-        "klasse": "E",
+        "class": "E",
         "lastname": "Haseitl",
         "firstname": "Johannes",
         "rookie": "",
         "zip": "30161",
         "city": "Hannover",
-        "club": "MSC Lechbruck",
+        "club": "MSC Altenstadt",
         "birthday": "01.02.1984",
         "oldLicence": "1045"
     }
+}
+
+
+GET /api/driver/:name
+< 200
+< Content-Type: application/json
+{
+    "id": "Z00001",
+    "class": "E",
+    "lastname": "Haseitl",
+    "firstname": "Johannes",
+    "rookie": "",
+    "zip": "30161",
+    "city": "Hannover",
+    "club": "MSC Altenstadt",
+    "birthday": "01.02.1984",
+    "oldLicence": "1045"
+}
+
+PUT /api/driver/:name
+> Accept: application/json
+{
+    "id": "Z00001",
+    "class": "E",
+    "lastname": "Haseitl",
+    "firstname": "Johannes",
+    "rookie": "",
+    "zip": "30161",
+    "city": "Hannover",
+    "club": "MSC Lechbruck",
+    "birthday": "01.02.1984",
+    "oldLicence": "1045"
+}
+< 200
+< Content-Type: application/json
+{
+    "status": "updated"
+}
+
+
+DELETE /api/driver/:name
+> Accept: application/json
+< 200
+< Content-Type: application/json
+{
+    "status": "deleted"
 }
