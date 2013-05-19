@@ -1,0 +1,16 @@
+{
+  "sourceFile": "persons.csv",
+  "sourceFormat": "csv",
+  "mapping": {
+    "id": 0,
+    "class": 1,
+    "lastname": 2,
+    "firstname": 3,
+    "rookie": 4,
+    "zip": 5,
+    "city": 6,
+    "club": 7,
+    "birthday": 8,
+    "oldLicence": 9
+  }
+}

@@ -1,16 +1,20 @@
 lib-cov
 *.seed
 *.log
-data/*.csv
 *.dat
 *.out
 *.pid
 *.gz
-
 pids
 logs
 results
-
 npm-debug.log
 
 .idea
+
+data/*.*
+data/import/*
+data/current/*
+!data/current/README.md
+!data/import/README.md
+
