@@ -6,6 +6,7 @@ angular.module('openKS', ['openKS.filters', 'openKS.services', 'openKS.directive
   config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider.when('/home', {templateUrl: 'partials/home', controller: HomeCtrl});
     $routeProvider.when('/drivers', {templateUrl: 'partials/drivers', controller: driversCtrl});
+    $routeProvider.when('/settings', {templateUrl: 'partials/settings', controller: settingsCtrl});
     $routeProvider.otherwise({redirectTo: '/home'});
     $locationProvider.html5Mode(true);
   }]);

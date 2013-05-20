@@ -2,6 +2,12 @@
 
 /* Controllers */
 
+/**
+ * Controller for drivers overview.
+ *
+ * @param $scope
+ * @param $http
+ */
 function driversCtrl($scope, $http) {
   $http({method: 'GET', url: '/api/drivers'}).
     success(function(data, status, headers, config) {
@@ -18,3 +24,12 @@ driversCtrl.$inject = ['$scope', '$http'];
 function HomeCtrl() {
 }
 HomeCtrl.$inject = [];
+
+
+/**
+ * Controller for settings page.
+ */
+function settingsCtrl() {
+
+}
+settingsCtrl.$inject = [];
