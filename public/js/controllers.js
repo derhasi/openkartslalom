@@ -52,9 +52,11 @@ driversCtrl.$inject = ['$scope', '$http'];
  * @param $scope
  */
 function driversEditCtrl($scope, $routeParams, driverFactory) {
+  console.log($routeParams);
+  $scope.driver = driverFactory.get({driverId: $routeParams.id});
 
-  $scope.driver = {
-    "lastname": "Holla"
+  $scope.saveDriver = function() {
+    alert("Not implemented yet!");
   }
 }
 driversEditCtrl.$inject = ['$scope', '$routeParams', 'driverFactory'];
