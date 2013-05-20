@@ -2,24 +2,48 @@ extends layout
 
 block body
   header.container
-    h1 openKartSlalom
-    nav.navbar
-      div.navbar-inner
-        ul.nav
-          li
-            a(href='home') Home
-          li
-            a(href='drivers') Drivers
-          li
-            a(href='settings') Settings
+    nav.masthead
+      ul.nav.nav-pills.pull-right
+        li(class="{{getClass('/home')}}")
+          a(href='home')
+            i.icon-home  Home
+        li(class="{{getClass('/drivers')}}")
+          a(href='drivers')
+            i.icon-user  Drivers
+        li(class="{{getClass('/settings')}}")
+          a(href='settings')
+            i.icon-cog  Settings
+    h1.title
+      | openKartSlalom&nbsp;
+      i.icon-flag-checkered.icon-3x
 
-  div(ng-view
-    class="container")
+  div.container(ng-view)
 
   footer.footer
     div.container
       p openKartSlalom app: v
         span(app-version)
+      p.muted
+        | Created by&nbsp;
+        a(href="http://derhasi.de")
+          i.icon-user  derhasi
+        | , source code on&nbsp;
+        a(href="https://github.com/derhasi/openkartslalom")
+          i.icon-github  Github
+      p
+        | powered by&nbsp;
+        span.badge nodejs
+        | &nbsp;
+        span.badge angularjs
+        | &nbsp;
+        span.badge express
+        | &nbsp;
+        span.badge bootstrap
+        | &nbsp;
+        i.icon-html5
+        | &nbsp;
+        i.icon-css3
+
 
   script(src='js/lib/angular/angular.js')
   script(src='js/app.js')

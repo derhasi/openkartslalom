@@ -22,6 +22,10 @@ table(class='table-hover table')
     th City
     th Birthday
     th Actions
+  tr(ng-hide="drivers.length")
+    td(colspan="7")
+      i.icon-spinner.icon-spin.icon-large
+      span  Loading ...
   tr(ng-repeat='driver in drivers | filter:searchText | orderBy:sortBY')
     td {{driver.id}}
     td {{driver.class}}
