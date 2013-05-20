@@ -1,37 +1,34 @@
-h2 drivers
+h2 Driver database
 
 div
-  | Filter:
-  input(ng-model='searchText')
-  | Sort:
-  select(ng-model='sortBY')
-    option(value="")
-    option(value="lastname") Last name
-    option(value="firstname") First name
-    option(value="class") Class
-    option(value="club") Club
+  div.input-prepend.span4
+    span.add-on Filter:
+    input(type="text", ng-model='searchText')
+  div.input-prepend.span4
+    span.add-on Sort:
+    select(ng-model='sortBY')
+      option(value='')
+      option(value='lastname') Last name
+      option(value='firstname') First name
+      option(value='class') Class
+      option(value='club') Club
 
-table
+table(class='table-hover table')
   tr
     th ID
     th Class
-    th(colspan=2) Name
+    th Name
     th Club
     th City
     th Birthday
     th Actions
-  tr(ng-repeat="driver in drivers | filter:searchText | orderBy:sortBY")
+  tr(ng-repeat='driver in drivers | filter:searchText | orderBy:sortBY')
     td {{driver.id}}
     td {{driver.class}}
-    td {{driver.firstname}}
-    td {{driver.lastname}}
+    td {{driver.firstname}} {{driver.lastname}}
     td {{driver.club}}
     td {{driver.zip}} {{driver.city}}
     td {{driver.birthday}}
     td
-      a(href="driver/{{driver.__id}}/edit")
-        i Edit
-
-div(class="legend")
-
-
+      a(href='driver/{{driver.__id}}/edit', title='Edit "{{driver.firstname}} {{driver.lastname}}"')
+        i(class='icon-edit-sign')  edit

@@ -1,20 +1,25 @@
 extends layout
 
 block body
-  header
+  header.container
     h1 openKartSlalom
-  nav
-    ul.menu
-      li
-        a(href='home') Home
-      li
-        a(href='drivers') Drivers
+    nav.navbar
+      div.navbar-inner
+        ul.nav
+          li
+            a(href='home') Home
+          li
+            a(href='drivers') Drivers
+          li
+            a(href='settings') Settings
 
-  div(ng-view)
+  div(ng-view
+    class="container")
 
-  footer
-    | openKartSlalom app: v
-    span(app-version)
+  footer.footer
+    div.container
+      p openKartSlalom app: v
+        span(app-version)
 
   script(src='js/lib/angular/angular.js')
   script(src='js/app.js')
