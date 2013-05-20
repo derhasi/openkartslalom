@@ -1,16 +1,48 @@
 {
+  "title": "Event title",
+  "subtitle": "Event subtitle, like championship list",
   "driversCSV": "data/import/drivers.csv",
-  "driversCSVMapping": {
-    "id": 0,
-    "class": 1,
-    "lastname": 2,
-    "firstname": 3,
-    "rookie": 4,
-    "zip": 5,
-    "city": 6,
-    "club": 7,
-    "birthday": 8,
-    "oldLicence": 9
-  },
+  "driversCSVMapping": [
+    {
+      "column": "id",
+      "index": "0"
+    },
+    {
+      "column": "class",
+      "index": "1"
+    },
+    {
+      "column": "firstname",
+      "index": "2"
+    },
+    {
+      "column": "lastname",
+      "index": "3"
+    },
+    {
+      "column": "rookie",
+      "index": "4"
+    },
+    {
+      "column": "zip",
+      "index": "5"
+    },
+    {
+      "column": "city",
+      "index": "6"
+    },
+    {
+      "column": "club",
+      "index": "7"
+    },
+    {
+      "column": "birthday",
+      "index": "8"
+    },
+    {
+      "column": "oldLicence",
+      "index": "9"
+    }
+  ],
   "driversCSVHeaderCount": 1
 }

@@ -53,14 +53,10 @@ exports.setConfig = function (req, res) {
     }
     config.save();
     console.log('Updated %d config items.', count);
-    res.json({
-      "status": "updated"
-    });
+    res.json(config.load());
   }
   // We do not have any data to save.
   else {
-    res.json({
-      "status": "empty"
-    });
+    res.json(config.load());
   }
 }

@@ -72,9 +72,11 @@ function importCSV(fromPath, toPath, callback) {
     .transform(function(row) {
       var newRow = {};
 
-      for (var key in mapping) {
-        var index = mapping[key];
-        newRow[key] = row[index];
+      for (var i in mapping) {
+        var map = mapping[i];
+        if (map.index >= 0) {
+        newRow[map.column] = row[map.index];
+        }
       }
       return newRow;
     })
