@@ -25,3 +25,42 @@ exports.getDrivers = function (req, res) {
 
   });
 }
+
+/**
+ * Endpoint to view the whole configuration.
+ *
+ * @param req
+ * @param res
+ */
+exports.getConfig = function (req, res) {
+  res.json(config.load());
+}
+
+/**
+ * Endpoint to store config back again.
+ *
+ * @param req
+ * @param res
+ */
+exports.setConfig = function (req, res) {
+
+  console.log(req.body);
+  if (req.body) {
+    var count = 0;
+    for (var key in req.body) {
+      config.set(key, req.body[key]);
+      count++;
+    }
+    config.save();
+    console.log('Updated %d config items.', count);
+    res.json({
+      "status": "updated"
+    });
+  }
+  // We do not have any data to save.
+  else {
+    res.json({
+      "status": "empty"
+    });
+  }
+}

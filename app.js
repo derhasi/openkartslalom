@@ -21,6 +21,8 @@ app.configure(function(){
   app.use(app.router);
 });
 
+app.use(express.bodyParser());
+
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
@@ -36,6 +38,9 @@ app.get('/partials/:name', routes.partials);
 
 // JSON API
 app.get('/api/drivers', api.getDrivers);
+
+app.get('/api/config', api.getConfig);
+app.put('/api/config', api.setConfig);
 
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
