@@ -14,15 +14,36 @@ var driver = require('../models/driver');
  * @param res
  */
 exports.getDrivers = function (req, res) {
-
   // Output the list of drivers.
   driver.list(function (err, drivers) {
     if (err) {
       console.log(err);
     }
-
     res.json(drivers);
+  });
+}
 
+exports.getDriver = function(req, res) {
+  driver.get(req.params.driverId, function (err, driver) {
+    if (err) {
+      console.log('Error retrieving driver: ', err);
+      res.status(404).send('No driver found');
+    }
+    else if (!driver) {
+      res.status(404).send('No driver found');
+    }
+    else {
+      res.json(driver);
+    }
+  });
+}
+
+exports.newDriver = function(req, res) {
+  driver.new(function (err, driver) {
+    if (err) {
+      console.log('Error retrieving new driver: ', err);
+    }
+    res.json(driver);
   });
 }
 

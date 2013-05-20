@@ -52,6 +52,52 @@ exports.list = function(callback) {
   }
 }
 
+/**
+ * Get a driver object for the given id.
+ *
+ * @param id
+ *   ID of the driver
+ * @param callback
+ *  Provides:
+ *  - err: error object
+ *  - Object: a driver object
+ */
+exports.get = function(driverId, callback) {
+  this.list(function (err, drivers) {
+    if (err) {
+      callback(err);
+    }
+    // Run through the list of drivers
+    for (var key in drivers) {
+      if (drivers[key].__id == driverId) {
+        callback(null, drivers[key]);
+        return;
+      }
+    }
+
+    callback(new Error('Driver not found'));
+  });
+}
+
+/**
+ * Get a new empty driver.
+ *
+ * @param callback
+ */
+exports.new = function(callback) {
+  this.list(function (err, drivers) {
+    if (err) {
+      callback(err);
+    }
+
+    var l = drivers.length;
+    // Simply pass an empty obejct
+    callback(null, {
+      "__id": "new-" + l,
+      "id": "N" + l
+    });
+  });
+}
 
 /**
  * Helper function to convert a csv file to json.

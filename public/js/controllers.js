@@ -21,6 +21,12 @@ function AppCtrl($scope, $location) {
 }
 AppCtrl.$inject = ['$scope', '$location'];
 
+/**
+ * Controller for the home page.
+ */
+function HomeCtrl() {
+}
+HomeCtrl.$inject = [];
 
 /**
  * Controller for drivers overview.
@@ -41,22 +47,25 @@ function driversCtrl($scope, $http) {
 }
 driversCtrl.$inject = ['$scope', '$http'];
 
+/**
+ * Controller for editing driver.
+ * @param $scope
+ */
+function driversEditCtrl($scope, $routeParams, driverFactory) {
 
-function HomeCtrl() {
+  $scope.driver = {
+    "lastname": "Holla"
+  }
 }
-HomeCtrl.$inject = [];
-
+driversEditCtrl.$inject = ['$scope', '$routeParams', 'driverFactory'];
 
 /**
  * Controller for settings page.
  */
 function settingsCtrl($scope, configFactory) {
-
   $scope.config = configFactory.get();
-
   $scope.saveConfig = function() {
     $scope.config.$update();
   }
 }
 settingsCtrl.$inject = ['$scope', 'configFactory'];
-

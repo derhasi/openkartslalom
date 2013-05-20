@@ -37,6 +37,9 @@ app.get('/partials/:name', routes.partials);
 
 // JSON API
 app.get('/api/drivers', api.getDrivers);
+app.get('/api/driver/new', api.newDriver);
+app.get('/api/driver/:driverId', api.getDriver);
+
 
 app.get('/api/config', api.getConfig);
 app.put('/api/config', api.setConfig);
