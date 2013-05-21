@@ -83,6 +83,9 @@ exports.get = function(driverId, callback) {
  * Get a new empty driver.
  *
  * @param callback
+ *  Provides:
+ *  - err: error object
+ *  - Object: a driver object
  */
 exports.new = function(callback) {
   this.list(function (err, drivers) {
@@ -95,6 +98,50 @@ exports.new = function(callback) {
     callback(null, {
       "__id": "new-" + l,
       "id": "N" + l
+    });
+  });
+}
+
+/**
+ * Write a driver object back to the drivers json.
+ *
+ * @param obj
+ *   The driver object (new or to update).
+ * @param callback
+ *  Provides:
+ *  - err: error object
+ *  - Object: a driver object
+ */
+exports.write = function(obj, callback) {
+  this.list(function (err, drivers) {
+    if (err) {
+      callback(err);
+    }
+
+    if (obj.__id == undefined) {
+      callback(new Error('No __id given for the object.'));
+      return;
+    }
+
+    var found = false;
+    // Run through the list of drivers, and replace the object having the same
+    // __id with the new one.
+    for (var key in drivers) {
+      if (drivers[key].__id == obj.__id) {
+        drivers[key] = obj;
+        found = true;
+        break;
+      }
+    }
+
+    // If there was no existing entry, simply add id to the end of the list.
+    if (!found) {
+      drivers.push(obj);
+    }
+
+    // And then we will write the file back.
+    fs.writeFile(driverCurrentJSONPath, JSON.stringify(drivers, null, " "), function(err) {
+      callback(err, obj);
     });
   });
 }
