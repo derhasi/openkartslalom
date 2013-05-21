@@ -23,6 +23,12 @@ exports.getDrivers = function (req, res) {
   });
 }
 
+/**
+ * Endpoint for getting a driver object from the stored json.
+ *
+ * @param req
+ * @param res
+ */
 exports.getDriver = function(req, res) {
   driver.get(req.params.driverId, function (err, driver) {
     if (err) {
@@ -38,6 +44,12 @@ exports.getDriver = function(req, res) {
   });
 }
 
+/**
+ * Endpoint callback to get an object with a new id.
+ *
+ * @param req
+ * @param res
+ */
 exports.newDriver = function(req, res) {
   driver.new(function (err, driver) {
     if (err) {
@@ -45,6 +57,31 @@ exports.newDriver = function(req, res) {
     }
     res.json(driver);
   });
+}
+
+/**
+ * Endpoint callback for saving a driver object.
+ * @param req
+ * @param res
+ */
+exports.saveDriver = function(req, res) {
+  if (!req.body) {
+    res.status('406').send('No object given.');
+  }
+  else if (req.body.__id == undefined) {
+    res.status('406').send('No object __id given');
+  }
+  else if (req.body.__id != req.params.driverId) {
+    res.status('406').send('Param and object id do not match');
+  }
+  else {
+    driver.write(req.body, function(err, driver) {
+      if (err) {
+        console.log('Error saving driver: ', req.body);
+      }
+      res.json(driver);
+    });
+  }
 }
 
 /**

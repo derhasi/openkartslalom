@@ -39,6 +39,7 @@ app.get('/partials/:name', routes.partials);
 app.get('/api/drivers', api.getDrivers);
 app.get('/api/driver/new', api.newDriver);
 app.get('/api/driver/:driverId', api.getDriver);
+app.put('/api/driver/:driverId', api.saveDriver);
 
 
 app.get('/api/config', api.getConfig);
