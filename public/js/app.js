@@ -9,7 +9,7 @@ openKS.config(['$routeProvider', '$locationProvider', function($routeProvider, $
   $routeProvider.when('/drivers', {templateUrl: 'partials/drivers', controller: driversCtrl});
   $routeProvider.when('/drivers/:id/edit', {templateUrl: 'partials/driver-edit', controller: driversEditCtrl});
   $routeProvider.when('/settings', {templateUrl: 'partials/settings', controller: settingsCtrl});
-  //$routeProvider.otherwise({redirectTo: '/home'});
+  $routeProvider.otherwise({redirectTo: '/home'});
   $locationProvider.html5Mode(true);
 }]);
 
