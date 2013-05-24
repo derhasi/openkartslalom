@@ -8,7 +8,8 @@ openKS.config(['$routeProvider', '$locationProvider', '$translateProvider', func
   // Routes defined.
   $routeProvider.when('/home', {templateUrl: 'partials/home', controller: HomeCtrl});
   $routeProvider.when('/drivers', {templateUrl: 'partials/drivers', controller: driversCtrl});
-  $routeProvider.when('/drivers/:id/edit', {templateUrl: 'partials/driver-edit', controller: driversEditCtrl});
+  $routeProvider.when('/drivers/add', {templateUrl: 'partials/driver-form', controller: driversAddCtrl});
+  $routeProvider.when('/drivers/:id/edit', {templateUrl: 'partials/driver-form', controller: driversEditCtrl});
   $routeProvider.when('/settings', {templateUrl: 'partials/settings', controller: settingsCtrl});
   $routeProvider.otherwise({redirectTo: '/home'});
   $locationProvider.html5Mode(true);
@@ -28,7 +29,7 @@ openKS.config(['$routeProvider', '$locationProvider', '$translateProvider', func
 openKS.factory('configFactory', function($resource) {
   return $resource('/api/config',
     {},
-    { update: { method: 'PUT' }}
+    { save: { method: 'PUT' }}
   );
 });
 
@@ -38,8 +39,9 @@ openKS.factory('configFactory', function($resource) {
 openKS.factory('driverFactory', function($resource) {
   return $resource('/api/driver/:driverId',
     { driverId: '@__id' },
-    { save: { method: 'PUT' },
-      new: {method: 'PUT', params:{driverId:"new"}}
+    {
+      save: { method: 'PUT' },
+      new: {method: 'GET', params:{driverId:"new"}}
     }
   );
 });

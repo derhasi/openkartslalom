@@ -1,7 +1,8 @@
 a(href="/drivers")
   i.icon-reply  Back to drivers
 
-h2 Edit "{{driver.firstname}} {{driver.lastname}}"
+h2(ng-show="newDriver", translate="") Add driver
+h2(ng-hide="newDriver") Edit "{{driver.firstname}} {{driver.lastname}}"
 
 form
   label ID

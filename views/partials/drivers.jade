@@ -12,6 +12,10 @@ div
       option(value='firstname', translate="") First name
       option(value='class', translate="") Class
       option(value='club', translate="") Club
+  div.span2
+    a.btn.btn-primary(href="/drivers/add")
+      i.icon-plus
+      | &nbsp;{{ 'Add driver' | translate }}
 
 table(class='table-hover table')
   tr
@@ -35,4 +39,4 @@ table(class='table-hover table')
     td {{driver.birthday}}
     td
       a(href='drivers/{{driver.__id}}/edit', title='Edit "{{driver.firstname}} {{driver.lastname}}"')
-        i(class='icon-edit-sign')  edit
+        i(class='icon-edit')  edit
