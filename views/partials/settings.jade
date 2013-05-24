@@ -1,40 +1,40 @@
-h2 Settings
+h2(translate="") Settings
 
 
 form.form-horizontal
   fieldset
-    legend General
+    legend(translate="") General
     div.control-group
-      label.control-label(for="inputTitle") Title
+      label.control-label(for="inputTitle", translate="") Title
       div.controls
         input.input-xlarge(type="text", id="inputTitle", ng-model='config.title')
     div.control-group
-      label.control-label(for="inputSubtitle") Subtitle
+      label.control-label(for="inputSubtitle", translate="") Subtitle
       div.controls
         input.input-xlarge(type="text", ng-model='config.subtitle')
   fieldset
     legend Results
     div.control-group
-      label.control-label(for="secondsCol1") Fail seconds (Column 1)
+      label.control-label(for="secondsCol1", translate="") Fail seconds (Column 1)
       div.controls
         input.input-mini(type="number", id="secondsCol1", ng-model='config.fs1')
     div.control-group
-      label.control-label(for="secondsCol2") Fail seconds (Column 2)
+      label.control-label(for="secondsCol2", translate="") Fail seconds (Column 2)
       div.controls
         input.input-mini(type="number", id="secondsCol2", ng-model='config.fs2')
 
   fieldset
     legend Drivers CSV
     div.control-group
-      label.control-label File path
+      label.control-label(translate="") File path
       div.controls
         input.input-xlarge(type="text", ng-model='config.driversCSV')
     div.control-group
-      label.control-label Header rows
+      label.control-label(translate="") Header rows
       div.controls
         input.input-mini(type="number", ng-model='config.driversCSVHeaderCount')
 
   hr
   div.actions
-    input.btn.btn-large.btn-primary(type="submit", value="Save settings", ng-click="saveConfig()")
+    input.btn.btn-large.btn-primary(type="submit", value="{{ 'Save settings' | translate }}", ng-click="saveConfig()")
 

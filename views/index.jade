@@ -6,13 +6,16 @@ block body
       ul.nav.nav-pills.pull-right
         li(class="{{getClass('/home')}}")
           a(href='home')
-            i.icon-home  Home
+            i.icon-home
+            | &nbsp;{{ 'Home' | translate }}
         li(class="{{getClass('/drivers')}}")
           a(href='drivers')
-            i.icon-user  Drivers
+            i.icon-user(translate)
+            | &nbsp;{{ 'Drivers' | translate }}
         li(class="{{getClass('/settings')}}")
           a(href='settings')
-            i.icon-cog  Settings
+            i.icon-cog(translate)
+            | &nbsp;{{ 'Settings' | translate }}
     h1.title
       | openKartSlalom&nbsp;
       i.icon-flag-checkered.icon-3x
@@ -47,6 +50,7 @@ block body
 
   script(src='components/angular/angular.js')
   script(src='components/angular-resource/angular-resource.js')
+  script(src='components/angular-translate/angular-translate.js')
   script(src='js/app.js')
   script(src='js/services.js')
   script(src='js/controllers.js')
