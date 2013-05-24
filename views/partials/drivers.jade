@@ -8,20 +8,20 @@ div
     span.add-on Sort:
     select(ng-model='sortBY')
       option(value='')
-      option(value='lastname') Last name
-      option(value='firstname') First name
-      option(value='class') Class
-      option(value='club') Club
+      option(value='lastname', translate="") Last name
+      option(value='firstname', translate="") First name
+      option(value='class', translate="") Class
+      option(value='club', translate="") Club
 
 table(class='table-hover table')
   tr
-    th ID
-    th Class
-    th Name
-    th Club
-    th City
-    th Birthday
-    th Actions
+    th(translate="") ID
+    th(translate="") Class
+    th(translate="") Name
+    th(translate="") Club
+    th(translate="") City
+    th(translate="") Birthday
+    th(translate="") Actions
   tr(ng-hide="drivers.length")
     td(colspan="7")
       i.icon-spinner.icon-spin.icon-large

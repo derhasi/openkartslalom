@@ -14,13 +14,14 @@ openKS.config(['$routeProvider', '$locationProvider', '$translateProvider', func
   $locationProvider.html5Mode(true);
 
   // Configure translation service.
-  $translateProvider.translations({
-    "Home": "Startseite",
-    "Drivers": "Fahrer",
-    "Settings": "Einstellungen",
-    "Save settings": "Einstellungen speichern",
-    "Title": "Titel"
+  $translateProvider.preferredLanguage('de');
+
+  // use static-files loader with options object
+  $translateProvider.useStaticFilesLoader({
+    prefix: 'translations/',
+    suffix: '.json'
   });
+
 }]);
 
 // @todo minify support?
