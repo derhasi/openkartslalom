@@ -2,6 +2,7 @@
 var fs = require('fs');
 var csv = require('csv');
 var config = require('./config');
+var str = require('string');
 
 const driverCurrentJSONPath = "data/current/drivers.json";
 
@@ -93,11 +94,12 @@ exports.new = function(callback) {
       callback(err);
     }
 
+
     var l = drivers.length;
-    // Simply pass an empty obejct
+    // Simply pass an empty object with a N00000 id.
     callback(null, {
       "__id": "new-" + l,
-      "id": "N" + l
+      "id": "N" + str(l).padLeft(5, "0")
     });
   });
 }
