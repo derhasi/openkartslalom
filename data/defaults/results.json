@@ -1,0 +1,39 @@
+[
+  {
+    "driver": "new-300",
+    "driverName": "Johannes Haseitl",
+    "startNo": 1,
+    "team": "MSC Lechbruck",
+    "class": "E",
+    "gender": "male",
+    "status": "DQ/DNF/iW",
+    "training": [
+      {
+        "penalties": [0, 1],
+        "time": 10.10
+      }
+    ],
+    "race": [
+      {
+        "penalties": [0, 1],
+        "time": 10.10,
+        "aggregated": 20.10
+      },
+      {
+        "penalties": [0, 1],
+        "time": 10.10,
+        "aggregated": 20.10
+      }
+    ],
+    "total": {
+      "penalties": 20,
+      "time": 20.20,
+      "aggregated": 40.20
+    },
+    "best": 20.10,
+    "points": {
+      "adac": 6.0,
+      "default": 10.00
+    }
+  }
+]
