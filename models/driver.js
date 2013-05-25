@@ -99,9 +99,21 @@ exports.new = function(callback) {
     // Simply pass an empty object with a N00000 id.
     callback(null, {
       "__id": "new-" + l,
-      "id": "N" + str(l).padLeft(5, "0")
+      "id": getNewIDFromDrivers(drivers)
     });
   });
+}
+
+/**
+ * Helper to get a new key from the drivers array.
+ *
+ * @param Array drivers
+ * @returns {string}
+ */
+function getNewIDFromDrivers(drivers) {
+  var l = drivers.length;
+
+  return "N" + str(l).padLeft(5, "0");
 }
 
 /**
@@ -123,6 +135,11 @@ exports.write = function(obj, callback) {
     if (obj.__id == undefined) {
       callback(new Error('No __id given for the object.'));
       return;
+    }
+
+    // If the ID is empty we get the auto-id.
+    if (obj.id == "") {
+      obj.id = getNewIDFromDrivers(drivers);
     }
 
     var found = false;
