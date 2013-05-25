@@ -142,6 +142,10 @@ exports.write = function(obj, callback) {
       obj.id = getNewIDFromDrivers(drivers);
     }
 
+    // Update revision by 1.
+    obj.v += 1;
+    // @todo: add created and changed attributes
+
     var found = false;
     // Run through the list of drivers, and replace the object having the same
     // __id with the new one.
@@ -195,6 +199,7 @@ function importCSV(fromPath, toPath, callback) {
     .on('record', function(row, index) {
       if (index >= headerCount) {
         row.__id = 'csv-' + index;
+        row.v = 1;
         drivers.push(row);
       }
     })
