@@ -117,7 +117,7 @@ resultsEditCtrl.$inject = ['$scope', '$routeParams', 'resultFactory'];
 function resultsAddCtrl($scope, $routeParams, resultFactory) {
   console.log($routeParams);
   $scope.result = resultFactory.new();
-  $scope.newresult = true;
+  $scope.newResult = true;
 
   $scope.saveResult = function() {
     $scope.result.$save();

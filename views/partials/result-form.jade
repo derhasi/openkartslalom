@@ -9,6 +9,42 @@ form
   input(type='text', ng-model='result.id')
   label Class
   input(type='text', ng-model='result.class')
+  label StartNo.
+  input(type='number', ng-model='result.startNo')
+  label Driver
+    | &nbsp;
+    small {{ result.driverName }}
+  input(type='text', ng-model='result.driver')
+  label Status
+  select(ng-model='result.status')
+    option(value="iW") in Wertung
+    option(value="DQ") disqualified
+    option(value="DNF") did not finish
+    option(value="DNS") did not start
+
+  // Iterate over trainings.
+  label Training
+  div(ng-repeat='t in result.training')
+    label T{{ $index + 1 }}
+    | Time:
+    input(type='decimal', ng-model='t.time')
+    | Pen 1:
+    input(type='number', ng-model='t.penalties[0]', maxlength="2")
+    | Pen 2:
+    input(type='number', ng-model='t.penalties[1]')
+
+  label Races
+  div(ng-repeat='r in result.race')
+    label R{{ $index + 1 }}
+    | Time:
+    input(type='decimal', ng-model='r.time')
+    | Pen 1:
+    input(type='number', ng-model='r.penalties[0]', maxlength="2")
+    | Pen 2:
+    input(type='number', ng-model='r.penalties[1]')
+
+  label Comment
+  textarea(ng-model='result.comment')
 
   hr
   div.actions
