@@ -1,11 +1,11 @@
 [
   {
+    "__id": 1,
     "driver": "new-300",
     "driverName": "Johannes Haseitl",
     "startNo": 1,
     "team": "MSC Lechbruck",
     "class": "E",
-    "gender": "male",
     "status": "DQ/DNF/iW",
     "training": [
       {
