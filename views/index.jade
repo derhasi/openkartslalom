@@ -8,13 +8,17 @@ block body
           a(href='home')
             i.icon-home
             | &nbsp;{{ 'Home' | translate }}
+        li(class="{{getClass('/results')}}")
+          a(href='results')
+            i.icon-flag-checkered
+            | &nbsp;{{ 'Results' | translate }}
         li(class="{{getClass('/drivers')}}")
           a(href='drivers')
-            i.icon-user(translate)
+            i.icon-user
             | &nbsp;{{ 'Drivers' | translate }}
         li(class="{{getClass('/settings')}}")
           a(href='settings')
-            i.icon-cog(translate)
+            i.icon-cog
             | &nbsp;{{ 'Settings' | translate }}
     h1.title
       | openKartSlalom&nbsp;

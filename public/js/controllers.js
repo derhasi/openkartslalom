@@ -86,3 +86,11 @@ function settingsCtrl($scope, configFactory) {
   }
 }
 settingsCtrl.$inject = ['$scope', 'configFactory'];
+
+/**
+ * Controller for result list page.
+ */
+function resultsCtrl($scope, resultFactory) {
+  $scope.results = resultFactory.query();
+}
+resultsCtrl.$inject = ['$scope', 'resultFactory'];

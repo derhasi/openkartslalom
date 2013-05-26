@@ -41,9 +41,13 @@ app.get('/api/driver/new', api.newDriver);
 app.get('/api/driver/:driverId', api.getDriver);
 app.put('/api/driver/:driverId', api.saveDriver);
 
-
 app.get('/api/config', api.getConfig);
 app.put('/api/config', api.setConfig);
+
+app.get('/api/result/query', api.getResults);
+app.get('/api/result/new', api.newResult);
+app.get('/api/result/:id', api.getResult);
+app.put('/api/result/:id', api.saveResult);
 
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);

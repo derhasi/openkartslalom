@@ -11,6 +11,7 @@ openKS.config(['$routeProvider', '$locationProvider', '$translateProvider', func
   $routeProvider.when('/drivers/add', {templateUrl: 'partials/driver-form', controller: driversAddCtrl});
   $routeProvider.when('/drivers/:id/edit', {templateUrl: 'partials/driver-form', controller: driversEditCtrl});
   $routeProvider.when('/settings', {templateUrl: 'partials/settings', controller: settingsCtrl});
+  $routeProvider.when('/results', {templateUrl: 'partials/results', controller: resultsCtrl});
   $routeProvider.otherwise({redirectTo: '/home'});
   $locationProvider.html5Mode(true);
 
@@ -42,6 +43,20 @@ openKS.factory('driverFactory', function($resource) {
     {
       save: { method: 'PUT' },
       new: {method: 'GET', params:{driverId:"new"}}
+    }
+  );
+});
+
+/**
+ * Factory for accessing driver data.
+ */
+openKS.factory('resultFactory', function($resource) {
+  return $resource('/api/result/:__id',
+    { __id: '@__id' },
+    {
+      query: {method: 'GET', params:{__id:'query'}, isArray: true},
+      save: { method: 'PUT' },
+      new: {method: 'GET', params:{__id:"new"}}
     }
   );
 });
