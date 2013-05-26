@@ -1,0 +1,16 @@
+a(href="/results")
+  i.icon-reply  Back to results
+
+h2(ng-show="newResult", translate="") Add result
+h2(ng-hide="newResult") Edit result item {{result.id}}
+
+form
+  label ID
+  input(type='text', ng-model='result.id')
+  label Class
+  input(type='text', ng-model='result.class')
+
+  hr
+  div.actions
+    input.btn.btn-large.btn-primary(type="submit", value="Save result", ng-click="saveResult()")
+    | &nbsp;Revision {{result.v}}

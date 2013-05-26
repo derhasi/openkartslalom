@@ -46,7 +46,7 @@ exports.get = function(id, callback) {
     }
     // Run through the list of drivers
     for (var key in results) {
-      if (results[key].__id == id) {
+      if (results[key].id == id) {
         callback(null, results[key]);
         return;
       }
@@ -73,14 +73,15 @@ exports.new = function(callback) {
     // Get the next id by running through all ids.
     var max = 0;
     for (var i in results) {
-      if (results[i].__id && results[i].__id > max) {
-        max = results[i].__id;
+      if (results[i].id && results[i].id > max) {
+        max = results[i].id;
       }
     }
 
     // Simply pass an empty object with a N00000 id.
     callback(null, {
-      "__id": max + 1
+      "id": max + 1,
+      "v": 0
     });
   });
 }
@@ -102,8 +103,8 @@ exports.write = function(obj, callback) {
       callback(err);
     }
 
-    if (obj.__id == undefined) {
-      callback(new Error('No __id given for the object.'));
+    if (obj.id == undefined) {
+      callback(new Error('No id given for the object.'));
       return;
     }
 
@@ -115,7 +116,7 @@ exports.write = function(obj, callback) {
     // Run through the list of drivers, and replace the object having the same
     // __id with the new one.
     for (var key in results) {
-      if (results[key].__id == obj.__id) {
+      if (results[key].id == obj.id) {
         results[key] = obj;
         found = true;
         break;

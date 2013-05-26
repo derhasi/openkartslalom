@@ -144,7 +144,7 @@ exports.getResults = function (req, res) {
  * @param res
  */
 exports.getResult = function(req, res) {
-  result.get(req.params.driverId, function (err, rslt) {
+  result.get(req.params.id, function (err, rslt) {
     if (err) {
       console.log('Error retrieving result: ', err);
       res.status(404).send('No result found');
@@ -182,10 +182,10 @@ exports.saveResult = function(req, res) {
   if (!req.body) {
     res.status('406').send('No object given.');
   }
-  else if (req.body.__id == undefined) {
+  else if (req.body.id == undefined) {
     res.status('406').send('No object __id given');
   }
-  else if (req.body.__id != req.params.id) {
+  else if (req.body.id != req.params.id) {
     res.status('406').send('Param and object id do not match');
   }
   else {

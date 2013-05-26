@@ -12,6 +12,8 @@ openKS.config(['$routeProvider', '$locationProvider', '$translateProvider', func
   $routeProvider.when('/drivers/:id/edit', {templateUrl: 'partials/driver-form', controller: driversEditCtrl});
   $routeProvider.when('/settings', {templateUrl: 'partials/settings', controller: settingsCtrl});
   $routeProvider.when('/results', {templateUrl: 'partials/results', controller: resultsCtrl});
+  $routeProvider.when('/results/add', {templateUrl: 'partials/result-form', controller: resultsAddCtrl});
+  $routeProvider.when('/results/:id/edit', {templateUrl: 'partials/result-form', controller: resultsEditCtrl});
   $routeProvider.otherwise({redirectTo: '/home'});
   $locationProvider.html5Mode(true);
 
@@ -51,12 +53,12 @@ openKS.factory('driverFactory', function($resource) {
  * Factory for accessing driver data.
  */
 openKS.factory('resultFactory', function($resource) {
-  return $resource('/api/result/:__id',
-    { __id: '@__id' },
+  return $resource('/api/result/:id',
+    { id: '@id' },
     {
-      query: {method: 'GET', params:{__id:'query'}, isArray: true},
+      query: {method: 'GET', params:{id:'query'}, isArray: true},
       save: { method: 'PUT' },
-      new: {method: 'GET', params:{__id:"new"}}
+      new: {method: 'GET', params:{id:"new"}}
     }
   );
 });

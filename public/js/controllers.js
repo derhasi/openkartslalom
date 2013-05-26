@@ -94,3 +94,33 @@ function resultsCtrl($scope, resultFactory) {
   $scope.results = resultFactory.query();
 }
 resultsCtrl.$inject = ['$scope', 'resultFactory'];
+
+
+/**
+ * Controller for editing result.
+ * @param $scope
+ */
+function resultsEditCtrl($scope, $routeParams, resultFactory) {
+  console.log($routeParams);
+  $scope.result = resultFactory.get({id: $routeParams.id});
+
+  $scope.saveResult = function() {
+    $scope.result.$save();
+  }
+}
+resultsEditCtrl.$inject = ['$scope', '$routeParams', 'resultFactory'];
+
+/**
+ * Controller for adding a result.
+ * @param $scope
+ */
+function resultsAddCtrl($scope, $routeParams, resultFactory) {
+  console.log($routeParams);
+  $scope.result = resultFactory.new();
+  $scope.newresult = true;
+
+  $scope.saveResult = function() {
+    $scope.result.$save();
+  }
+}
+resultsEditCtrl.$inject = ['$scope', '$routeParams', 'resultFactory'];

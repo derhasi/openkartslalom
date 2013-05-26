@@ -18,10 +18,10 @@ table(class='table-hover table')
       i.icon-spinner.icon-spin.icon-large
       span  No results.
   tr(ng-repeat='result in results')
-    td {{result.__id}}
+    td {{result.id}}
     td {{result.class}}
     td {{result.driver}}
     td {{result.team}}
     td
-      a(href='results/{{result.__id}}/edit', title='Edit result {{result.__id}}"')
+      a(href='results/{{result.id}}/edit', title='Edit result {{result.id}}"')
         i(class='icon-edit')  edit
