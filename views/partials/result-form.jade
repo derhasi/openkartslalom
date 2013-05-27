@@ -5,6 +5,7 @@ h2(ng-show="newResult", translate="") Add result
 h2(ng-hide="newResult") Edit result item {{result.id}}
 
 form
+  h3 Meta
   label ID
   input(type='text', ng-model='result.id')
   label Class
@@ -15,6 +16,8 @@ form
     | &nbsp;
     small {{ result.driverName }}
   input(type='text', ng-model='result.driver')
+  label Team
+  input(type='text', ng-model='result.team')
   label Status
   select(ng-model='result.status')
     option(value="iW") in Wertung
@@ -23,27 +26,33 @@ form
     option(value="DNS") did not start
 
   // Iterate over trainings.
-  label Training
-  div(ng-repeat='t in result.training')
+  h3 Training
+  div.clearfix(ng-repeat='t in result.training')
     label T{{ $index + 1 }}
-    | Time:
-    input(type='decimal', ng-model='t.time')
-    | Pen 1:
-    input(type='number', ng-model='t.penalties[0]', maxlength="2")
-    | Pen 2:
-    input(type='number', ng-model='t.penalties[1]')
+    div.input-prepend.span2
+      span.add-on Time
+      input.input-small(type='text', ng-model='t.time')
+    div.input-prepend.span2
+      span.add-on Pen 1
+      input.input-mini(type='number', ng-model='t.penalties[0]')
+    div.input-prepend.span2
+      span.add-on Pen 2
+      input.input-mini(type='number', ng-model='t.penalties[1]')
 
-  label Races
-  div(ng-repeat='r in result.race')
+  h3 Races
+  div.clearfix(ng-repeat='r in result.race')
     label R{{ $index + 1 }}
-    | Time:
-    input(type='decimal', ng-model='r.time')
-    | Pen 1:
-    input(type='number', ng-model='r.penalties[0]', maxlength="2")
-    | Pen 2:
-    input(type='number', ng-model='r.penalties[1]')
+    div.input-prepend.span2
+      span.add-on Time
+      input.input-small(type='text', ng-model='r.time')
+    div.input-prepend.span2
+      span.add-on Pen 1
+      input.input-mini(type='number', ng-model='r.penalties[0]')
+    div.input-prepend.span2
+      span.add-on Pen 2
+      input.input-mini(type='number', ng-model='r.penalties[1]')
 
-  label Comment
+  h3 Comment
   textarea(ng-model='result.comment')
 
   hr
