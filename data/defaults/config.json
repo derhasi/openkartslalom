@@ -44,5 +44,15 @@
       "index": "9"
     }
   ],
-  "driversCSVHeaderCount": 1
+  "driversCSVHeaderCount": 1,
+  "results": {
+    "trainingRuns": 1,
+    "officialRuns": 2,
+    "scoredRuns": 2,
+    "scoreMode": "aggregated",
+    "penaltyMultiplier1": 2,
+    "penaltyMultiplier2": 10,
+    "penaltyName1": "F2",
+    "penaltyName2": "F10"
+  }
 }

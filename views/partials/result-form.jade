@@ -26,7 +26,7 @@ form
     option(value="DNS") did not start
 
   // Iterate over trainings.
-  h3 Training
+  h3 Training runs
   div.clearfix(ng-repeat='t in result.training')
     label T{{ $index + 1 }}
     div.input-prepend.span2
@@ -39,7 +39,7 @@ form
       span.add-on Pen 2
       input.input-mini(type='number', ng-model='t.penalties[1]')
 
-  h3 Races
+  h3 Score runs
   div.clearfix(ng-repeat='r in result.race')
     label R{{ $index + 1 }}
     div.input-prepend.span2
