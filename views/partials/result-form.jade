@@ -25,11 +25,11 @@ form
     option(value="DNF") did not finish
     option(value="DNS") did not start
 
-  - if (config.results.trainingRunsCount > 0)
+  - if (config.resultsTrainingRunsCount > 0)
     // Iterate over trainings.
     h3 Training runs
     - i = 0
-    while (i < config.results.trainingRunsCount)
+    while (i < config.resultsTrainingRunsCount)
       div.clearfix
         label Training #{ i + 1 }
         div.input-prepend.span2
@@ -37,18 +37,18 @@ form
           input.input-small(type='text', ng-model='result.trainingRuns[#{i}].time')
         // iterate over number of penalties
         - p = 0
-        while (p < config.results.penaltyCount)
+        while (p < config.resultsPenaltyCount)
           div.input-prepend.span2
-            span.add-on #{ config.results.penaltyData[p].name }
+            span.add-on #{ config.resultsPenaltyData[p].name }
             input.input-mini(type='number', ng-model='result.trainingRuns[#{i}].penalties[#{p}]')
           - p++
       - i++
 
-  - if (config.results.officialRunsCount > 0)
+  - if (config.resultsOfficialRunsCount > 0)
     // Iterate over trainings.
     h3 Offical runs
     - i = 0
-    while (i < config.results.officialRunsCount)
+    while (i < config.resultsOfficialRunsCount)
       div.clearfix
         label Official run #{ i + 1 }
         div.input-prepend.span2
@@ -56,9 +56,9 @@ form
           input.input-small(type='text', ng-model='result.officialRuns[#{i}].time')
         // iterate over number of penalties
         - p = 0
-        while (p < config.results.penaltyCount)
+        while (p < config.resultsPenaltyCount)
           div.input-prepend.span2
-            span.add-on #{ config.results.penaltyData[p].name }
+            span.add-on #{ config.resultsPenaltyData[p].name }
             input.input-mini(type='number', ng-model='result.officialRuns[#{i}].penalties[#{p}]')
           - p++
       - i++
