@@ -110,6 +110,34 @@ exports.setConfig = function (req, res) {
       config.set(key, req.body[key]);
       count++;
     }
+
+    // Some additional validation.
+    // We need
+    var results = config.get('results');
+    var penaltyCount = results.penaltyCount;
+    var penaltyData = results.penaltyData;
+    console.log('penalty count ', penaltyCount);
+    console.log('penalty data ', penaltyData);
+    var i = 0;
+    // We build a new penalty Data array, that counts exactly penaltyCount
+    // entries.
+    var newPenaltyData = [];
+    while (i < penaltyCount) {
+      // Set default data for the key:
+      newPenaltyData[i] = {
+        multiplier: 1,
+        name: "Pen " + (i + 1)
+      };
+      // Get the data form the existing one.
+      if (penaltyData[i]) {
+        newPenaltyData[i].multiplier = penaltyData[i].multiplier;
+        newPenaltyData[i].name = penaltyData[i].name;
+      }
+      i++
+    }
+    results.penaltyData = newPenaltyData;
+    config.set('results', results);
+
     config.save();
     console.log('Updated %d config items.', count);
     res.json(config.load());

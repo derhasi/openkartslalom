@@ -15,13 +15,27 @@ form.form-horizontal
   fieldset
     legend(translate="") Results
     div.control-group
-      label.control-label(for="secondsCol1", translate="") Fail seconds (Column 1)
+      label.control-label(translate="") Training runs count
       div.controls
-        input.input-mini(type="number", id="secondsCol1", ng-model='config.fs1')
+        input.input-mini(type="number", ng-model='config.results.trainingRunsCount')
     div.control-group
-      label.control-label(for="secondsCol2", translate="") Fail seconds (Column 2)
+      label.control-label(translate="") Official runs count
       div.controls
-        input.input-mini(type="number", id="secondsCol2", ng-model='config.fs2')
+        input.input-mini(type="number", ng-model='config.results.officialRunsCount')
+    fieldset.offset1
+      legend(translate="") Penalties
+      div.control-group
+        label.control-label(translate="") Penalty count
+        div.controls
+          input.input-mini(type="number", ng-model='config.results.penaltyCount')
+      div.control-group(ng-repeat="data in config.results.penaltyData")
+        label.control-label Penalty {{ $index + 1 }}
+        div.input-prepend.span2
+          span.add-on Multiplier
+          input.input-mini(type='number', ng-model='data.multiplier')
+        div.input-prepend.span2
+          span.add-on Name
+          input.input-small(type='text', ng-model='data.name')
 
   fieldset
     legend(translate="") Drivers CSV
