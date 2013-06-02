@@ -25,32 +25,43 @@ form
     option(value="DNF") did not finish
     option(value="DNS") did not start
 
-  // Iterate over trainings.
-  h3 Training runs
-  div.clearfix(ng-repeat='t in result.training')
-    label T{{ $index + 1 }}
-    div.input-prepend.span2
-      span.add-on Time
-      input.input-small(type='text', ng-model='t.time')
-    div.input-prepend.span2
-      span.add-on Pen 1
-      input.input-mini(type='number', ng-model='t.penalties[0]')
-    div.input-prepend.span2
-      span.add-on Pen 2
-      input.input-mini(type='number', ng-model='t.penalties[1]')
+  - if (config.results.trainingRunsCount > 0)
+    // Iterate over trainings.
+    h3 Training runs
+    - i = 0
+    while (i < config.results.trainingRunsCount)
+      div.clearfix
+        label Training #{ i + 1 }
+        div.input-prepend.span2
+          span.add-on Time
+          input.input-small(type='text', ng-model='result.trainingRuns[#{i}].time')
+        // iterate over number of penalties
+        - p = 0
+        while (p < config.results.penaltyCount)
+          div.input-prepend.span2
+            span.add-on #{ config.results.penaltyData[p].name }
+            input.input-mini(type='number', ng-model='result.trainingRuns[#{i}].penalties[#{p}]')
+          - p++
+      - i++
 
-  h3 Score runs
-  div.clearfix(ng-repeat='r in result.race')
-    label R{{ $index + 1 }}
-    div.input-prepend.span2
-      span.add-on Time
-      input.input-small(type='text', ng-model='r.time')
-    div.input-prepend.span2
-      span.add-on Pen 1
-      input.input-mini(type='number', ng-model='r.penalties[0]')
-    div.input-prepend.span2
-      span.add-on Pen 2
-      input.input-mini(type='number', ng-model='r.penalties[1]')
+  - if (config.results.officialRunsCount > 0)
+    // Iterate over trainings.
+    h3 Offical runs
+    - i = 0
+    while (i < config.results.officialRunsCount)
+      div.clearfix
+        label Official run #{ i + 1 }
+        div.input-prepend.span2
+          span.add-on Time
+          input.input-small(type='text', ng-model='result.officialRuns[#{i}].time')
+        // iterate over number of penalties
+        - p = 0
+        while (p < config.results.penaltyCount)
+          div.input-prepend.span2
+            span.add-on #{ config.results.penaltyData[p].name }
+            input.input-mini(type='number', ng-model='result.officialRuns[#{i}].penalties[#{p}]')
+          - p++
+      - i++
 
   h3 Comment
   textarea(ng-model='result.comment')

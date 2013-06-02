@@ -46,13 +46,20 @@
   ],
   "driversCSVHeaderCount": 1,
   "results": {
-    "trainingRuns": 1,
-    "officialRuns": 2,
-    "scoredRuns": 2,
+    "trainingRunsCount": 1,
+    "officialRunsCount": 2,
+    "scoredRunsCount": 2,
     "scoreMode": "aggregated",
-    "penaltyMultiplier1": 2,
-    "penaltyMultiplier2": 10,
-    "penaltyName1": "F2",
-    "penaltyName2": "F10"
+    "penaltyCount": 2,
+    "penaltyData": [
+      {
+        "multiplier": 2,
+        "name": "F2"
+      },
+      {
+        "multiplier": 10,
+        "name": "F10"
+      }
+    ]
   }
 }

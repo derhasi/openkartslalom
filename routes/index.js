@@ -1,4 +1,6 @@
 
+var config = require('../models/config');
+
 /*
  * GET home page.
  */
@@ -9,5 +11,9 @@ exports.index = function(req, res){
 
 exports.partials = function (req, res) {
   var name = req.params.name;
-  res.render('partials/' + name);
+  // We pass our config to the jade partials.
+  var vars = {
+    config: config.load()
+  };
+  res.render('partials/' + name, vars);
 };
