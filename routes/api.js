@@ -112,12 +112,8 @@ exports.setConfig = function (req, res) {
     }
 
     // Some additional validation.
-    // We need
-    var results = config.get('results');
-    var penaltyCount = results.penaltyCount;
-    var penaltyData = results.penaltyData;
-    console.log('penalty count ', penaltyCount);
-    console.log('penalty data ', penaltyData);
+    var penaltyCount = config.get('resultsPenaltyCount');
+    var penaltyData = config.get('resultsPenaltyData');
     var i = 0;
     // We build a new penalty Data array, that counts exactly penaltyCount
     // entries.
@@ -135,8 +131,7 @@ exports.setConfig = function (req, res) {
       }
       i++
     }
-    results.penaltyData = newPenaltyData;
-    config.set('results', results);
+    config.set('resultsPenaltyData', newPenaltyData);
 
     config.save();
     console.log('Updated %d config items.', count);

@@ -17,18 +17,18 @@ form.form-horizontal
     div.control-group
       label.control-label(translate="") Training runs count
       div.controls
-        input.input-mini(type="number", ng-model='config.results.trainingRunsCount')
+        input.input-mini(type="number", ng-model='config.resultsTrainingRunsCount')
     div.control-group
       label.control-label(translate="") Official runs count
       div.controls
-        input.input-mini(type="number", ng-model='config.results.officialRunsCount')
+        input.input-mini(type="number", ng-model='config.resultsOfficialRunsCount')
     fieldset.offset1
       legend(translate="") Penalties
       div.control-group
         label.control-label(translate="") Penalty count
         div.controls
-          input.input-mini(type="number", ng-model='config.results.penaltyCount')
-      div.control-group(ng-repeat="data in config.results.penaltyData")
+          input.input-mini(type="number", ng-model='config.resultsPenaltyCount')
+      div.control-group(ng-repeat="data in config.resultsPenaltyData")
         label.control-label Penalty {{ $index + 1 }}
         div.input-prepend.span2
           span.add-on Multiplier

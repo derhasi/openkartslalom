@@ -45,21 +45,19 @@
     }
   ],
   "driversCSVHeaderCount": 1,
-  "results": {
-    "trainingRunsCount": 1,
-    "officialRunsCount": 2,
-    "scoredRunsCount": 2,
-    "scoreMode": "aggregated",
-    "penaltyCount": 2,
-    "penaltyData": [
-      {
-        "multiplier": 2,
-        "name": "F2"
-      },
-      {
-        "multiplier": 10,
-        "name": "F10"
-      }
-    ]
-  }
+  "resultsTrainingRunsCount": 1,
+  "resultsOfficialRunsCount": 2,
+  "resultsScoredRunsCount": 2,
+  "resultsScoreMode": "aggregated",
+  "resultsPenaltyCount": 2,
+  "resultsPenaltyData": [
+    {
+      "multiplier": 2,
+      "name": "F2"
+    },
+    {
+      "multiplier": 10,
+      "name": "F10"
+    }
+  ]
 }
