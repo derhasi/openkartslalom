@@ -1,0 +1,15 @@
+{
+  "name": "openKartSlalom",
+  "version": "0.1",
+  "manifest_version": 2,
+  "description": "The openKartSlalom app ",
+  "icons": {
+    "16": "img/logo.png",
+    "128": "img/logo.png"
+  },
+  "app": {
+    "background": {
+      "scripts": ["js/chromeapp.js"]
+    }
+  }
+}

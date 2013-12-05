@@ -6,14 +6,14 @@ var openKS = angular.module('openKS', ['ngResource', 'openKS.filters', 'openKS.s
 
 openKS.config(['$routeProvider', '$locationProvider', '$translateProvider', function($routeProvider, $locationProvider, $translateProvider) {
   // Routes defined.
-  $routeProvider.when('/home', {templateUrl: 'partials/home', controller: HomeCtrl});
-  $routeProvider.when('/drivers', {templateUrl: 'partials/drivers', controller: driversCtrl});
-  $routeProvider.when('/drivers/add', {templateUrl: 'partials/driver-form', controller: driversAddCtrl});
-  $routeProvider.when('/drivers/:id/edit', {templateUrl: 'partials/driver-form', controller: driversEditCtrl});
-  $routeProvider.when('/settings', {templateUrl: 'partials/settings', controller: settingsCtrl});
-  $routeProvider.when('/results', {templateUrl: 'partials/results', controller: resultsCtrl});
-  $routeProvider.when('/results/add', {templateUrl: 'partials/result-form', controller: resultsAddCtrl});
-  $routeProvider.when('/results/:id/edit', {templateUrl: 'partials/result-form', controller: resultsEditCtrl});
+  $routeProvider.when('/home', {templateUrl: 'views/home.html', controller: HomeCtrl});
+  $routeProvider.when('/drivers', {templateUrl: 'views/drivers.html', controller: driversCtrl});
+  $routeProvider.when('/drivers/add', {templateUrl: 'views/driver-form.html', controller: driversAddCtrl});
+  $routeProvider.when('/drivers/:id/edit', {templateUrl: 'views/driver-form.html', controller: driversEditCtrl});
+  $routeProvider.when('/settings', {templateUrl: 'views/settings.html', controller: settingsCtrl});
+  $routeProvider.when('/results', {templateUrl: 'views/results.html', controller: resultsCtrl});
+  $routeProvider.when('/results/add', {templateUrl: 'views/result-form.html', controller: resultsAddCtrl});
+  $routeProvider.when('/results/:id/edit', {templateUrl: 'views/result-form.html', controller: resultsEditCtrl});
   $routeProvider.otherwise({redirectTo: '/home'});
   $locationProvider.html5Mode(true);
 
