@@ -2,7 +2,7 @@
 
 
 // Declare app level module which depends on filters, and services
-var openKS = angular.module('openKS', ['ngResource', 'openKS.filters', 'openKS.services', 'openKS.directives']);
+var openKS = angular.module('openKS', ['ngRoute', 'ngResource', 'openKS.filters', 'openKS.services', 'openKS.directives']);
 
 openKS.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   // Routes defined.

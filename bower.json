@@ -4,7 +4,8 @@
   "dependencies": {
     "angular": "1.2.3",
     "angular-cookies": "1.2.3",
-    "angular-resource": "1.2.3"
+    "angular-resource": "1.2.3",
+    "angular-route": "1.2.3"
   },
   "ignore": [
     "**/.*",
