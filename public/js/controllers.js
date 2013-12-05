@@ -9,17 +9,39 @@
  * @param $location
  * @constructor
  */
-function AppCtrl($scope, $location) {
+function AppCtrl($scope) {
   $scope.getClass = function(path) {
-    if ($location.path().indexOf(path) == 0) {
+    if ($scope.view.name == path) {
       return "active";
     }
     else {
       return "";
     }
   }
+
+  $scope.getController = function(p) {
+    return templates[p].controller;
+  }
+
+  /**
+   * Provide a page changing event.
+   * @param path
+   */
+  $scope.setView = function(p) {
+    $scope.view = templates[p];
+  }
+
+  var templates = {
+    home: { name: 'home', url: 'views/home.html', controller: 'HomeCtrl'},
+    drivers: { name: 'drivers', url: 'views/drivers.html', controller: 'driversCtrl'},
+    settings: { name: 'settings', url: 'views/settings.html', controller: 'settingsCtrl'},
+    results: { name: 'results', url: 'views/results.html', controller: 'resultsCtrl'}
+  };
+
+  $scope.view = templates.home;
+
 }
-AppCtrl.$inject = ['$scope', '$location'];
+AppCtrl.$inject = ['$scope'];
 
 /**
  * Controller for the home page.
@@ -34,93 +56,26 @@ HomeCtrl.$inject = [];
  * @param $scope
  * @param $http
  */
-function driversCtrl($scope, $http) {
+function driversCtrl($scope) {
   $scope.drivers = [];
-
-  $http({method: 'GET', url: '/api/drivers'}).
-    success(function(data, status, headers, config) {
-      $scope.drivers = data;
-    }).
-    error(function(data, status, headers, config) {
-      $scope.drivers = [];
-    });
+  $scope.title = 'Drivers';
 }
-driversCtrl.$inject = ['$scope', '$http'];
-
-/**
- * Controller for editing driver.
- * @param $scope
- */
-function driversEditCtrl($scope, $routeParams, driverFactory) {
-  console.log($routeParams);
-  $scope.driver = driverFactory.get({driverId: $routeParams.id});
-
-  $scope.saveDriver = function() {
-    $scope.driver.$save();
-  }
-}
-driversEditCtrl.$inject = ['$scope', '$routeParams', 'driverFactory'];
-
-/**
- * Controller for adding a driver.
- * @param $scope
- */
-function driversAddCtrl($scope, $routeParams, driverFactory) {
-  console.log($routeParams);
-  $scope.driver = driverFactory.new();
-  $scope.newDriver = true;
-
-  $scope.saveDriver = function() {
-    $scope.driver.$save();
-  }
-}
-driversEditCtrl.$inject = ['$scope', '$routeParams', 'driverFactory'];
+driversCtrl.$inject = ['$scope'];
 
 /**
  * Controller for settings page.
  */
-function settingsCtrl($scope, configFactory) {
-  $scope.config = configFactory.get();
-  $scope.saveConfig = function() {
-    $scope.config.$save();
-  }
+function settingsCtrl($scope) {
+  $scope.title = 'Settings';
 }
-settingsCtrl.$inject = ['$scope', 'configFactory'];
+settingsCtrl.$inject = ['$scope'];
 
 /**
  * Controller for result list page.
  */
-function resultsCtrl($scope, resultFactory) {
-  $scope.results = resultFactory.query();
+function resultsCtrl($scope) {
+  $scope.results = [];
+  $scope.title = 'Results';
 }
-resultsCtrl.$inject = ['$scope', 'resultFactory'];
+resultsCtrl.$inject = ['$scope'];
 
-
-/**
- * Controller for editing result.
- * @param $scope
- */
-function resultsEditCtrl($scope, $routeParams, resultFactory) {
-  console.log($routeParams);
-  $scope.result = resultFactory.get({id: $routeParams.id});
-
-  $scope.saveResult = function() {
-    $scope.result.$save();
-  }
-}
-resultsEditCtrl.$inject = ['$scope', '$routeParams', 'resultFactory'];
-
-/**
- * Controller for adding a result.
- * @param $scope
- */
-function resultsAddCtrl($scope, $routeParams, resultFactory) {
-  console.log($routeParams);
-  $scope.result = resultFactory.new();
-  $scope.newResult = true;
-
-  $scope.saveResult = function() {
-    $scope.result.$save();
-  }
-}
-resultsEditCtrl.$inject = ['$scope', '$routeParams', 'resultFactory'];
