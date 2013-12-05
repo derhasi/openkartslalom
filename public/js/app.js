@@ -2,9 +2,9 @@
 
 
 // Declare app level module which depends on filters, and services
-var openKS = angular.module('openKS', ['ngResource', 'openKS.filters', 'openKS.services', 'openKS.directives', 'pascalprecht.translate']);
+var openKS = angular.module('openKS', ['ngResource', 'openKS.filters', 'openKS.services', 'openKS.directives']);
 
-openKS.config(['$routeProvider', '$locationProvider', '$translateProvider', function($routeProvider, $locationProvider, $translateProvider) {
+openKS.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   // Routes defined.
   $routeProvider.when('/home', {templateUrl: 'views/home.html', controller: HomeCtrl});
   $routeProvider.when('/drivers', {templateUrl: 'views/drivers.html', controller: driversCtrl});
@@ -16,15 +16,6 @@ openKS.config(['$routeProvider', '$locationProvider', '$translateProvider', func
   $routeProvider.when('/results/:id/edit', {templateUrl: 'views/result-form.html', controller: resultsEditCtrl});
   $routeProvider.otherwise({redirectTo: '/home'});
   $locationProvider.html5Mode(true);
-
-  // Configure translation service.
-  $translateProvider.preferredLanguage('de');
-
-  // use static-files loader with options object
-  $translateProvider.useStaticFilesLoader({
-    prefix: 'translations/',
-    suffix: '.json'
-  });
 
 }]);
 
