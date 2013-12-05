@@ -1,0 +1,75 @@
+<a href="/results"><i class="icon-reply"> Back to results</i></a>
+<h2 ng-show="newResult" translate="">Add result</h2>
+<h2 ng-hide="newResult">Edit result item {{result.id}}</h2>
+<form>
+  <h3>Meta</h3>
+  <label>ID</label>
+  <input type="text" ng-model="result.id"/>
+  <label>Class</label>
+  <input type="text" ng-model="result.class"/>
+  <label>StartNo.</label>
+  <input type="number" ng-model="result.startNo"/>
+  <label>
+    Driver
+    &nbsp;<small>{{ result.driverName }}</small>
+  </label>
+  <input type="text" ng-model="result.driver"/>
+  <label>Team</label>
+  <input type="text" ng-model="result.team"/>
+  <label>Status</label>
+  <select ng-model="result.status">
+    <option value="iW">in Wertung</option>
+    <option value="DQ">disqualified</option>
+    <option value="DNF">did not finish</option>
+    <option value="DNS">did not start</option>
+  </select>
+  <!-- Iterate over trainings.-->
+  <h3>Training runs</h3>
+  <div class="clearfix">
+    <label>Training 1</label>
+    <div class="input-prepend span2"><span class="add-on">Time</span>
+      <input type="text" ng-model="result.trainingRuns[0].time" class="input-small"/>
+    </div>
+    <!-- iterate over number of penalties-->
+    <div class="input-prepend span2"><span class="add-on">P1</span>
+      <input type="number" ng-model="result.trainingRuns[0].penalties[0]" class="input-mini"/>
+    </div>
+    <div class="input-prepend span2"><span class="add-on">P1</span>
+      <input type="number" ng-model="result.trainingRuns[0].penalties[1]" class="input-mini"/>
+    </div>
+  </div>
+  <!-- Iterate over trainings.-->
+  <h3>Offical runs</h3>
+  <div class="clearfix">
+    <label>Official run 1</label>
+    <div class="input-prepend span2"><span class="add-on">Time</span>
+      <input type="text" ng-model="result.officialRuns[0].time" class="input-small"/>
+    </div>
+    <!-- iterate over number of penalties-->
+    <div class="input-prepend span2"><span class="add-on">P2</span>
+      <input type="number" ng-model="result.officialRuns[0].penalties[0]" class="input-mini"/>
+    </div>
+    <div class="input-prepend span2"><span class="add-on">P2</span>
+      <input type="number" ng-model="result.officialRuns[0].penalties[1]" class="input-mini"/>
+    </div>
+  </div>
+  <div class="clearfix">
+    <label>Official run 2</label>
+    <div class="input-prepend span2"><span class="add-on">Time</span>
+      <input type="text" ng-model="result.officialRuns[1].time" class="input-small"/>
+    </div>
+    <!-- iterate over number of penalties-->
+    <div class="input-prepend span2"><span class="add-on">P2</span>
+      <input type="number" ng-model="result.officialRuns[1].penalties[0]" class="input-mini"/>
+    </div>
+    <div class="input-prepend span2"><span class="add-on">P2</span>
+      <input type="number" ng-model="result.officialRuns[1].penalties[1]" class="input-mini"/>
+    </div>
+  </div>
+  <h3>Comment</h3>
+  <textarea ng-model="result.comment"></textarea>
+  <hr/>
+  <div class="actions">
+    <input type="submit" value="Save result" ng-click="saveResult()" class="btn btn-large btn-primary"/>&nbsp;Revision {{result.v}}
+  </div>
+</form>

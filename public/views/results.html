@@ -1,0 +1,24 @@
+
+<h2 translate="">Results</h2>
+<div>
+  <div class="span2"><a href="/results/add" class="btn btn-primary"><i class="icon-plus"></i>&nbsp;{{ 'Add result' | translate }}</a></div>
+</div>
+<table class="table-hover table">
+  <tr>
+    <th translate="">ID</th>
+    <th translate="">Class</th>
+    <th translate="">Name</th>
+    <th translate="">Team</th>
+    <th translate="">Actions</th>
+  </tr>
+  <tr ng-hide="results.length">
+    <td colspan="7"><i class="icon-spinner icon-spin icon-large"></i><span> No results.</span></td>
+  </tr>
+  <tr ng-repeat="result in results">
+    <td>{{result.id}}</td>
+    <td>{{result.class}}</td>
+    <td>{{result.driver}}</td>
+    <td>{{result.team}}</td>
+    <td><a href="results/{{result.id}}/edit" title="Edit result {{result.id}}&quot;"><i class="icon-edit"> edit</i></a></td>
+  </tr>
+</table>

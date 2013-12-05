@@ -1,0 +1,40 @@
+
+<h2>Driver database</h2>
+<div>
+  <div class="input-prepend span4"><span class="add-on">Filter:</span>
+    <input type="text" ng-model="searchText"/>
+  </div>
+  <div class="input-prepend span4"><span class="add-on">Sort:</span>
+    <select ng-model="sortBY">
+      <option value=""></option>
+      <option value="lastname" translate="">Last name</option>
+      <option value="firstname" translate="">First name</option>
+      <option value="class" translate="">Class</option>
+      <option value="club" translate="">Club</option>
+    </select>
+  </div>
+  <div class="span2"><a href="/drivers/add" class="btn btn-primary"><i class="icon-plus"></i>&nbsp;{{ 'Add driver' | translate }}</a></div>
+</div>
+<table class="table-hover table">
+  <tr>
+    <th translate="">ID</th>
+    <th translate="">Class</th>
+    <th translate="">Name</th>
+    <th translate="">Club</th>
+    <th translate="">City</th>
+    <th translate="">Birthday</th>
+    <th translate="">Actions</th>
+  </tr>
+  <tr ng-hide="drivers.length">
+    <td colspan="7"><i class="icon-spinner icon-spin icon-large"></i><span> Loading ...</span></td>
+  </tr>
+  <tr ng-repeat="driver in drivers | filter:searchText | orderBy:sortBY">
+    <td>{{driver.id}}</td>
+    <td>{{driver.class}}</td>
+    <td>{{driver.firstname}} {{driver.lastname}}</td>
+    <td>{{driver.club}}</td>
+    <td>{{driver.zip}} {{driver.city}}</td>
+    <td>{{driver.birthday}}</td>
+    <td><a href="drivers/{{driver.__id}}/edit" title="Edit &quot;{{driver.firstname}} {{driver.lastname}}&quot;"><i class="icon-edit"> edit</i></a></td>
+  </tr>
+</table>
