@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "dependencies": {
     "angular": "1.2.3",
-    "angular-resource": "1.2.3",
-    "angular-route": "1.2.3"
+    "idbwrapper": "1.4.1",
+    "foundation": "5.0.2"
   },
   "ignore": [
     "**/.*",
