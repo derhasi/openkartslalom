@@ -4,39 +4,45 @@
     <meta charset="utf8">
     <base href="/">
     <title>openKartSlalom</title>
-    <link rel="stylesheet" href="/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/bootstrap-responsive.css">
-    <link rel="stylesheet" href="/css/font-awesome.css">
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="components/foundation/css/foundation.css">
+    <link rel="stylesheet" href="components/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="css/app.css">
   </head>
   <body>
-    <header class="container">
-      <nav class="masthead">
-        <ul class="nav nav-pills pull-right">
-          <li class="{{getClass('home')}}"><a ng-click="setView('home')"><i class="icon-home"></i> Home</a></li>
-          <li class="{{getClass('results')}}"><a ng-click="setView('results')"><i class="icon-flag-checkered"></i> Results</a></li>
-          <li class="{{getClass('drivers')}}"><a ng-click="setView('drivers')"><i class="icon-user"></i> Drivers</a></li>
-          <li class="{{getClass('settings')}}"><a ng-click="setView('settings')"><i class="icon-cog"></i> Settings</a></li>
+    <header class="row">
+      <nav class="top-bar" data-topbar>
+        <ul class="title-area">
+          <li class="name">
+            <h1>openKartSlalom&nbsp;<i class="fa fa-flag-checkered fa fa-2x"></i></h1>
+          </li>
         </ul>
-        <a href="#test" target="_self">Test Anchor</a>
+
+        <section class="top-bar-section">
+          <!-- Right Nav Section -->
+          <ul class="right">
+            <li class="{{getClass('home')}}"><a ng-click="setView('home')"><i class="fa fa-home"></i> Home</a></li>
+            <li class="{{getClass('results')}}"><a ng-click="setView('results')"><i class="fa fa-flag-checkered"></i> Results</a></li>
+            <li class="{{getClass('drivers')}}"><a ng-click="setView('drivers')"><i class="fa fa-user"></i> Drivers</a></li>
+            <li class="{{getClass('settings')}}"><a ng-click="setView('settings')"><i class="fa fa-cog"></i> Settings</a></li>
+          </ul>
+
+        </section>
       </nav>
-      <h1 class="title">openKartSlalom&nbsp;<i class="icon-flag-checkered icon-3x"></i></h1>
     </header>
 
 
-    <div class="view" ng-include="view.url" ng-controller="view.controller"></div>
+    <div class="view row" ng-include="view.url" ng-controller="view.controller"></div>
 
-    <footer class="footer">
+    <footer class="footer row">
       <div class="container">
         <p>openKartSlalom app: v<span app-version></span></p>
-        <p class="muted">Created by&nbsp;<a href="http://derhasi.de"><i class="icon-user"> derhasi</i></a>, source code on&nbsp;<a href="https://github.com/derhasi/openkartslalom"><i class="icon-github"> Github</i></a></p>
-        <p>powered by&nbsp;<span class="badge">angularjs</span>&nbsp<span class="badge">bootstrap</span>&nbsp;<i class="icon-html5"></i>&nbsp;<i class="icon-css3"></i></p>
+        <p class="muted">
+          Created by&nbsp;<a href="http://derhasi.de"><i class="fa fa-user"> derhasi</i></a>, source code on&nbsp;<a href="https://github.com/derhasi/openkartslalom"><i class="fa fa-github"> Github</i></a></p>
+        <p>powered by&nbsp;<span class="badge">angularjs</span>&nbsp<span class="badge">bootstrap</span>&nbsp;<i class="fa fa-html5"></i>&nbsp;<i class="fa fa-css3"></i></p>
       </div>
       <div id="test">Bottom test</div>
     </footer>
     <script src="components/angular/angular.js"></script>
-    <script src="components/angular-route/angular-route.js"></script>
-    <script src="components/angular-resource/angular-resource.js"></script>
     <script src="js/app.js"></script>
     <script src="js/services.js"></script>
     <script src="js/controllers.js"></script>
