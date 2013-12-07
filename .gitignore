@@ -1,21 +1,19 @@
-lib-cov
-*.seed
-*.log
-*.dat
-*.out
-*.pid
-*.gz
-pids
-logs
-results
-npm-debug.log
-
-.idea
-.DS_Store
-
 data/*.*
 data/import/*
 data/current/*
 !data/current/README.md
 !data/import/README.md
 
+# Ignore other files.
+.svn
+*.komodoproject
+*.komodotools
+.DS_Store
+Thumbs.db
+.project
+.buildpath
+.settings
+*.esproj
+nbproject
+.idea
+.sass-cache
