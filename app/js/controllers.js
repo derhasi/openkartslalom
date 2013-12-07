@@ -4,12 +4,8 @@
 
 /**
  * Controller for the whole html content.
- *
- * @param $scope
- * @param $location
- * @constructor
  */
-function AppCtrl($scope) {
+openKS.controller('AppCtrl', ['$scope', function($scope) {
   $scope.getClass = function(path) {
     if ($scope.view.name == path) {
       return "active";
@@ -17,10 +13,6 @@ function AppCtrl($scope) {
     else {
       return "";
     }
-  }
-
-  $scope.getController = function(p) {
-    return templates[p].controller;
   }
 
   /**
@@ -32,50 +24,34 @@ function AppCtrl($scope) {
   }
 
   var templates = {
-    home: { name: 'home', url: 'views/home.html', controller: 'HomeCtrl'},
-    drivers: { name: 'drivers', url: 'views/drivers.html', controller: 'driversCtrl'},
-    settings: { name: 'settings', url: 'views/settings.html', controller: 'settingsCtrl'},
-    results: { name: 'results', url: 'views/results.html', controller: 'resultsCtrl'}
+    home: { name: 'home', url: 'views/home.html'},
+    results: { name: 'results', url: 'views/results.html'},
+    drivers: { name: 'drivers', url: 'views/drivers.html'},
+    settings: { name: 'settings', url: 'views/settings.html'},
+    info: { name: 'info', url: 'views/info.html'}
+
   };
 
   $scope.view = templates.home;
 
-}
-AppCtrl.$inject = ['$scope'];
+}]);
 
 /**
- * Controller for the home page.
+ * Controller for home.
  */
-function HomeCtrl() {
-}
-HomeCtrl.$inject = [];
+openKS.controller('HomeCtrl', [function() {}]);
 
 /**
  * Controller for drivers overview.
- *
- * @param $scope
- * @param $http
  */
-function driversCtrl($scope) {
-  $scope.drivers = [];
-  $scope.title = 'Drivers';
-}
-driversCtrl.$inject = ['$scope'];
+openKS.controller('DriversCtrl', [function() {}]);
 
 /**
- * Controller for settings page.
+ * Controller for drivers overview.
  */
-function settingsCtrl($scope) {
-  $scope.title = 'Settings';
-}
-settingsCtrl.$inject = ['$scope'];
+openKS.controller('ResultsCtrl', [function() {}]);
 
 /**
- * Controller for result list page.
+ * Controller for drivers overview.
  */
-function resultsCtrl($scope) {
-  $scope.results = [];
-  $scope.title = 'Results';
-}
-resultsCtrl.$inject = ['$scope'];
-
+openKS.controller('SettingsCtrl', [function() {}]);
