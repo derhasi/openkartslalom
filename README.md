@@ -1,14 +1,19 @@
 # openkartslalom
 
-This is a html based KartSlalom result list desktop software, opensource, utilising angularjs, nodejs and appjs.
+![openKS Logo](app/img/logo_128.png)
 
-## Opensource
+This is a html based KartSlalom result list desktop software, opensource,
+utilising angularjs and currently built as a Chrome packaged app.
+
+## Projects
 
 The project builds upon different technologies and open-source projects:
 
 * AngularJS
-* Expressjs
-* And the seed project of Brian Ford: https://github.com/btford/angular-express-seed
+* IndexedDB
+* Google Chrome Packaged App
+* Foundation
+* Font-Awesome
 
 ## Attribution
 
