@@ -1,4 +1,9 @@
 
+html {
+  // Ensure the app shows a scrollbar when needed.
+  overflow: auto;
+}
+
 header {
 }
 
@@ -10,7 +15,3 @@ header {
   }
 }
 
-
-footer {
-
-}
