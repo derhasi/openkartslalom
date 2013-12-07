@@ -20,28 +20,24 @@
         <section class="top-bar-section">
           <!-- Right Nav Section -->
           <ul class="right">
-            <li class="{{getClass('home')}}"><a ng-click="setView('home')"><i class="fa fa-home"></i> Home</a></li>
+            <li class="{{getClass('home')}}"><a ng-click="setView('home')"><i class="fa fa-home"></i> <span class="hide">Home</span></a></li>
             <li class="{{getClass('results')}}"><a ng-click="setView('results')"><i class="fa fa-flag-checkered"></i> Results</a></li>
             <li class="{{getClass('drivers')}}"><a ng-click="setView('drivers')"><i class="fa fa-user"></i> Drivers</a></li>
-            <li class="{{getClass('settings')}}"><a ng-click="setView('settings')"><i class="fa fa-cog"></i> Settings</a></li>
+            <li class="{{getClass('settings')}}"><a ng-click="setView('settings')"><i class="fa fa-cog"></i> <span class="hide">Settings</span></a></li>
+            <li class="{{getClass('info')}}"><a ng-click="setView('info')"><i class="fa fa-info-circle"></i> <span class="hide">Info</span></a></li>
           </ul>
-
         </section>
       </nav>
+      <div>
+        <ul class="breadcrumbs">
+          <li><a ng-click="setView('home')"><i class="fa fa-home"></i> Home</a></li>
+          <li class="current"><a href="#">{{view.name}}</a></li>
+        </ul>
+      </div>
     </header>
 
+    <div id="view" ng-include="view.url"></div>
 
-    <div class="view row" ng-include="view.url" ng-controller="view.controller"></div>
-
-    <footer class="footer row">
-      <div class="container">
-        <p>openKartSlalom app: v<span app-version></span></p>
-        <p class="muted">
-          Created by&nbsp;<a href="http://derhasi.de"><i class="fa fa-user"> derhasi</i></a>, source code on&nbsp;<a href="https://github.com/derhasi/openkartslalom"><i class="fa fa-github"> Github</i></a></p>
-        <p>powered by&nbsp;<span class="badge">angularjs</span>&nbsp<span class="badge">bootstrap</span>&nbsp;<i class="fa fa-html5"></i>&nbsp;<i class="fa fa-css3"></i></p>
-      </div>
-      <div id="test">Bottom test</div>
-    </footer>
     <script src="components/angular/angular.js"></script>
     <script src="js/app.js"></script>
     <script src="js/services.js"></script>

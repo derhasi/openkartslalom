@@ -2,6 +2,10 @@ html {
   overflow: auto;
 }
 
+#view {
+  margin: 0 1em;
+}
+
 .top-bar h1 {
   color: white;
   font-weight: bold;
