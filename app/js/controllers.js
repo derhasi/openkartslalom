@@ -35,10 +35,15 @@ openKS.controller('AppCtrl', ['$scope', '$timeout', 'openKSDatabase', function($
     { key: 'settings', title: 'Settings', url: 'views/settings.html'},
     { key: 'info', title: 'Info', url: 'views/info.html'},
     { key: 'driverAdd', title: 'Add driver', url: 'views/driver-form.html'}
-  ]);
+  ], 'index');
 
-  // Set the default page as home.
-  $scope.nav.setDefaultView('home');
+  // Load the scope nav element from local store.
+  $scope.nav.load( function() {
+    // Set the default page as home, as we have no current view.
+    $scope.nav.setDefaultView('home');
+    // Make sure our nav element updates in view.
+    $scope.$apply();
+  });
 
   /**
    * Get the class for the given view.

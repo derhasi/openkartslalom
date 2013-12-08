@@ -7,6 +7,9 @@
     "16": "img/logo_16.png",
     "128": "img/logo_128.png"
   },
+  "permissions": [
+    "storage"
+  ],
   "app": {
     "background": {
       "scripts": ["js/chromeapp.js"]
