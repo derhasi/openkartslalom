@@ -1,10 +1,8 @@
 'use strict';
 
-/* Filters */
+/**
+ * @file
+ * Holds custom filters for the openKS app.
+ */
 
-angular.module('openKS.filters', []).
-  filter('interpolate', ['version', function(version) {
-    return function(text) {
-      return String(text).replace(/\%VERSION\%/mg, version);
-    }
-  }]);
+
