@@ -64,10 +64,38 @@ openKS.controller('HomeCtrl', [function() {}]);
 /**
  * Controller for drivers overview.
  */
-openKS.controller('DriversCtrl', ['$scope', function($scope) {
+openKS.controller('DriversCtrl', ['$scope', 'openKSDatabase', function($scope, db) {
   $scope.loading = true;
 
   $scope.drivers = [];
+
+  /**
+   * Loads the all drivers asynchronously.
+   */
+  $scope.loadDrivers = function() {
+    // We mark the scope, that we are loading the drivers list again.
+    $scope.loading = true;
+
+    db.driverDB.getAll(
+      function(items) {
+        console.log(items);
+        // Asign the fetched values to our scope variable.
+        $scope.drivers = items;
+        // As we finished, we can unflad the loading state.
+        $scope.loading = false;
+        // ... as the call is async, we need to tell our scope that it has been
+        // updated.
+        $scope.$apply();
+      },
+      function (err) {
+        console.log('Error', err);
+      }
+    );
+  }
+
+  // Initially load the drivers on controller init.
+  $scope.loadDrivers();
+
 }]);
 
 /**

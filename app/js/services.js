@@ -14,6 +14,7 @@ openKS.factory('openKSDatabase', function openKSDatabaseFactory() {
 
   var driverDB = new IDBStore({
     storeName: 'drivers',
+    storePrefix: 'openKS-',
     dbVersion: 1,
     keyPath: 'id',
     autoIncrement: true,
