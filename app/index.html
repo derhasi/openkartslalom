@@ -20,18 +20,24 @@
         <section class="top-bar-section">
           <!-- Right Nav Section -->
           <ul class="right">
-            <li class="{{getClass('home')}}"><a ng-click="setView('home')"><i class="fa fa-home"></i> <span class="hide">Home</span></a></li>
-            <li class="{{getClass('results')}}"><a ng-click="setView('results')"><i class="fa fa-trophy"></i> Results</a></li>
-            <li class="{{getClass('drivers')}}"><a ng-click="setView('drivers')"><i class="fa fa-users"></i> Drivers</a></li>
-            <li class="{{getClass('settings')}}"><a ng-click="setView('settings')"><i class="fa fa-cog"></i> <span class="hide">Settings</span></a></li>
-            <li class="{{getClass('info')}}"><a ng-click="setView('info')"><i class="fa fa-info-circle"></i> <span class="hide">Info</span></a></li>
+            <li class="{{getClass('home')}}"><a ng-click="nav.setView('home')"><i class="fa fa-home"></i> <span class="hide">Home</span></a></li>
+            <li class="{{getClass('results')}}"><a ng-click="nav.setView('results')"><i class="fa fa-trophy"></i> Results</a></li>
+            <li class="{{getClass('drivers')}}"><a ng-click="nav.setView('drivers')"><i class="fa fa-users"></i> Drivers</a></li>
+            <li class="{{getClass('settings')}}"><a ng-click="nav.setView('settings')"><i class="fa fa-cog"></i> <span class="hide">Settings</span></a></li>
+            <li class="{{getClass('info')}}"><a ng-click="nav.setView('info')"><i class="fa fa-info-circle"></i> <span class="hide">Info</span></a></li>
           </ul>
         </section>
       </nav>
       <div>
         <ul class="breadcrumbs">
-          <li><a ng-click="setView('home')"><i class="fa fa-home"></i> Home</a></li>
-          <li class="current"><a href="#">{{view.name}}</a></li>
+          <li><a ng-click="nav.setView('home')"><i class="fa fa-home"></i> Home</a></li>
+          <li class="current"><a ng-click="nav.setView(nav.currentView.key)">{{nav.currentView.title}}</a></li>
+        </ul>
+      </div>
+      <div class="history">
+        <ul>
+          <li ng-if="nav.hasHistory()"><a ng-click="nav.goBack()">Go back</a></li>
+          <li ng-if="nav.hasFuture()"><a ng-click="nav.goForward()">Go forward</a></li>
         </ul>
       </div>
     </header>
@@ -39,10 +45,11 @@
     <div id="loading" ng-if="!dbReady">
       Database still initialising!!
     </div>
-    <div id="view" ng-if="dbReady" ng-include="view.url"></div>
+    <div id="view" ng-if="dbReady" ng-include="nav.currentView.url"></div>
 
     <script src="components/angular/angular.js"></script>
     <script src="components/idbwrapper/idbstore.js"></script>
+    <script src="js/util.js"></script>
     <script src="js/app.js"></script>
     <script src="js/services.js"></script>
     <script src="js/controllers.js"></script>

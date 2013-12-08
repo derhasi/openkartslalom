@@ -11,6 +11,7 @@
 openKS.controller('AppCtrl', ['$scope', '$timeout', 'openKSDatabase', function($scope, $timeout, db) {
 
   // Function to check the status of the db initialisation.
+  // @todo: rewrite as trigger on openKSDatabase
   var checkDB = function () {
     $scope.dbReady = db.dbReady();
 
@@ -26,33 +27,35 @@ openKS.controller('AppCtrl', ['$scope', '$timeout', 'openKSDatabase', function($
   // And finally check it.
   checkDB();
 
-  $scope.getClass = function(path) {
-    if ($scope.view.name == path) {
+  // Provides a navigation object with history and (later) persistent storage.
+  $scope.nav = new openKSUtil.navObject([
+    { key: 'home', title: 'Home', url: 'views/home.html'},
+    { key: 'results', title: 'Results', url: 'views/results.html'},
+    { key: 'drivers', title: 'Drivers', url: 'views/drivers.html'},
+    { key: 'settings', title: 'Settings', url: 'views/settings.html'},
+    { key: 'info', title: 'Info', url: 'views/info.html'},
+    { key: 'driverAdd', title: 'Add driver', url: 'views/driver-form.html'}
+  ]);
+
+  // Set the default page as home.
+  $scope.nav.setDefaultView('home');
+
+  /**
+   * Get the class for the given view.
+   *
+   * @param {string} key
+   *   Key of the view
+   * @returns {string}
+   *   Either 'active' for the current view or empty string.
+   */
+  $scope.getClass = function(key) {
+    if ($scope.nav.currentView != undefined && $scope.nav.currentView.key == key) {
       return "active";
     }
     else {
       return "";
     }
   }
-
-  /**
-   * Provide a page changing event.
-   * @param path
-   */
-  $scope.setView = function(p) {
-    $scope.view = templates[p];
-  }
-
-  var templates = {
-    home: { name: 'home', url: 'views/home.html'},
-    results: { name: 'results', url: 'views/results.html'},
-    drivers: { name: 'drivers', url: 'views/drivers.html'},
-    settings: { name: 'settings', url: 'views/settings.html'},
-    info: { name: 'info', url: 'views/info.html'},
-    driverAdd: {name: 'driverAdd', url: 'views/driver-form.html'}
-  };
-
-  $scope.view = templates.home;
 
 }]);
 
