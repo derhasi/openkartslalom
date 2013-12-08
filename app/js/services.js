@@ -35,5 +35,21 @@ openKS.factory('openKSDatabase', function openKSDatabaseFactory() {
       return dbInitted >= 1;
     }
   };
+});
 
+/**
+ * Service providing the general navigation object.
+ */
+openKS.factory('openKSNavigation', function openKSNavigationFactory() {
+  var views = [
+    { key: 'home', title: 'Home', url: 'views/home.html'},
+    { key: 'results', title: 'Results', url: 'views/results.html'},
+    { key: 'drivers', title: 'Drivers', url: 'views/drivers.html'},
+    { key: 'settings', title: 'Settings', url: 'views/settings.html'},
+    { key: 'info', title: 'Info', url: 'views/info.html'},
+    { key: 'driverAdd', title: 'Add driver', url: 'views/driver-form.html'}
+  ];
+
+  var nav = new openKSUtil.navObject(views, 'index');
+  return nav;
 });

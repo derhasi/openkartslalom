@@ -8,7 +8,7 @@
 /**
  * Controller for the whole html content.
  */
-openKS.controller('AppCtrl', ['$scope', '$timeout', 'openKSDatabase', function($scope, $timeout, db) {
+openKS.controller('AppCtrl', ['$scope', '$timeout', 'openKSDatabase', 'openKSNavigation', function($scope, $timeout, db, navigation) {
 
   // Function to check the status of the db initialisation.
   // @todo: rewrite as trigger on openKSDatabase
@@ -28,14 +28,7 @@ openKS.controller('AppCtrl', ['$scope', '$timeout', 'openKSDatabase', function($
   checkDB();
 
   // Provides a navigation object with history and (later) persistent storage.
-  $scope.nav = new openKSUtil.navObject([
-    { key: 'home', title: 'Home', url: 'views/home.html'},
-    { key: 'results', title: 'Results', url: 'views/results.html'},
-    { key: 'drivers', title: 'Drivers', url: 'views/drivers.html'},
-    { key: 'settings', title: 'Settings', url: 'views/settings.html'},
-    { key: 'info', title: 'Info', url: 'views/info.html'},
-    { key: 'driverAdd', title: 'Add driver', url: 'views/driver-form.html'}
-  ], 'index');
+  $scope.nav = navigation;
 
   // Load the scope nav element from local store.
   $scope.nav.load( function() {
