@@ -1,24 +1,49 @@
-<a href="/drivers"><i class="icon-reply"> Back to drivers</i></a>
-<h2 ng-show="newDriver" translate="">Add driver</h2>
-<h2 ng-hide="newDriver">Edit "{{driver.firstname}} {{driver.lastname}}"</h2>
-<form>
-  <label>ID</label>
-  <input type="text" ng-model="driver.id"/>
-  <label>Class</label>
-  <input type="text" ng-model="driver.class"/>
-  <label>First name</label>
-  <input type="text" ng-model="driver.firstname"/>
-  <label>Last name</label>
-  <input type="text" ng-model="driver.lastname"/>
-  <label>Zip Code</label>
-  <input type="text" ng-model="driver.zip"/>
-  <label>City</label>
-  <input type="text" ng-model="driver.city"/>
-  <label>Club</label>
-  <input type="text" ng-model="driver.club"/>
-  <label ng-show="driver.oldLicence">old Licence</label>{{driver.oldLicence}}
-  <hr/>
-  <div class="actions">
-    <input type="submit" value="Save driver" ng-click="saveDriver()" class="btn btn-large btn-primary"/>&nbsp;Revision {{driver.v}}
-  </div>
-</form>
+<div ng-controller="DriverFormCtrl">
+
+  <h2 ng-if="new" translate="">Add new driver</h2>
+  <h2 ng-if="!new">Edit "{{driver.firstname}} {{driver.lastname}}"</h2>
+  <div ng-if="!new" class="revision">Revision: {{driver.v}}</div>
+  <form class="row">
+    <div class="row">
+      <div class="small-1 columns">
+        <label>ID</label>
+        <input type="text" ng-model="driver.id"/>
+      </div>
+      <div class="small-3 columns">
+        <label>Class</label>
+        <input type="text" ng-model="driver.class"/>
+      </div>
+      <div class="small-8 columns">
+        <label>Club</label>
+        <input type="text" ng-model="driver.club"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-6 columns">
+        <label>First name</label>
+        <input type="text" ng-model="driver.firstname"/>
+      </div>
+      <div class="small-6 columns">
+        <label>Last name</label>
+        <input type="text" ng-model="driver.lastname"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-4 columns">
+        <label>Zip Code</label>
+        <input type="text" ng-model="driver.zip"/>
+      </div>
+      <div class="small-8 columns">
+        <label>City</label>
+        <input type="text" ng-model="driver.city"/>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="small-12 columns">
+        <a ng-click="saveDriver()" class="button radius">Save driver</a>
+      </div>
+    </div>
+
+  </form>
+</div>

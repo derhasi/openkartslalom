@@ -102,6 +102,28 @@ openKS.controller('DriversCtrl', ['$scope', 'openKSDatabase', function($scope, d
 /**
  * Controller for drivers overview.
  */
+openKS.controller('DriverFormCtrl', ['$scope', 'openKSDatabase', 'openKSNavigation', function($scope, db, navigation) {
+
+  var arg0 = navigation.getArg(0);
+
+  if (arg0 == undefined || arg0 == 'new') {
+    $scope.new = true;
+  }
+  else {
+    $scope.new = false;
+  }
+
+  /**
+   * Save the data of the driver to the database.
+   */
+  $scope.saveDriver = function() {
+  };
+
+}]);
+
+/**
+ * Controller for drivers overview.
+ */
 openKS.controller('ResultsCtrl', [function() {}]);
 
 /**
