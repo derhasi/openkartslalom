@@ -143,7 +143,6 @@ openKSUtil.navObject = function (templateOptions, id) {
       nav.save(function() {
         console.log('View setted and stored:', key);
         console.log(args);
-
       });
     }
   }
@@ -157,7 +156,7 @@ openKSUtil.navObject = function (templateOptions, id) {
    */
   this.getArg = function(num) {
     if (nav.hasArg(num)) {
-      return nav.args[num];
+      return nav.currentView.args[num];
     }
   }
 
@@ -168,7 +167,7 @@ openKSUtil.navObject = function (templateOptions, id) {
    * @returns {boolean}
    */
   this.hasArg = function(num) {
-    return nav.args[num] != undefined;
+    return nav.currentView.args[num] != undefined;
   }
 
   /**
