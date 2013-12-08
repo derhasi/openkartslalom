@@ -36,7 +36,10 @@
       </div>
     </header>
 
-    <div id="view" ng-include="view.url"></div>
+    <div id="loading" ng-if="!dbReady">
+      Database still initialising!!
+    </div>
+    <div id="view" ng-if="dbReady" ng-include="view.url"></div>
 
     <script src="components/angular/angular.js"></script>
     <script src="components/idbwrapper/idbstore.js"></script>

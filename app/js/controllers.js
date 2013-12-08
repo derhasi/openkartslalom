@@ -1,11 +1,31 @@
 'use strict';
 
-/* Controllers */
+/**
+ * @file
+ * Holds controllers for the openKS app.
+ */
 
 /**
  * Controller for the whole html content.
  */
-openKS.controller('AppCtrl', ['$scope', function($scope) {
+openKS.controller('AppCtrl', ['$scope', '$timeout', 'openKSDatabase', function($scope, $timeout, db) {
+
+  // Function to check the status of the db initialisation.
+  var checkDB = function () {
+    $scope.dbReady = db.dbReady();
+
+    if ($scope.dbReady == false) {
+      console.log('DB not ready');
+      $timeout(checkDB);
+    }
+    else {
+      console.log('Yeah, DB is ready!');
+    }
+  };
+
+  // And finally check it.
+  checkDB();
+
   $scope.getClass = function(path) {
     if ($scope.view.name == path) {
       return "active";
