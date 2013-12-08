@@ -66,6 +66,7 @@ openKSUtil.navObject = function (templateOptions, id) {
    */
   this.clear = function() {
     nav.history = [];
+    nav.future = [];
   }
 
   /**
@@ -201,6 +202,8 @@ openKSUtil.navObject = function (templateOptions, id) {
   /**
    * Save settings to local storage.
    * @param callback
+   *
+   * @todo: limit history to a maximum length to avoid storage overflow
    */
   this.save = function(callback) {
     var store = {};

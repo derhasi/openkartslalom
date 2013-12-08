@@ -3,72 +3,19 @@
   <h2 translate="">Settings</h2>
   <form class="form-horizontal">
     <fieldset>
-      <legend translate="">General</legend>
-      <div class="control-group">
-        <label for="inputTitle" translate="" class="control-label">Title</label>
-        <div class="controls">
-          <input type="text" id="inputTitle" ng-model="config.title" class="input-xlarge"/>
-        </div>
-      </div>
-      <div class="control-group">
-        <label for="inputSubtitle" translate="" class="control-label">Subtitle</label>
-        <div class="controls">
-          <input type="text" ng-model="config.subtitle" class="input-xlarge"/>
-        </div>
-      </div>
+      <legend>General</legend>
+
+        <label>Title</label>
+        <input type="text" disabled/>
+      <label>Subtitle</label>
+      <input type="text" disabled/>
     </fieldset>
+
     <fieldset>
-      <legend translate="">Results</legend>
-      <div class="control-group">
-        <label translate="" class="control-label">Training runs count</label>
-        <div class="controls">
-          <input type="number" ng-model="config.resultsTrainingRunsCount" class="input-mini"/>
-        </div>
-      </div>
-      <div class="control-group">
-        <label translate="" class="control-label">Official runs count</label>
-        <div class="controls">
-          <input type="number" ng-model="config.resultsOfficialRunsCount" class="input-mini"/>
-        </div>
-      </div>
-      <fieldset class="offset1">
-        <legend translate="">Penalties</legend>
-        <div class="control-group">
-          <label translate="" class="control-label">Penalty count</label>
-          <div class="controls">
-            <input type="number" ng-model="config.resultsPenaltyCount" class="input-mini"/>
-          </div>
-        </div>
-        <div ng-repeat="data in config.resultsPenaltyData" class="control-group">
-          <label class="control-label">Penalty {{ $index + 1 }}</label>
-          <div class="input-prepend span2"><span class="add-on">Multiplier</span>
-            <input type="number" ng-model="data.multiplier" class="input-mini"/>
-          </div>
-          <div class="input-prepend span2"><span class="add-on">Name</span>
-            <input type="text" ng-model="data.name" class="input-small"/>
-          </div>
-        </div>
-      </fieldset>
+      <legend>Navigation</legend>
+      <a ng-click="clearHistory()" class="button radius secondary">Clear history</a>
     </fieldset>
-    <fieldset>
-      <legend translate="">Drivers CSV</legend>
-      <div class="control-group">
-        <label translate="" class="control-label">File path</label>
-        <div class="controls">
-          <input type="text" ng-model="config.driversCSV" class="input-xlarge"/>
-        </div>
-      </div>
-      <div class="control-group">
-        <label translate="" class="control-label">Header rows</label>
-        <div class="controls">
-          <input type="number" ng-model="config.driversCSVHeaderCount" class="input-mini"/>
-        </div>
-      </div>
-    </fieldset>
-    <hr/>
-    <div class="actions">
-      <input type="submit" value="Save settings" ng-click="saveConfig()" class="btn btn-large btn-primary"/>
-    </div>
+
   </form>
 
 </div>

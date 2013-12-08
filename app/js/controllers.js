@@ -107,4 +107,10 @@ openKS.controller('ResultsCtrl', [function() {}]);
 /**
  * Controller for drivers overview.
  */
-openKS.controller('SettingsCtrl', [function() {}]);
+openKS.controller('SettingsCtrl', [ '$scope', 'openKSNavigation', function($scope, navigation) {
+
+  $scope.clearHistory = function() {
+    navigation.clear();
+  }
+
+}]);
