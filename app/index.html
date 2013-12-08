@@ -16,30 +16,32 @@
             <h1>openKartSlalom&nbsp;<i class="fa fa-flag-checkered fa fa-2x"></i></h1>
           </li>
         </ul>
-
         <section class="top-bar-section">
-          <!-- Right Nav Section -->
-          <ul class="right">
+          <ul class="left">
             <li class="{{getClass('home')}}"><a ng-click="nav.setView('home')"><i class="fa fa-home"></i> <span class="hide">Home</span></a></li>
             <li class="{{getClass('results')}}"><a ng-click="nav.setView('results')"><i class="fa fa-trophy"></i> Results</a></li>
             <li class="{{getClass('drivers')}}"><a ng-click="nav.setView('drivers')"><i class="fa fa-users"></i> Drivers</a></li>
+          </ul>
+          <!-- Right Nav Section -->
+          <ul class="right">
+            <li>
+              <a ng-if="nav.hasHistory()" ng-click="nav.goBack()" title="Go back"><i class="fa fa-undo"></i></a>
+              <a ng-if="!nav.hasHistory()" class="inactive"><i class="fa fa-undo"></i></a>
+            </li>
+            <li>
+              <a ng-if="nav.hasFuture()" ng-click="nav.goForward()" title="Go forward"><i class="fa fa-repeat"></i></a>
+              <a ng-if="!nav.hasFuture()" class="inactive"><i class="fa fa-repeat"></i></a>
+            </li>
+            <li class="divider"></li>
             <li class="{{getClass('settings')}}"><a ng-click="nav.setView('settings')"><i class="fa fa-cog"></i> <span class="hide">Settings</span></a></li>
             <li class="{{getClass('info')}}"><a ng-click="nav.setView('info')"><i class="fa fa-info-circle"></i> <span class="hide">Info</span></a></li>
           </ul>
         </section>
       </nav>
-      <div>
-        <ul class="breadcrumbs">
-          <li><a ng-click="nav.setView('home')"><i class="fa fa-home"></i> Home</a></li>
-          <li class="current"><a ng-click="nav.setView(nav.currentView.key)">{{nav.currentView.title}}</a></li>
-        </ul>
-      </div>
-      <div class="history">
-        <ul>
-          <li ng-if="nav.hasHistory()"><a ng-click="nav.goBack()">Go back</a></li>
-          <li ng-if="nav.hasFuture()"><a ng-click="nav.goForward()">Go forward</a></li>
-        </ul>
-      </div>
+      <ul class="breadcrumbs">
+        <li><a ng-click="nav.setView('home')"><i class="fa fa-home"></i> Home</a></li>
+        <li class="current"><a ng-click="nav.setView(nav.currentView.key)">{{nav.currentView.title}}</a></li>
+      </ul>
     </header>
 
     <div id="loading" ng-if="!dbReady">

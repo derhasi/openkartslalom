@@ -12,10 +12,17 @@ header {
 }
 
 .top-bar {
+  .title-area {
+    margin-right: 2em;
+  }
   h1 {
     color: white;
     font-weight: bold;
     font-size: 2em;
+  }
+  //
+  .inactive {
+    opacity: 0.5;
   }
 }
 
