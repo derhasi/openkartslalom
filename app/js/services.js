@@ -1,9 +1,38 @@
 'use strict';
 
-/* Services */
+/**
+ * @file
+ * Holds custom services for the openKS app.
+ */
 
+/**
+ * Provides the central database for storing drivers and (later) results data.
+ */
+openKS.factory('openKSDatabase', function openKSDatabaseFactory() {
 
-// Demonstrate how to register services
-// In this case it is a simple value service.
-angular.module('openKS.services', []).
-  value('version', '0.1');
+  var dbInitted = 0;
+
+  var driverDB = new IDBStore({
+    storeName: 'drivers',
+    dbVersion: 1,
+    keyPath: 'id',
+    autoIncrement: true,
+    onStoreReady: function(){
+      dbInitted++;
+    },
+    indexes: [
+      { name: 'class' },
+      { name: 'firstname' },
+      { name: 'lastname' },
+      { name: 'club' }
+    ]
+  });
+
+  return {
+    "driverDB": driverDB,
+    "dbReady": function () {
+      return dbInitted >= 1;
+    }
+  };
+
+});
