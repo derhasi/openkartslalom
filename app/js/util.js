@@ -79,19 +79,53 @@ openKSUtil.navObject = function (templateOptions, id) {
   }
 
   /**
-   * Change the view.
+   * Change the view with an optional list of arguments.
+   *
+   * @code
+   *   nav.setView('driverAdd', 'new');
+   * @endcode
    *
    * @param {string} key
    *   Machine name of the view to set as current.
-   *
-   * @todo: provide arguments
+   * @param ...
+   *   Additional arguments to pass, that can be retrieved for the current view
+   *   via getArg(num), with num starting from 0.
    */
   this.setView = function(key) {
+    // 'arguments' is no real array, so we have to build one first to shift
+    // the first argument - which is the key - and pass the rest as context to
+    // the current view.
+    var args = Array.prototype.slice.call(arguments);
+    args.shift();
 
+    nav.setViewByArgs(key, args);
+  }
+
+  /**
+   * Change the view with a given array of arguments.
+   *
+   * Example usage:
+   * @code
+   *   nav.setViewByArgs('driverAdd', ['new']);
+   * @endcode
+   *
+   * @param {string} key
+   *   Machine name of the view to set as current.
+   * @param {Array} args
+   *   Additional arguments to pass, that can be retrieved for the current view
+   *   via getArg(num), with num starting from 0.
+   */
+  this.setViewByArgs = function(key, args) {
     // Only process if the given view exists.
     if (nav.templates[key] != undefined) {
 
-      // Set the current view as history.
+      // Do nothing, if the current view has not changed.
+      if (nav.currentView != undefined && nav.currentView.key == key
+        && angular.toJson(nav.currentView.args) == angular.toJson(args)) {
+        return;
+      }
+
+      // Set the current view as history (if we really have one already).
       if (nav.currentView != undefined) {
         nav.history.push(nav.currentView);
         nav.history = nav.history.filter(objArrFilter);
@@ -99,15 +133,42 @@ openKSUtil.navObject = function (templateOptions, id) {
 
       // Write the given key as new view.
       nav.currentView = nav.templates[key];
+      // We add the instance args
+      nav.currentView.args = args;
 
-      // We reset the future, as we set a
+      // We reset the future, as we set a new view.
       nav.future = [];
 
       // Finally save our new view state.
       nav.save(function() {
         console.log('View setted and stored:', key);
+        console.log(args);
+
       });
     }
+  }
+
+  /**
+   * Retrieve argument from the current view instance.
+   *
+   * @param {int} num
+   *
+   * @returns {*}
+   */
+  this.getArg = function(num) {
+    if (nav.hasArg(num)) {
+      return nav.args[num];
+    }
+  }
+
+  /**
+   * Check if the given arg is available.
+   *
+   * @param {int} num
+   * @returns {boolean}
+   */
+  this.hasArg = function(num) {
+    return nav.args[num] != undefined;
   }
 
   /**
