@@ -48,8 +48,8 @@ openKS.controller('AppCtrl', ['$scope', '$timeout', 'openKSDatabase', function($
     results: { name: 'results', url: 'views/results.html'},
     drivers: { name: 'drivers', url: 'views/drivers.html'},
     settings: { name: 'settings', url: 'views/settings.html'},
-    info: { name: 'info', url: 'views/info.html'}
-
+    info: { name: 'info', url: 'views/info.html'},
+    driverAdd: {name: 'driverAdd', url: 'views/driver-form.html'}
   };
 
   $scope.view = templates.home;
@@ -64,7 +64,11 @@ openKS.controller('HomeCtrl', [function() {}]);
 /**
  * Controller for drivers overview.
  */
-openKS.controller('DriversCtrl', [function() {}]);
+openKS.controller('DriversCtrl', ['$scope', function($scope) {
+  $scope.loading = true;
+
+  $scope.drivers = [];
+}]);
 
 /**
  * Controller for drivers overview.
