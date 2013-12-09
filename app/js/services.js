@@ -53,3 +53,135 @@ openKS.factory('openKSNavigation', function openKSNavigationFactory() {
   var nav = new openKSUtil.navObject(views, 'index');
   return nav;
 });
+
+/**
+ * Provides driver object.
+ */
+openKS.factory('openKSDriver', ['openKSDatabase', function openKSDriverFactory(db) {
+  var openKSDriver = function (params) {
+
+    // Driver for internal reference.
+    var driver = this;
+
+    // Empty params, means empty object.
+    if (params == undefined) {
+      params = {};
+    }
+
+    // Default values for a new driver.
+    this.isNew = function () {
+      return driver.id == undefined || driver.id <= 0;
+    };
+
+    // Init default params (will be overwritten by init() again).
+    this.id = undefined;
+    this.license = '';
+    this.club = '';
+    this.class = '';
+    this.firstname = '';
+    this.lastname = '';
+    this.zipcode = '';
+    this.city = '';
+
+    /**
+     * Construct the object from the given parameters provided.
+     * @param {Array} params
+     */
+    var init = function (params) {
+      assign(driver, params, true);
+    }
+
+    /**
+     * Private function to assig properties to a given object.
+     *
+     * @param {Object} obj
+     * @param {Object} params
+     */
+    var assign = function (obj, params, addUndefined) {
+      var defaults = {
+        id: undefined,
+        firstname: '',
+        lastname: '',
+        zipcode: '',
+        city: '',
+        license: '',
+        class: '',
+        club: ''
+      }
+
+      // Assign passed values to the object. Set default, if none is given.
+      for (var prop in defaults) {
+        var val = (params[prop] != undefined) ? params[prop] : defaults[prop];
+        if (val != undefined || addUndefined) {
+          obj[prop] = val;
+        }
+      }
+    }
+
+    /**
+     * Asynchronous save function.
+     *
+     * @param {Function} callback
+     *  - will be called with (updated) driver object as first parameter
+     */
+    this.save = function (callback) {
+      var store = driver.toObject();
+      db.driverDB.put(store,
+        // Success callback providing (new) id.
+        function(id) {
+          driver.id = id;
+          callback(driver);
+        },
+        // Error callback.
+        function (err) {
+          console.error(err);
+        }
+      );
+    }
+
+    /**
+     * Provide an object that can be stored to the indexedDB.
+     *
+     * For some reason the original object cannot be serialized, so we simply
+     * take the raw values.
+     *
+     * @returns {{}}
+     */
+    this.toObject = function() {
+      var obj = {};
+      // The assign function with the false indicator will remove undefined
+      // values, so the id of new objects is not part of the object and may not
+      // cause errors with IndexDB.
+      // Due to that I had been running in the error:
+      // "Evaluating the object store's key path yielded a value that is not a valid key"
+      assign(obj, driver, false);
+      return obj;
+    }
+
+    // Initialize the object, after we got it.
+    init(params);
+  };
+
+  /**
+   * Load a new driver by id from the db.
+   *
+   * @param {int} driverID
+   * @param {Function} callback
+   *   - will be called with new driver object as first parameter
+   */
+  openKSDriver.load = function(driverID, callback) {
+    db.driverDB.get(driverID,
+      // Success callback
+      function(item) {
+        var newDriver = new openKSDriver(item);
+        callback(newDriver);
+      },
+      // Error callback.
+      function (err) {
+        console.log('Error', err);
+      }
+    );
+  }
+
+  return openKSDriver;
+}]);
