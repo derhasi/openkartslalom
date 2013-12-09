@@ -15,6 +15,8 @@ var openKSUtil = {};
  *   - key: the machine name for the view
  *   - title: the human readable name for the title
  *   - url: url for the template
+ *   - parent: (optional) key of a template that will point to the parent entry
+ *
  * @param {string} id
  *   ID for storage
  */
@@ -78,6 +80,25 @@ openKSUtil.navObject = function (templateOptions, id) {
    */
   this.getCurrentView = function() {
     return nav.currentView;
+  }
+
+  /**
+   * Get all template definitions of the parent entries.
+   *
+   * @returns {Array}
+   */
+  this.getCurrentParents = function() {
+    // Get raw template for the current view.
+    var tpl = templates[nav.currentView.key];
+
+    var parents = [];
+    // Get the parent of template, as long as no parent is given anymore.
+    while (tpl.parent != undefined  && templates[tpl.parent] != undefined) {
+      tpl = templates[tpl.parent];
+      parents.unshift(tpl);
+    }
+
+    return parents;
   }
 
   /**

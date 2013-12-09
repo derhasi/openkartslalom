@@ -42,13 +42,53 @@ openKS.factory('openKSDatabase', function openKSDatabaseFactory() {
  */
 openKS.factory('openKSNavigation', function openKSNavigationFactory() {
   var views = [
-    { key: 'home', title: 'Home', url: 'views/home.html'},
-    { key: 'results', title: 'Results', url: 'views/results.html'},
-    { key: 'drivers', title: 'Drivers', url: 'views/drivers.html'},
-    { key: 'settings', title: 'Settings', url: 'views/settings.html'},
-    { key: 'info', title: 'Info', url: 'views/info.html'},
-    { key: 'driverAdd', title: 'Add driver', url: 'views/driver-form.html'},
-    { key: 'driverEdit', title: 'Edit driver', url: 'views/driver-form.html'}
+    {
+      key: 'home',
+      title: 'Home',
+      url: 'views/home.html',
+      iconClass: 'fa fa-home'
+    },
+    { key: 'results',
+      title: 'Results',
+      url: 'views/results.html',
+      parent: 'home',
+      iconClass: 'fa fa-trophy'
+    },
+    {
+      key: 'drivers',
+      title: 'Drivers',
+      url: 'views/drivers.html',
+      parent: 'home',
+      iconClass: 'fa fa-users'
+    },
+    {
+      key: 'settings',
+      title: 'Settings',
+      url: 'views/settings.html',
+      parent: 'home',
+      iconClass: 'fa fa-coq'
+    },
+    {
+      key: 'info',
+      title: 'Info',
+      url: 'views/info.html',
+      parent: 'home',
+      iconClass: 'fa fa-info'
+    },
+    {
+      key: 'driverAdd',
+      title: 'Add driver',
+      url: 'views/driver-form.html',
+      parent: 'drivers',
+      iconClass: 'fa fa-plus'
+    },
+    {
+      key: 'driverEdit',
+      title: 'Edit driver',
+      url: 'views/driver-form.html',
+      parent: 'drivers',
+      iconClass: 'fa fa-edit'
+    }
   ];
 
   var nav = new openKSUtil.navObject(views, 'index');

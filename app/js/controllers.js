@@ -30,6 +30,11 @@ openKS.controller('AppCtrl', ['$scope', '$timeout', 'openKSDatabase', 'openKSNav
   // Provides a navigation object with history and (later) persistent storage.
   $scope.nav = navigation;
 
+  // Retrieve the parent templates as breadcrumbs.
+  $scope.breadcrumbs = function() {
+    return navigation.getCurrentParents();
+  }
+
   // Load the scope nav element from local store.
   $scope.nav.load( function() {
     // Set the default page as home, as we have no current view.

@@ -38,8 +38,10 @@
         </section>
       </nav>
       <ul class="breadcrumbs">
-        <li><a ng-click="setView('home')"><i class="fa fa-home"></i> Home</a></li>
-        <li class="current"><a ng-click="setView(nav.currentView.key)">{{nav.currentView.title}}</a></li>
+        <li ng-repeat="crumb in breadcrumbs()">
+          <a ng-click="setView(crumb.key)" class="crumb-{{crumb.key}}"><i class="{{crumb.iconClass}}"></i> {{crumb.title}}</a>
+        </li>
+        <li class="current"><a ng-click="setView(nav.currentView.key)"><i class="{{nav.currentView.iconClass}}"></i> {{nav.currentView.title}}</a></li>
       </ul>
     </header>
 
