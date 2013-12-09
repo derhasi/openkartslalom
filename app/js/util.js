@@ -88,10 +88,16 @@ openKSUtil.navObject = function (templateOptions, id) {
    * @returns {Array}
    */
   this.getCurrentParents = function() {
+
+    var parents = [];
+
+    if (nav.currentView == undefined) {
+      return parents;
+    }
+
     // Get raw template for the current view.
     var tpl = templates[nav.currentView.key];
 
-    var parents = [];
     // Get the parent of template, as long as no parent is given anymore.
     while (tpl.parent != undefined  && templates[tpl.parent] != undefined) {
       tpl = templates[tpl.parent];

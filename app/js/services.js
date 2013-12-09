@@ -66,7 +66,7 @@ openKS.factory('openKSNavigation', function openKSNavigationFactory() {
       title: 'Settings',
       url: 'views/settings.html',
       parent: 'home',
-      iconClass: 'fa fa-coq'
+      iconClass: 'fa fa-cog'
     },
     {
       key: 'info',
