@@ -1,8 +1,13 @@
 <div ng-controller="ResultsCtrl">
 
   <h2 translate="">Results</h2>
-  <div>
-    <div class="span2"><a href="/results/add" class="btn btn-primary"><i class="icon-plus"></i>&nbsp;Add result</a></div>
+  <div class="row">
+    <div class="small-4 columns">
+      <a ng-click="setView('resultAdd')" class="button radius"><i class="fa fa-clock-o"></i> Add result</a>
+    </div>
+    <div class="small-4 columns">
+      <a ng-click="loadResults()" class="button radius secondary"><i class="fa fa-refresh"></i> Reload list</a>
+    </div>
   </div>
   <table class="table-hover table">
     <tr>
@@ -20,7 +25,7 @@
       <td>{{result.class}}</td>
       <td>{{result.driver}}</td>
       <td>{{result.team}}</td>
-      <td><a href="results/{{result.id}}/edit" title="Edit result {{result.id}}&quot;"><i class="icon-edit"> edit</i></a></td>
+      <td><a ng-click="setView('resultEdit', results.id)" title="Edit result {{result.id}}&quot;"><i class="icon-edit"> edit</i></a></td>
     </tr>
   </table>
 

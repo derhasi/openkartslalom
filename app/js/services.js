@@ -88,6 +88,20 @@ openKS.factory('openKSNavigation', function openKSNavigationFactory() {
       url: 'views/driver-form.html',
       parent: 'drivers',
       iconClass: 'fa fa-edit'
+    },
+    {
+      key: 'resultAdd',
+      title: 'Add result',
+      url: 'views/result-form.html',
+      parent: 'results',
+      iconClass: 'fa fa-clock-o'
+    },
+    {
+      key: 'resultEdit',
+      title: 'Edit result',
+      url: 'views/result-form.html',
+      parent: 'results',
+      iconClass: 'fa fa-edit'
     }
   ];
 
