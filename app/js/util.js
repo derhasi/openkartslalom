@@ -108,6 +108,36 @@ openKSUtil.navObject = function (templateOptions, id) {
   }
 
   /**
+   * Checks if the given key, is the active view.
+   * @param key
+   * @returns {boolean}
+   */
+  this.isActive = function (key) {
+    return nav.currentView != undefined && nav.currentView.key == key;
+  }
+
+  /**
+   * Check if the given key is in the trail of the currently active view.
+   * @param {string} key
+   * @returns {boolean}
+   */
+  this.isActiveTrail = function (key) {
+    if (nav.isActive(key)) {
+      return true;
+    }
+    // Check if the given key is part of the current view's parents.
+    else {
+      var parents = nav.getCurrentParents();
+      for (var i in parents) {
+        if (parents[i].key == key) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  /**
    * Change the view with a given array of arguments.
    *
    * Example usage:

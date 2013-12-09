@@ -55,7 +55,9 @@ openKS.controller('AppCtrl', ['$scope', '$timeout', 'openKSDatabase', 'openKSNav
    *   Either 'active' for the current view or empty string.
    */
   $scope.getClass = function(key) {
-    if ($scope.nav.currentView != undefined && $scope.nav.currentView.key == key) {
+    // Home shall only be active if is the current view and not only part of the
+    // trail.
+    if ($scope.nav.isActive(key) || ( key != 'home' && $scope.nav.isActiveTrail(key))) {
       return "active";
     }
     else {
