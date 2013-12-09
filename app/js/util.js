@@ -34,8 +34,6 @@ openKSUtil.navObject = function (templateOptions, id) {
   this.history = [];
   this.future = [];
 
-
-
   /**
    * Helper to filter an array to only use objects.
    * @param val
@@ -83,29 +81,6 @@ openKSUtil.navObject = function (templateOptions, id) {
   }
 
   /**
-   * Change the view with an optional list of arguments.
-   *
-   * @code
-   *   nav.setView('driverAdd', 'new');
-   * @endcode
-   *
-   * @param {string} key
-   *   Machine name of the view to set as current.
-   * @param ...
-   *   Additional arguments to pass, that can be retrieved for the current view
-   *   via getArg(num), with num starting from 0.
-   */
-  this.setView = function(key) {
-    // 'arguments' is no real array, so we have to build one first to shift
-    // the first argument - which is the key - and pass the rest as context to
-    // the current view.
-    var args = Array.prototype.slice.call(arguments);
-    args.shift();
-
-    nav.setViewByArgs(key, args);
-  }
-
-  /**
    * Change the view with a given array of arguments.
    *
    * Example usage:
@@ -118,8 +93,10 @@ openKSUtil.navObject = function (templateOptions, id) {
    * @param {Array} args
    *   Additional arguments to pass, that can be retrieved for the current view
    *   via getArg(num), with num starting from 0.
+   * @param {Function} callback
+   *   Callback function for when the new view information was saved.
    */
-  this.setViewByArgs = function(key, args) {
+  this.setView = function(key, args, callback) {
     // Only process if the given view exists.
     if (templates[key] != undefined) {
 
@@ -148,8 +125,8 @@ openKSUtil.navObject = function (templateOptions, id) {
         console.log('View setted and stored:', key);
         console.log(args);
 
-        // @todo: trigger event as navigation as changed.
-
+        // Call the callback, whenever the view was updated.
+        callback();
       });
     }
   }
@@ -183,9 +160,9 @@ openKSUtil.navObject = function (templateOptions, id) {
    * @param {string} key
    *   Machine name of the view to set as current.
    */
-  this.setDefaultView = function(key) {
+  this.setDefaultView = function(key, callback) {
     if (nav.currentView == undefined) {
-      nav.setView(key);
+      nav.setView(key, [], callback);
     }
   }
 

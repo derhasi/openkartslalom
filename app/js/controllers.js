@@ -33,7 +33,10 @@ openKS.controller('AppCtrl', ['$scope', '$timeout', 'openKSDatabase', 'openKSNav
   // Load the scope nav element from local store.
   $scope.nav.load( function() {
     // Set the default page as home, as we have no current view.
-    $scope.nav.setDefaultView('home');
+    $scope.nav.setDefaultView('home', function() {
+      $scope.$apply();
+    });
+
     // Make sure our nav element updates in view.
     $scope.$apply();
   });
@@ -53,6 +56,16 @@ openKS.controller('AppCtrl', ['$scope', '$timeout', 'openKSDatabase', 'openKSNav
     else {
       return "";
     }
+  }
+
+  /**
+   * Callback to wrap the change of a view.
+   * @param key
+   */
+  $scope.setView = function (key) {
+    navigation.setView(key, [], function() {
+      $scope.$apply();
+    });
   }
 
 }]);
@@ -103,7 +116,9 @@ openKS.controller('DriversCtrl', ['$scope', 'openKSDatabase', 'openKSNavigation'
    * @param id
    */
   $scope.editView = function (id) {
-    nav.setView('driverEdit', id);
+    nav.setView('driverEdit', [id], function () {
+      $scope.$apply();
+    });
   }
 
 }]);
@@ -124,7 +139,7 @@ openKS.controller('DriverFormCtrl', ['$scope', 'openKSDriver', 'openKSNavigation
 
     driverDB.load(driverId, function(driver) {
       $scope.driver = driver;
-      //$scope.$apply();
+      $scope.$apply();
     });
   }
 
@@ -149,10 +164,14 @@ openKS.controller('DriverFormCtrl', ['$scope', 'openKSDriver', 'openKSNavigation
 
       // If the driver was new, we change the view.
       if (isNew) {
-        navigation.setView('driverEdit', driver.id);
+        navigation.setView('driverEdit', [driver.id], function() {
+          $scope.$apply();
+        });
       }
       else {
-        navigation.setView('drivers');
+        navigation.setView('drivers', [], function() {
+          $scope.$apply();
+        });
       }
     });
   };
