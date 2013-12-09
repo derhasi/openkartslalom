@@ -100,34 +100,47 @@ openKS.controller('DriversCtrl', ['$scope', 'openKSDatabase', function($scope, d
 }]);
 
 /**
- * Controller for drivers overview.
+ * Controller for driver form.
  */
-openKS.controller('DriverFormCtrl', ['$scope', 'openKSDatabase', 'openKSNavigation', function($scope, db, navigation) {
+openKS.controller('DriverFormCtrl', ['$scope', 'openKSDriver', 'openKSNavigation', function($scope, driverDB, navigation) {
 
-  var arg0 = navigation.getArg(0);
-
-  if (arg0 == undefined || arg0 == 'new') {
-    $scope.new = true;
+  // We got a new driver on the driverAdd view.
+  if (navigation.currentView.key == 'driverAdd') {
+    $scope.driver = new driverDB({});
   }
+  // We got an existing driver and therefore have to retrieve the ID from the
+  // navigation args.
   else {
-    $scope.new = false;
+    var driverId = navigation.currentView.getArg(0);
+
+    driverDB.load(driverId, function(driver) {
+      $scope.driver = driver;
+      //$scope.$apply();
+    });
   }
 
-  /**
-   * Save the data of the driver to the database.
-   */
+  $scope.isNew = function() {
+    if ($scope.driver != undefined) {
+      return $scope.driver.isNew();
+    }
+  }
+
   $scope.saveDriver = function() {
+    $scope.driver.save(function(driver) {
+      $scope.driver = driver;
+      //$scope.$apply();
+    });
   };
 
 }]);
 
 /**
- * Controller for drivers overview.
+ * Controller for restult overview.
  */
 openKS.controller('ResultsCtrl', [function() {}]);
 
 /**
- * Controller for drivers overview.
+ * Controller for settings view.
  */
 openKS.controller('SettingsCtrl', [ '$scope', 'openKSNavigation', function($scope, navigation) {
 

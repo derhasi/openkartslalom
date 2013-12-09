@@ -1,41 +1,41 @@
 <div ng-controller="DriverFormCtrl">
 
-  <h2 ng-if="new" translate="">Add new driver</h2>
-  <h2 ng-if="!new">Edit "{{driver.firstname}} {{driver.lastname}}"</h2>
-  <div ng-if="!new" class="revision">Revision: {{driver.v}}</div>
+  <h2 ng-if="isNew()" translate="">Add new driver</h2>
+  <h2 ng-if="!isNew()">Edit "{{driver.firstname}} {{driver.lastname}}"</h2>
+  <div ng-if="!isNew()" class="revision">Revision: {{driver.v}}</div>
   <form class="row">
     <div class="row">
       <div class="small-1 columns">
         <label>ID</label>
-        <input type="text" ng-model="driver.id"/>
+        <input type="text" ng-model="driver.id" disabled=""/>
       </div>
       <div class="small-3 columns">
         <label>Class</label>
-        <input type="text" ng-model="driver.class"/>
+        <input type="text" ng-model="driver.class" placeholder="z.B. K1"/>
       </div>
       <div class="small-8 columns">
         <label>Club</label>
-        <input type="text" ng-model="driver.club"/>
+        <input type="text" ng-model="driver.club" placeholder="z.B. MSC OpenSource"/>
       </div>
     </div>
     <div class="row">
       <div class="small-6 columns">
         <label>First name</label>
-        <input type="text" ng-model="driver.firstname"/>
+        <input type="text" ng-model="driver.firstname" placeholder="z.B. Andrea"/>
       </div>
       <div class="small-6 columns">
         <label>Last name</label>
-        <input type="text" ng-model="driver.lastname"/>
+        <input type="text" ng-model="driver.lastname" placeholder="z.B. Mustermann"/>
       </div>
     </div>
     <div class="row">
       <div class="small-4 columns">
         <label>Zip Code</label>
-        <input type="text" ng-model="driver.zip"/>
+        <input type="text" ng-model="driver.zipcode" placeholder="00000"/>
       </div>
       <div class="small-8 columns">
         <label>City</label>
-        <input type="text" ng-model="driver.city"/>
+        <input type="text" ng-model="driver.city" placeholder="Musterstadt"/>
       </div>
     </div>
 
