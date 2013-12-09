@@ -47,7 +47,8 @@ openKS.factory('openKSNavigation', function openKSNavigationFactory() {
     { key: 'drivers', title: 'Drivers', url: 'views/drivers.html'},
     { key: 'settings', title: 'Settings', url: 'views/settings.html'},
     { key: 'info', title: 'Info', url: 'views/info.html'},
-    { key: 'driverAdd', title: 'Add driver', url: 'views/driver-form.html'}
+    { key: 'driverAdd', title: 'Add driver', url: 'views/driver-form.html'},
+    { key: 'driverEdit', title: 'Edit driver', url: 'views/driver-form.html'}
   ];
 
   var nav = new openKSUtil.navObject(views, 'index');

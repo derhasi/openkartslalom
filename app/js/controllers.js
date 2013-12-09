@@ -65,7 +65,7 @@ openKS.controller('HomeCtrl', [function() {}]);
 /**
  * Controller for drivers overview.
  */
-openKS.controller('DriversCtrl', ['$scope', 'openKSDatabase', function($scope, db) {
+openKS.controller('DriversCtrl', ['$scope', 'openKSDatabase', 'openKSNavigation', function($scope, db, nav) {
   $scope.loading = true;
 
   $scope.drivers = [];
@@ -97,6 +97,15 @@ openKS.controller('DriversCtrl', ['$scope', 'openKSDatabase', function($scope, d
   // Initially load the drivers on controller init.
   $scope.loadDrivers();
 
+  /**
+   * Wrapper for navigating to the edit view of the given entry.
+   *
+   * @param id
+   */
+  $scope.editView = function (id) {
+    nav.setView('driverEdit', id);
+  }
+
 }]);
 
 /**
@@ -111,7 +120,7 @@ openKS.controller('DriverFormCtrl', ['$scope', 'openKSDriver', 'openKSNavigation
   // We got an existing driver and therefore have to retrieve the ID from the
   // navigation args.
   else {
-    var driverId = navigation.currentView.getArg(0);
+    var driverId = navigation.getCurrentArg(0);
 
     driverDB.load(driverId, function(driver) {
       $scope.driver = driver;
@@ -119,16 +128,32 @@ openKS.controller('DriverFormCtrl', ['$scope', 'openKSDriver', 'openKSNavigation
     });
   }
 
+  /**
+   * Helper to get the new state of the driver object.
+   * @returns {*}
+   */
   $scope.isNew = function() {
     if ($scope.driver != undefined) {
       return $scope.driver.isNew();
     }
   }
 
+  /**
+   * Callback to save the current driver credentials.
+   */
   $scope.saveDriver = function() {
+    // We have to knwo, if the driver was new, before we saved it.
+    var isNew = $scope.driver.isNew();
     $scope.driver.save(function(driver) {
       $scope.driver = driver;
-      //$scope.$apply();
+
+      // If the driver was new, we change the view.
+      if (isNew) {
+        navigation.setView('driverEdit', driver.id);
+      }
+      else {
+        navigation.setView('drivers');
+      }
     });
   };
 

@@ -23,15 +23,18 @@ openKSUtil.navObject = function (templateOptions, id) {
   // Private properties:
   // Storage ID to be used for local storage.
   var storageId = 'navObject-' + id;
+  // Templates are held private as only that init call shall define them.
+  var templates = {};
 
   // Set as local variable for
   var nav = this;
 
   // Public properties:
-  this.templates = {};
   this.currentView = undefined;
   this.history = [];
   this.future = [];
+
+
 
   /**
    * Helper to filter an array to only use objects.
@@ -48,13 +51,13 @@ openKSUtil.navObject = function (templateOptions, id) {
    */
   var initTemplates = function (templateOptions) {
     // Ensure empty template registry.
-    nav.templates = {};
+    templates = {};
 
     // key the template store be the key.
     for (var i in templateOptions) {
       var tpl = templateOptions[i];
 
-      nav.templates[tpl.key] = tpl;
+      templates[tpl.key] = tpl;
     }
   }
 
@@ -67,6 +70,7 @@ openKSUtil.navObject = function (templateOptions, id) {
   this.clear = function() {
     nav.history = [];
     nav.future = [];
+    initTemplates(origTemplates);
   }
 
   /**
@@ -117,7 +121,7 @@ openKSUtil.navObject = function (templateOptions, id) {
    */
   this.setViewByArgs = function(key, args) {
     // Only process if the given view exists.
-    if (nav.templates[key] != undefined) {
+    if (templates[key] != undefined) {
 
       // Do nothing, if the current view has not changed.
       if (nav.currentView != undefined && nav.currentView.key == key
@@ -132,7 +136,7 @@ openKSUtil.navObject = function (templateOptions, id) {
       }
 
       // Write the given key as new view.
-      nav.currentView = nav.templates[key];
+      nav.currentView = templates[key];
       // We add the instance args
       nav.currentView.args = args;
 
@@ -143,6 +147,9 @@ openKSUtil.navObject = function (templateOptions, id) {
       nav.save(function() {
         console.log('View setted and stored:', key);
         console.log(args);
+
+        // @todo: trigger event as navigation as changed.
+
       });
     }
   }
@@ -154,7 +161,7 @@ openKSUtil.navObject = function (templateOptions, id) {
    *
    * @returns {*}
    */
-  this.getArg = function(num) {
+  this.getCurrentArg = function(num) {
     if (nav.hasArg(num)) {
       return nav.currentView.args[num];
     }
@@ -249,7 +256,6 @@ openKSUtil.navObject = function (templateOptions, id) {
       if (items[storageId] != undefined) {
         var store = angular.fromJson(items[storageId]);
 
-        nav.templates = store.templates;
         nav.currentView = store.currentView;
         nav.history = store.history;
         nav.future = store.future;

@@ -24,14 +24,14 @@
     <tr ng-if="!loading && !drivers.length">
       <td colspan="7"><span> No drivers in the database. <a ng-click="nav.setView('driverAdd', 'new')">Add some here</a>.</span></td>
     </tr>
-    <tr ng-repeat="driver in drivers | filter:searchText | orderBy:sortBY">
+    <tr ng-repeat="driver in drivers">
       <td>{{driver.id}}</td>
       <td>{{driver.class}}</td>
       <td>{{driver.firstname}} {{driver.lastname}}</td>
       <td>{{driver.club}}</td>
       <td>{{driver.zip}} {{driver.city}}</td>
       <td>{{driver.birthday}}</td>
-      <td><a href="drivers/{{driver.__id}}/edit" title="Edit &quot;{{driver.firstname}} {{driver.lastname}}&quot;"><i class="icon-edit"> edit</i></a></td>
+      <td><a ng-click="editView(driver.id)" title="Edit &quot;{{driver.firstname}} {{driver.lastname}}&quot;"><i class="fa fa-edit"> edit</i></a></td>
     </tr>
   </table>
 
