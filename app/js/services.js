@@ -137,6 +137,11 @@ openKS.factory('openKSDriver', ['openKSDatabase', function openKSDriverFactory(d
     this.lastname = '';
     this.zipcode = '';
     this.city = '';
+    this.sex = '';
+    this.birthday = '';
+    this.oldLicense = '';
+    this.rookie = '';
+    this.comment = '';
 
     /**
      * Construct the object from the given parameters provided.
@@ -161,7 +166,12 @@ openKS.factory('openKSDriver', ['openKSDatabase', function openKSDriverFactory(d
         city: '',
         license: '',
         class: '',
-        club: ''
+        club: '',
+        sex: '',
+        birthday: '',
+        oldLicense: '',
+        rookie: '',
+        comment: ''
       }
 
       // Assign passed values to the object. Set default, if none is given.

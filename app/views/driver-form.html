@@ -2,20 +2,19 @@
 
   <h2 ng-if="isNew()" translate="">Add new driver</h2>
   <h2 ng-if="!isNew()">Edit "{{driver.firstname}} {{driver.lastname}}"</h2>
-  <div ng-if="!isNew()" class="revision">Revision: {{driver.v}}</div>
   <form class="row">
     <div class="row">
-      <div class="small-1 columns">
+      <div ng-if="!isNew()" class="small-2 columns">
         <label>ID</label>
         <input type="text" ng-model="driver.id" disabled=""/>
       </div>
-      <div class="small-3 columns">
-        <label>Class</label>
-        <input type="text" ng-model="driver.class" placeholder="z.B. K1"/>
+      <div class="small-5 columns">
+        <label>License</label>
+        <input type="text" ng-model="driver.license" placeholder="z.B. 120328"/>
       </div>
-      <div class="small-8 columns">
-        <label>Club</label>
-        <input type="text" ng-model="driver.club" placeholder="z.B. MSC OpenSource"/>
+      <div class="small-5 columns">
+        <label>Old license</label>
+        <input type="text" ng-model="driver.oldLicense" disabled/>
       </div>
     </div>
     <div class="row">
@@ -30,21 +29,52 @@
     </div>
     <div class="row">
       <div class="small-4 columns">
+        <label>Class</label>
+        <input type="text" ng-model="driver.class" placeholder="z.B. K5"/>
+      </div>
+      <div class="small-8 columns">
+        <label>Club</label>
+        <input type="text" ng-model="driver.club" placeholder="z.B. MSC Lechbruck"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-4 columns">
         <label>Zip Code</label>
-        <input type="text" ng-model="driver.zipcode" placeholder="00000"/>
+        <input type="text" ng-model="driver.zipcode" placeholder="z.B. 30173"/>
       </div>
       <div class="small-8 columns">
         <label>City</label>
-        <input type="text" ng-model="driver.city" placeholder="Musterstadt"/>
+        <input type="text" ng-model="driver.city" placeholder="z.B. Hannover"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-3 columns">
+        <label>Sex</label>
+        <select ng-model="driver.sex" required="required">
+          <option value="f">female</option>
+          <option value="m">male</option>
+        </select>
+      </div>
+      <div class="small-5 columns">
+        <label>Birthday</label>
+        <input type="text" ng-model="driver.birthday" placeholder="z.B. 21.01.1983"/>
+      </div>
+      <div class="small-4 columns">
+        <label>Rookie year</label>
+        <input type="text" ng-model="driver.rookie" placeholder="z.B. 2010"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-12 columns">
+        <label>Comment</label>
+        <textarea ng-model="driver.comment" rows="5"></textarea>
       </div>
     </div>
 
     <div class="row">
-      <div class="small-4 columns">
-        <button ng-click="saveDriver()" class="button radius"><i class="fa fa-save"></i> Save driver</button>
-      </div>
-      <div class="small-4 columns text-right">
-        <a ng-click="deleteDriver()" class="button radius secondary"><i class="fa fa-trash-o"></i> Delete</a>
+      <div class="small-12 columns">
+        <button ng-click="saveDriver()" class="button radius left"><i class="fa fa-save"></i> Save driver</button>
+        <a ng-click="deleteDriver()" class="button radius secondary right"><i class="fa fa-trash-o"></i> Delete</a>
       </div>
     </div>
 
