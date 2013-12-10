@@ -195,6 +195,27 @@ openKS.factory('openKSDriver', ['openKSDatabase', function openKSDriverFactory(d
     }
 
     /**
+     * Delete the driver instance.
+     *
+     * @param {Function} callback
+     */
+    this.delete = function (callback) {
+      var obj = driver.toObject();
+      console.log('Delete driver:', obj);
+
+      db.driverDB.remove(driver.id,
+        // Success function.
+        function () {
+          callback(obj);
+        },
+        // Error callback.
+        function (err) {
+          console.error(err);
+        }
+      );
+    }
+
+    /**
      * Provide an object that can be stored to the indexedDB.
      *
      * For some reason the original object cannot be serialized, so we simply
