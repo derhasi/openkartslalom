@@ -203,9 +203,47 @@ openKS.controller('DriverFormCtrl', ['$scope', 'openKSDriver', 'openKSNavigation
 }]);
 
 /**
- * Controller for restult overview.
+ * Controller for result overview.
  */
 openKS.controller('ResultsCtrl', [function() {}]);
+
+
+/**
+ * Controller for the result form.
+ */
+openKS.controller('ResultFormCtrl', ['$scope', function($scope) {
+
+  // Getter callback for a new
+  $scope.isNew = function() {
+    return true; // @todo
+  };
+
+  $scope.result = {
+    startNo: undefined,
+    driverId: undefined,
+    training: {
+      pen1: 0,
+      pen2: 0,
+      time: "0.00"
+    },
+    run1: {
+      pen1: 0,
+      pen2: 0,
+      time: "0.00"
+    },
+    run2: {
+      pen1: 0,
+      pen2: 0,
+      time: "0.00"
+    },
+    status: '',
+    comment: ''
+  };
+
+  $scope.saveResultItem = function () {
+  };
+
+}]);
 
 /**
  * Controller for settings view.
