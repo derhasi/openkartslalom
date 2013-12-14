@@ -2,20 +2,20 @@
 /**
  * Provides an object factory.
  *
- * @param defaults
- * @param required
+ * @param {{}} params
+ *   Properties for initialising the object.
  */
 function OpenKSUtilObj(params) {
   // Every object has to hold that ID, as this is used to store the object.
   this.id = undefined;
 
-  // Init defaults.
+  // Extract defaults and init the object properties.
   this.defaults();
   this.init(params);
 }
 
 /**
- * Extract the default values from the
+ * Extract the default values from initial object.
  */
 OpenKSUtilObj.prototype.defaults = function() {
 
@@ -24,24 +24,23 @@ OpenKSUtilObj.prototype.defaults = function() {
   this.__defaults = {};
 
   // Extract defaults.
-  for (var i in this) {
-    // We got a default, if it is not a function
-    // and the property is not prefixed with an underscore.
-    if (i[0] != '_' && typeof this[i] != 'function') {
-      this.__defaults[i] = this[i];
+  for (var key in this) {
+    // We got a default, if it is not a function and the property is not
+    // prefixed with an underscore.
+    if (key[0] != '_' && typeof this[key] != 'function') {
+      this.__defaults[key] = this[key];
     }
   }
-
-  // Defaults
-  console.log('Defaults:', this.__defaults);
 };
 
 /**
  * Initialize the object with the given parameters
- * @param params
+ *
+ * @param {{}} params
+ *   Properties for initialising the object.
  */
 OpenKSUtilObj.prototype.init = function (params) {
-  console.log('typeof params', typeof params);
+  console.log('init typeof params', typeof params);
   if (params === undefined || typeof params != 'object') {
     return;
   }
@@ -76,8 +75,10 @@ OpenKSUtilObj.prototype.toObject = function() {
 }
 
 /**
+ * Result object for use in openKS.
  *
- * @param params
+ * @param {{}} params
+ *   Parameters for initialising the object.
  */
 function OpenKSResult(params) {
 
@@ -107,7 +108,10 @@ function OpenKSResult(params) {
 OpenKSResult.prototype = new OpenKSUtilObj();
 
 /**
+ * Driver object for use in openKS.
  *
+ * @param {{}} params
+ *   Parameters for initialising the object.
  */
 function OpenKSDriver(params) {
   // Init default params.
