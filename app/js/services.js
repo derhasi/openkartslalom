@@ -130,8 +130,8 @@ openKS.factory('openKSNavigation', function openKSNavigationFactory() {
 /**
  * Provides driver object.
  */
-openKS.factory('openKSDriver', ['openKSDatabase', function openKSDriverFactory(db) {
-  var openKSDriver = function (params) {
+openKS.factory('openKSDrv', ['openKSDatabase', function openKSDrvFactory(db) {
+  var openKSDrv = function (params) {
 
     // Driver for internal reference.
     var driver = this;
@@ -273,11 +273,11 @@ openKS.factory('openKSDriver', ['openKSDatabase', function openKSDriverFactory(d
    * @param {Function} callback
    *   - will be called with new driver object as first parameter
    */
-  openKSDriver.load = function(driverID, callback) {
+  openKSDrv.load = function(driverID, callback) {
     db.driverDB.get(driverID,
       // Success callback
       function(item) {
-        var newDriver = new openKSDriver(item);
+        var newDriver = new openKSDrv(item);
         callback(newDriver);
       },
       // Error callback.
@@ -287,5 +287,5 @@ openKS.factory('openKSDriver', ['openKSDatabase', function openKSDriverFactory(d
     );
   }
 
-  return openKSDriver;
+  return openKSDrv;
 }]);
