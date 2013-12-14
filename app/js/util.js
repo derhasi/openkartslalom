@@ -5,8 +5,6 @@
  * Some of them may be provided as angularjs providers later.
  */
 
-var openKSUtil = {};
-
 /**
  * Provide an object to manage the view history.
  *
@@ -20,7 +18,7 @@ var openKSUtil = {};
  * @param {string} id
  *   ID for storage
  */
-openKSUtil.navObject = function (templateOptions, id) {
+function openKSUtilNav(templateOptions, id) {
 
   // Private properties:
   // Storage ID to be used for local storage.

@@ -123,7 +123,7 @@ openKS.factory('openKSNavigation', function openKSNavigationFactory() {
     }
   ];
 
-  var nav = new openKSUtil.navObject(views, 'index');
+  var nav = new openKSUtilNav(views, 'index');
   return nav;
 });
 
