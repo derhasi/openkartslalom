@@ -72,7 +72,17 @@ OpenKSUtilObj.prototype.toObject = function() {
     }
   }
   return obj;
-}
+};
+
+/**
+ * Checks if the current object is new.
+ *
+ * @returns {boolean}
+ *   true if the object is new. false otherwise.
+ */
+OpenKSUtilObj.prototype.isNew = function() {
+  return this.id == undefined || this.id <= 0;
+};
 
 /**
  * Result object for use in openKS.
