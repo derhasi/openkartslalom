@@ -5,13 +5,18 @@
  * @param {{}} params
  *   Properties for initialising the object.
  */
-function OpenKSUtilObj(params) {
+
+/**
+ *
+ * @constructor
+ */
+function OpenKSUtilObj() {
   // Every object has to hold that ID, as this is used to store the object.
   this.id = undefined;
 
   // Extract defaults and init the object properties.
   this.defaults();
-  this.init(params);
+  this.init({});
 }
 
 /**
@@ -85,12 +90,35 @@ OpenKSUtilObj.prototype.isNew = function() {
 };
 
 /**
+ * Loads the object parameters from the database.
+ *
+ * @param {int} id
+ * @param {Function} callback
+ */
+OpenKSUtilObj.prototype.load = function(id, callback) {
+  return;
+  this.__db.get(id,
+    // Success callback
+    function(item) {
+      // We initialise the object with the retrieved item.
+      this.init(item)
+
+      callback(this);
+    },
+    // Error callback.
+    function (err) {
+      callback(this, err);
+    }
+  );
+}
+
+/**
  * Result object for use in openKS.
  *
  * @param {{}} params
  *   Parameters for initialising the object.
  */
-function OpenKSResult(params) {
+function OpenKSResult(params, id, callback) {
 
   this.startNo =  undefined;
   this.driverId = undefined;
@@ -113,9 +141,12 @@ function OpenKSResult(params) {
   this.comment = '';
 
   // Call the parent constructor
-  OpenKSUtilObj.call(this, params);
+  OpenKSUtilObj.call(this, params, id, callback);
 }
+// Inherit OpenKSUtilObj.
 OpenKSResult.prototype = new OpenKSUtilObj();
+// Correct the constructor pointer because it points to OpenKSUtilObj.
+OpenKSResult.prototype.constructor = OpenKSResult;
 
 /**
  * Driver object for use in openKS.
@@ -123,7 +154,7 @@ OpenKSResult.prototype = new OpenKSUtilObj();
  * @param {{}} params
  *   Parameters for initialising the object.
  */
-function OpenKSDriver(params) {
+function OpenKSDriver(params, id, callback) {
   // Init default params.
   this.license = '';
   this.club = '';
@@ -138,7 +169,46 @@ function OpenKSDriver(params) {
   this.rookie = '';
   this.comment = '';
 
+  // Provide datastore for our object.
+  this.__dbready = false;
+  this.__db = new mockDB(function() {
+    this.__dbready = true;
+  });
+
   // Call the parent constructor
-  OpenKSUtilObj.call(this, params);
+  OpenKSUtilObj.call(this, params, id, callback);
 }
+// Inherit OpenKSUtilObj.
 OpenKSDriver.prototype = new OpenKSUtilObj();
+// Correct the constructor pointer because it points to OpenKSUtilObj.
+OpenKSDriver.prototype.constructor = OpenKSDriver;
+
+/**
+ * A simple mockDB for now.
+ * @param options
+ */
+var mockDB = function(options) {
+
+  var onStoreReady = (options.onStoreReady == undefined) ? function(){} : options.onStoreReady;
+
+  this.get = function(id, callback) {
+    setTimeout(function() {
+      callback({id: id, comment: 'This comment ' + +new Date()});
+    }, 1000);
+  };
+
+  this.put = function(obj, callback) {
+    setTimeout(function() {
+      if (obj.id == undefined) {
+        obj.id = +new Date();
+      }
+
+      callback(obj.id);
+    });
+  }
+
+  // Simulate database initialisation.
+  setTimeout(function() {
+    onStoreReady();
+  }, 1000);
+}
