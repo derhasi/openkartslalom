@@ -133,18 +133,18 @@ openKS.controller('DriversCtrl', ['$scope', 'openKSDatabase', 'openKSNavigation'
 /**
  * Controller for driver form.
  */
-openKS.controller('DriverFormCtrl', ['$scope', 'openKSDriver', 'openKSNavigation', function($scope, driverDB, navigation) {
+openKS.controller('DriverFormCtrl', ['$scope', 'openKSDriver', 'openKSNavigation', function($scope, openKSDriver, navigation) {
 
   // We got a new driver on the driverAdd view.
   if (navigation.currentView.key == 'driverAdd') {
-    $scope.driver = new driverDB({});
+    $scope.driver = new openKSDriver();
   }
   // We got an existing driver and therefore have to retrieve the ID from the
   // navigation args.
   else {
     var driverId = navigation.getCurrentArg(0);
 
-    driverDB.load(driverId, function(driver) {
+    openKSDriver.load(driverId, function(driver) {
       $scope.driver = driver;
       $scope.$apply();
     });
@@ -206,7 +206,6 @@ openKS.controller('DriverFormCtrl', ['$scope', 'openKSDriver', 'openKSNavigation
  * Controller for result overview.
  */
 openKS.controller('ResultsCtrl', [function() {}]);
-
 
 /**
  * Controller for the result form.

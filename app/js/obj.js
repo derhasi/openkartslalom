@@ -7,6 +7,7 @@
  */
 
 /**
+ * Basic object to write and load from IDBStore.
  *
  * @constructor
  */
@@ -96,14 +97,14 @@ OpenKSUtilObj.prototype.isNew = function() {
  * @param {Function} callback
  */
 OpenKSUtilObj.prototype.load = function(id, callback) {
-  return;
+  var obj = this;
   this.__db.get(id,
     // Success callback
     function(item) {
       // We initialise the object with the retrieved item.
-      this.init(item)
+      obj.init(item);
 
-      callback(this);
+      callback(obj);
     },
     // Error callback.
     function (err) {
@@ -113,102 +114,45 @@ OpenKSUtilObj.prototype.load = function(id, callback) {
 }
 
 /**
- * Result object for use in openKS.
+ * Asynchronous save function.
  *
- * @param {{}} params
- *   Parameters for initialising the object.
+ * @param {Function} callback
+ *   - will be called with (updated) driver object as first parameter
  */
-function OpenKSResult(params, id, callback) {
-
-  this.startNo =  undefined;
-  this.driverId = undefined;
-  this.training = {
-    pen1: 0,
-    pen2: 0,
-    time: "0.00"
-  };
-  this.run1 = {
-    pen1: 0,
-    pen2: 0,
-    time: "0.00"
-  };
-  this.run2 = {
-    pen1: 0,
-    pen2: 0,
-    time: "0.00"
-  };
-  this.status = '';
-  this.comment = '';
-
-  // Call the parent constructor
-  OpenKSUtilObj.call(this, params, id, callback);
+OpenKSUtilObj.prototype.save = function (callback) {
+  var store = this.toObject();
+  var obj = this;
+  this.__db.put(store,
+    // Success callback providing (new) id.
+    function(id) {
+      obj.id = id;
+      callback(obj);
+    },
+    // Error callback.
+    function (err) {
+      console.error(err);
+    }
+  );
 }
-// Inherit OpenKSUtilObj.
-OpenKSResult.prototype = new OpenKSUtilObj();
-// Correct the constructor pointer because it points to OpenKSUtilObj.
-OpenKSResult.prototype.constructor = OpenKSResult;
 
 /**
- * Driver object for use in openKS.
+ * Delete the driver instance.
  *
- * @param {{}} params
- *   Parameters for initialising the object.
+ * @param {Function} callback
+ *
  */
-function OpenKSDriver(params, id, callback) {
-  // Init default params.
-  this.license = '';
-  this.club = '';
-  this.class = '';
-  this.firstname = '';
-  this.lastname = '';
-  this.zipcode = '';
-  this.city = '';
-  this.sex = '';
-  this.birthday = '';
-  this.oldLicense = '';
-  this.rookie = '';
-  this.comment = '';
+OpenKSUtilObj.prototype.delete = function (callback) {
+  var obj = this.toObject();
+  console.log('Delete obj:', obj);
 
-  // Provide datastore for our object.
-  this.__dbready = false;
-  this.__db = new mockDB(function() {
-    this.__dbready = true;
-  });
-
-  // Call the parent constructor
-  OpenKSUtilObj.call(this, params, id, callback);
-}
-// Inherit OpenKSUtilObj.
-OpenKSDriver.prototype = new OpenKSUtilObj();
-// Correct the constructor pointer because it points to OpenKSUtilObj.
-OpenKSDriver.prototype.constructor = OpenKSDriver;
-
-/**
- * A simple mockDB for now.
- * @param options
- */
-var mockDB = function(options) {
-
-  var onStoreReady = (options.onStoreReady == undefined) ? function(){} : options.onStoreReady;
-
-  this.get = function(id, callback) {
-    setTimeout(function() {
-      callback({id: id, comment: 'This comment ' + +new Date()});
-    }, 1000);
-  };
-
-  this.put = function(obj, callback) {
-    setTimeout(function() {
-      if (obj.id == undefined) {
-        obj.id = +new Date();
-      }
-
-      callback(obj.id);
-    });
-  }
-
-  // Simulate database initialisation.
-  setTimeout(function() {
-    onStoreReady();
-  }, 1000);
+  this.__db.remove(this.id,
+    // Success function.
+    function () {
+      callback(obj);
+    },
+    // Error callback.
+    function (err) {
+      console.error(err);
+    }
+  );
 }

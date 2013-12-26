@@ -130,24 +130,13 @@ openKS.factory('openKSNavigation', function openKSNavigationFactory() {
 /**
  * Provides driver object.
  */
-openKS.factory('openKSDrv', ['openKSDatabase', function openKSDrvFactory(db) {
-  var openKSDrv = function (params) {
+openKS.factory('openKSDriver', ['openKSDatabase', function openKSDriverFactory(db) {
 
-    // Driver for internal reference.
-    var driver = this;
-
-    // Empty params, means empty object.
-    if (params == undefined) {
-      params = {};
-    }
-
-    // Default values for a new driver.
-    this.isNew = function () {
-      return driver.id == undefined || driver.id <= 0;
-    };
-
-    // Init default params (will be overwritten by init() again).
-    this.id = undefined;
+  /**
+   * Driver object for use in openKS.
+   */
+  var OpenKSDriver = function() {
+    // Init default params.
     this.license = '';
     this.club = '';
     this.class = '';
@@ -161,131 +150,90 @@ openKS.factory('openKSDrv', ['openKSDatabase', function openKSDrvFactory(db) {
     this.rookie = '';
     this.comment = '';
 
-    /**
-     * Construct the object from the given parameters provided.
-     * @param {Array} params
-     */
-    var init = function (params) {
-      assign(driver, params, true);
-    }
+    this.__db = db.driverDB;
 
-    /**
-     * Private function to assig properties to a given object.
-     *
-     * @param {Object} obj
-     * @param {Object} params
-     */
-    var assign = function (obj, params, addUndefined) {
-      var defaults = {
-        id: undefined,
-        firstname: '',
-        lastname: '',
-        zipcode: '',
-        city: '',
-        license: '',
-        class: '',
-        club: '',
-        sex: '',
-        birthday: '',
-        oldLicense: '',
-        rookie: '',
-        comment: ''
-      }
-
-      // Assign passed values to the object. Set default, if none is given.
-      for (var prop in defaults) {
-        var val = (params[prop] != undefined) ? params[prop] : defaults[prop];
-        if (val != undefined || addUndefined) {
-          obj[prop] = val;
-        }
-      }
-    }
-
-    /**
-     * Asynchronous save function.
-     *
-     * @param {Function} callback
-     *  - will be called with (updated) driver object as first parameter
-     */
-    this.save = function (callback) {
-      var store = driver.toObject();
-      db.driverDB.put(store,
-        // Success callback providing (new) id.
-        function(id) {
-          driver.id = id;
-          callback(driver);
-        },
-        // Error callback.
-        function (err) {
-          console.error(err);
-        }
-      );
-    }
-
-    /**
-     * Delete the driver instance.
-     *
-     * @param {Function} callback
-     */
-    this.delete = function (callback) {
-      var obj = driver.toObject();
-      console.log('Delete driver:', obj);
-
-      db.driverDB.remove(driver.id,
-        // Success function.
-        function () {
-          callback(obj);
-        },
-        // Error callback.
-        function (err) {
-          console.error(err);
-        }
-      );
-    }
-
-    /**
-     * Provide an object that can be stored to the indexedDB.
-     *
-     * For some reason the original object cannot be serialized, so we simply
-     * take the raw values.
-     *
-     * @returns {{}}
-     */
-    this.toObject = function() {
-      var obj = {};
-      // The assign function with the false indicator will remove undefined
-      // values, so the id of new objects is not part of the object and may not
-      // cause errors with IndexDB.
-      // Due to that I had been running in the error:
-      // "Evaluating the object store's key path yielded a value that is not a valid key"
-      assign(obj, driver, false);
-      return obj;
-    }
-
-    // Initialize the object, after we got it.
-    init(params);
-  };
+    // Call the parent constructor
+    OpenKSUtilObj.call(this);
+  }
+  // Inherit OpenKSUtilObj.
+  OpenKSDriver.prototype = new OpenKSUtilObj();
+  // Correct the constructor pointer because it points to OpenKSUtilObj.
+  OpenKSDriver.prototype.constructor = OpenKSDriver;
 
   /**
-   * Load a new driver by id from the db.
+   * Load driver from the database.
    *
-   * @param {int} driverID
-   * @param {Function} callback
-   *   - will be called with new driver object as first parameter
+   * @param {int} id
+   * @param {function} callback
+   * @returns {OpenKSDriver}
    */
-  openKSDrv.load = function(driverID, callback) {
-    db.driverDB.get(driverID,
-      // Success callback
-      function(item) {
-        var newDriver = new openKSDrv(item);
-        callback(newDriver);
-      },
-      // Error callback.
-      function (err) {
-        console.log('Error', err);
-      }
-    );
+  OpenKSDriver.load = function(id, callback) {
+    var drv = new OpenKSDriver();
+    drv.load(id, callback);
+    return drv;
   }
 
-  return openKSDrv;
+  /**
+   * Create a new driver object from a given set of parameters.
+   *
+   * @param {{}} params
+   *   Parameters to create the new Driver object.
+   *   May not hold 'id', as that should be used with load() to avoid unforeseen
+   *   behavior.
+   *
+   * @returns {OpenKSDriver}
+   *   A new driver object.
+   */
+  OpenKSDriver.create = function(params) {
+    var drv = new OpenKSDriver();
+    // make sure no id is set.
+    params.id = undefined;
+    drv.init(params);
+    return drv;
+  }
+
+  return OpenKSDriver;
+}]);
+
+/**
+ * Provides result object factory.
+ */
+openKS.factory('openKSResult', ['openKSDatabase', function openKSResultFactory(db) {
+
+  /**
+   * Result object for use in openKS.
+   */
+  var OpenKSResult = function() {
+
+    this.startNo =  undefined;
+    this.driverId = undefined;
+    this.training = {
+      pen1: 0,
+      pen2: 0,
+      time: "0.00"
+    };
+    this.run1 = {
+      pen1: 0,
+      pen2: 0,
+      time: "0.00"
+    };
+    this.run2 = {
+      pen1: 0,
+      pen2: 0,
+      time: "0.00"
+    };
+    this.status = '';
+    this.comment = '';
+
+    this.__db = db.resultDB;
+
+    // Call the parent constructor
+    OpenKSUtilObj.call(this);
+  }
+  // Inherit OpenKSUtilObj.
+  OpenKSResult.prototype = new OpenKSUtilObj();
+  // Correct the constructor pointer because it points to OpenKSUtilObj.
+  OpenKSResult.prototype.constructor = OpenKSResult;
+
+  return OpenKSResult;
 }]);
