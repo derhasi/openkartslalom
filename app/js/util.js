@@ -466,3 +466,35 @@ OpenKSUtilObj.prototype.delete = function (callback) {
   );
 }
 
+/**
+ * Load object for the given class from the database.
+ *
+ * @param {OpenKSUtilObj} OpenKSClass
+ * @param {int} id
+ * @param {Function} callback
+ * @returns {OpenKSUtilObj}
+ */
+OpenKSUtilObj.load = function (id, callback) {
+  var obj = new this();
+  obj.load(id, callback);
+  return obj;
+}
+
+/**
+ * Create a new driver object from a given set of parameters.
+ *
+ * @param {{}} params
+ *   Parameters to create the new Driver object.
+ *   May not hold 'id', as that should be used with load() to avoid unforeseen
+ *   behavior.
+ *
+ * @returns {OpenKSUtilObj}
+ *   A new driver object.
+ */
+OpenKSUtilObj.create = function(params) {
+  var obj = new this();
+  // make sure no id is set.
+  params.id = undefined;
+  obj.init(params);
+  return obj;
+}

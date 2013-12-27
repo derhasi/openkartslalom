@@ -161,36 +161,10 @@ openKS.factory('openKSDriver', ['openKSDatabase', function openKSDriverFactory(d
   OpenKSDriver.prototype.constructor = OpenKSDriver;
 
   /**
-   * Load driver from the database.
-   *
-   * @param {int} id
-   * @param {function} callback
-   * @returns {OpenKSDriver}
+   * Copy static methods from OpenKSUtilObj.
    */
-  OpenKSDriver.load = function(id, callback) {
-    var drv = new OpenKSDriver();
-    drv.load(id, callback);
-    return drv;
-  }
-
-  /**
-   * Create a new driver object from a given set of parameters.
-   *
-   * @param {{}} params
-   *   Parameters to create the new Driver object.
-   *   May not hold 'id', as that should be used with load() to avoid unforeseen
-   *   behavior.
-   *
-   * @returns {OpenKSDriver}
-   *   A new driver object.
-   */
-  OpenKSDriver.create = function(params) {
-    var drv = new OpenKSDriver();
-    // make sure no id is set.
-    params.id = undefined;
-    drv.init(params);
-    return drv;
-  }
+  OpenKSDriver.load = OpenKSUtilObj.load;
+  OpenKSDriver.create = OpenKSUtilObj.create;
 
   return OpenKSDriver;
 }]);
@@ -234,6 +208,12 @@ openKS.factory('openKSResult', ['openKSDatabase', function openKSResultFactory(d
   OpenKSResult.prototype = new OpenKSUtilObj();
   // Correct the constructor pointer because it points to OpenKSUtilObj.
   OpenKSResult.prototype.constructor = OpenKSResult;
+
+  /**
+   * Copy static methods from OpenKSUtilObj.
+   */
+  OpenKSResult.load = OpenKSUtilObj.load;
+  OpenKSResult.create = OpenKSUtilObj.create;
 
   return OpenKSResult;
 }]);
