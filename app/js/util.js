@@ -355,7 +355,6 @@ OpenKSUtilObj.prototype.defaults = function() {
  *   Properties for initialising the object.
  */
 OpenKSUtilObj.prototype.init = function (params) {
-  console.log('init typeof params', typeof params);
   if (params === undefined || typeof params != 'object') {
     return;
   }
@@ -497,4 +496,38 @@ OpenKSUtilObj.create = function(params) {
   params.id = undefined;
   obj.init(params);
   return obj;
+}
+
+/**
+ * Load all objects for the given db.
+ *
+ * @param {Function} callback
+ */
+OpenKSUtilObj.loadAll = function(callback) {
+  // We us the database given by the prototype.
+  if (this.prototype.__db == undefined) {
+    console.log('Error', 'No __db provided');
+  }
+
+  // Provide our class in our scope.
+  var objClass = this;
+
+  this.prototype.__db.getAll(
+    function(items) {
+      console.log(items);
+      var objs = [];
+
+      // Build a new object for every databse row.
+      for (var i in items) {
+        var obj = new objClass();
+        obj.init(items[i]);
+        objs.push(obj);
+      }
+
+      callback(objs);
+    },
+    function (err) {
+      console.log('Error', err);
+    }
+  );
 }

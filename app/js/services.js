@@ -150,13 +150,15 @@ openKS.factory('openKSDriver', ['openKSDatabase', function openKSDriverFactory(d
     this.rookie = '';
     this.comment = '';
 
-    this.__db = db.driverDB;
-
     // Call the parent constructor
     OpenKSUtilObj.call(this);
   }
   // Inherit OpenKSUtilObj.
   OpenKSDriver.prototype = new OpenKSUtilObj();
+  // Add our database connection to the prototype, so we can us it in static
+  // functions too.
+  OpenKSDriver.prototype.__db = db.driverDB;
+
   // Correct the constructor pointer because it points to OpenKSUtilObj.
   OpenKSDriver.prototype.constructor = OpenKSDriver;
 
@@ -165,6 +167,7 @@ openKS.factory('openKSDriver', ['openKSDatabase', function openKSDriverFactory(d
    */
   OpenKSDriver.load = OpenKSUtilObj.load;
   OpenKSDriver.create = OpenKSUtilObj.create;
+  OpenKSDriver.loadAll = OpenKSUtilObj.loadAll;
 
   return OpenKSDriver;
 }]);
@@ -199,13 +202,14 @@ openKS.factory('openKSResult', ['openKSDatabase', function openKSResultFactory(d
     this.status = '';
     this.comment = '';
 
-    this.__db = db.resultDB;
-
     // Call the parent constructor
     OpenKSUtilObj.call(this);
   }
   // Inherit OpenKSUtilObj.
   OpenKSResult.prototype = new OpenKSUtilObj();
+  // Add our database connection to the prototype, so we can us it in static
+  // functions too.
+  OpenKSResult.prototype.__db = db.resultDB;
   // Correct the constructor pointer because it points to OpenKSUtilObj.
   OpenKSResult.prototype.constructor = OpenKSResult;
 
@@ -214,6 +218,7 @@ openKS.factory('openKSResult', ['openKSDatabase', function openKSResultFactory(d
    */
   OpenKSResult.load = OpenKSUtilObj.load;
   OpenKSResult.create = OpenKSUtilObj.create;
+  OpenKSResult.loadAll = OpenKSUtilObj.loadAll;
 
   return OpenKSResult;
 }]);

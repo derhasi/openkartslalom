@@ -85,7 +85,7 @@ openKS.controller('HomeCtrl', [function() {}]);
 /**
  * Controller for drivers overview.
  */
-openKS.controller('DriversCtrl', ['$scope', 'openKSDatabase', 'openKSNavigation', function($scope, db, nav) {
+openKS.controller('DriversCtrl', ['$scope', 'openKSDriver', 'openKSNavigation', function($scope, openKSDriver, nav) {
   $scope.loading = true;
 
   $scope.drivers = [];
@@ -97,19 +97,15 @@ openKS.controller('DriversCtrl', ['$scope', 'openKSDatabase', 'openKSNavigation'
     // We mark the scope, that we are loading the drivers list again.
     $scope.loading = true;
 
-    db.driverDB.getAll(
-      function(items) {
-        console.log(items);
-        // Asign the fetched values to our scope variable.
-        $scope.drivers = items;
+    openKSDriver.loadAll(
+      function(drivers) {
+        // Assign the fetched drivers to our scope variable.
+        $scope.drivers = drivers;
         // As we finished, we can unflad the loading state.
         $scope.loading = false;
         // ... as the call is async, we need to tell our scope that it has been
         // updated.
         $scope.$apply();
-      },
-      function (err) {
-        console.log('Error', err);
       }
     );
   }
