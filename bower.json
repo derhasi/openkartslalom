@@ -5,7 +5,8 @@
     "angular": "1.2.3",
     "idbwrapper": "1.4.1",
     "foundation": "5.0.2",
-    "font-awesome": "4.0.3"
+    "font-awesome": "4.0.3",
+    "angular-bootstrap-typeahead": "~0.6.0"
   },
   "ignore": [
     "**/.*",
