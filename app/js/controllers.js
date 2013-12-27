@@ -291,6 +291,23 @@ openKS.controller('ResultFormCtrl', ['$scope', 'openKSResult', 'openKSNavigation
     });
   };
 
+  /**
+   * Delete the driver of the current view.
+   */
+  $scope.deleteResultItem = function() {
+    // We need a driver id for deleting the driver.
+    if ($scope.resultItem.id < 1) {
+      return;
+    }
+
+    $scope.resultItem.delete(function(resultObj) {
+      // Change the view to the drivers list.
+      navigation.setView('results', [], function() {
+        $scope.$apply();
+      });
+    });
+  }
+
 }]);
 
 /**
