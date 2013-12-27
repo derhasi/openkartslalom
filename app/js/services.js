@@ -183,7 +183,7 @@ openKS.factory('openKSResult', ['openKSDatabase', function openKSResultFactory(d
   var OpenKSResult = function() {
 
     this.startNo =  undefined;
-    this.driverId = undefined;
+    this.driverID = undefined;
     this.training = {
       pen1: 0,
       pen2: 0,

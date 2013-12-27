@@ -160,7 +160,7 @@ openKS.controller('DriverFormCtrl', ['$scope', 'openKSDriver', 'openKSNavigation
    * Callback to save the current driver credentials.
    */
   $scope.saveDriver = function() {
-    // We have to knwo, if the driver was new, before we saved it.
+    // We have to know, if the driver was new, before we saved it.
     var isNew = $scope.driver.isNew();
     $scope.driver.save(function(driver) {
       $scope.driver = driver;
@@ -206,36 +206,50 @@ openKS.controller('ResultsCtrl', [function() {}]);
 /**
  * Controller for the result form.
  */
-openKS.controller('ResultFormCtrl', ['$scope', function($scope) {
+openKS.controller('ResultFormCtrl', ['$scope', 'openKSResult', 'openKSNavigation', function($scope, openKSResult, navigation) {
+
+  // We got a new driver on the driverAdd view.
+  if (navigation.currentView.key == 'resultAdd') {
+    $scope.resultItem = new openKSResult();
+  }
+  // We got an existing driver and therefore have to retrieve the ID from the
+  // navigation args.
+  else {
+    var resultId = navigation.getCurrentArg(0);
+
+    openKSResult.load(resultId, function(res) {
+      $scope.resultItem = res;
+      $scope.$apply();
+    });
+  }
 
   // Getter callback for a new
   $scope.isNew = function() {
-    return true; // @todo
-  };
-
-  $scope.result = {
-    startNo: undefined,
-    driverId: undefined,
-    training: {
-      pen1: 0,
-      pen2: 0,
-      time: "0.00"
-    },
-    run1: {
-      pen1: 0,
-      pen2: 0,
-      time: "0.00"
-    },
-    run2: {
-      pen1: 0,
-      pen2: 0,
-      time: "0.00"
-    },
-    status: '',
-    comment: ''
+    if ($scope.resultItem != undefined) {
+      return $scope.resultItem.isNew();
+    }
   };
 
   $scope.saveResultItem = function () {
+    $scope.resultItem.save(function() {
+      // We have a different behavior for new entries.
+      var isNew = $scope.resultItem.isNew();
+      $scope.resultItem.save(function(resultItem) {
+        $scope.resultItem = resultItem;
+
+        // If the driver was new, we change the view.
+        if (isNew) {
+          navigation.setView('resultEdit', [resultItem.id], function() {
+            $scope.$apply();
+          });
+        }
+        else {
+          navigation.setView('results', [], function() {
+            $scope.$apply();
+          });
+        }
+      });
+    });
   };
 
 }]);
