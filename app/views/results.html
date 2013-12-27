@@ -14,18 +14,19 @@
       <th translate="">ID</th>
       <th translate="">Class</th>
       <th translate="">Name</th>
-      <th translate="">Team</th>
       <th translate="">Actions</th>
     </tr>
-    <tr ng-hide="results.length">
-      <td colspan="7"><i class="icon-spinner icon-spin icon-large"></i><span> No results.</span></td>
+    <tr ng-if="loading">
+      <td colspan="7"><i class="fa fa-spinner fa-spin fa-large"></i><span> Loading ...</span></td>
+    </tr>
+    <tr ng-if="!loading && !results.length">
+      <td colspan="7"><span> No result items in the database. <a ng-click="setView('resultAdd')">Add some here</a>.</span></td>
     </tr>
     <tr ng-repeat="result in results">
       <td>{{result.id}}</td>
       <td>{{result.class}}</td>
-      <td>{{result.driver}}</td>
-      <td>{{result.team}}</td>
-      <td><a ng-click="setView('resultEdit', results.id)" title="Edit result {{result.id}}&quot;"><i class="icon-edit"> edit</i></a></td>
+      <td>{{result.driverID}}</td>
+      <td><a ng-click="editView(result.id)" title="Edit result {{result.id}}&quot;"><i class="icon-edit"> edit</i></a></td>
     </tr>
   </table>
 
