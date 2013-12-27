@@ -10,8 +10,11 @@
         <input type="number" ng-model="resultItem.startNo"/>
       </div>
       <div class="small-8 columns">
-        <label>Driver ID</label>
-        <input type="text" ng-model="resultItem.driverID"/>
+        <label>Driver ID {{resultItem.driverID}}</label>
+        <input type="text" ng-model="resultItem.driverID"
+               typeahead="d.id as d.firstname + ' ' + d.lastname + ' (' + d.club + ')' for d in drivers | filter:$viewValue"
+               typeahead-editable="false"
+        />
       </div>
     </div>
 

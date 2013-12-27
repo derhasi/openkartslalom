@@ -101,7 +101,7 @@ openKS.controller('DriversCtrl', ['$scope', 'openKSDriver', 'openKSNavigation', 
       function(drivers) {
         // Assign the fetched drivers to our scope variable.
         $scope.drivers = drivers;
-        // As we finished, we can unflad the loading state.
+        // As we finished, we can unflag the loading state.
         $scope.loading = false;
         // ... as the call is async, we need to tell our scope that it has been
         // updated.
@@ -245,7 +245,14 @@ openKS.controller('ResultsCtrl', ['$scope', 'openKSResult', 'openKSNavigation', 
 /**
  * Controller for the result form.
  */
-openKS.controller('ResultFormCtrl', ['$scope', 'openKSResult', 'openKSNavigation', function($scope, openKSResult, navigation) {
+openKS.controller('ResultFormCtrl', ['$scope', 'openKSResult', 'openKSDriver', 'openKSNavigation', function($scope, openKSResult, openKSDriver, navigation) {
+
+  // Provide a list of drivers for autocomplete selection.
+  $scope.drivers = [];
+  openKSDriver.loadAll(function(drivers) {
+    $scope.drivers = drivers;
+    $scope.$apply();
+  });
 
   // We got a new driver on the driverAdd view.
   if (navigation.currentView.key == 'resultAdd') {
