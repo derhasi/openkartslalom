@@ -254,6 +254,13 @@ openKS.controller('ResultFormCtrl', ['$scope', 'openKSResult', 'openKSDriver', '
     $scope.$apply();
   });
 
+  // Holds the currently selected driver object.
+  $scope.selectedDriver = {};
+  // Provide the label of the driver in the autocomplete and the input field.
+  $scope.getDriverLabel = function(d) {
+    return d.firstname + ' ' + d.lastname + ' (' + d.club + ')';
+  }
+
   // We got a new driver on the driverAdd view.
   if (navigation.currentView.key == 'resultAdd') {
     $scope.resultItem = new openKSResult();
@@ -265,7 +272,17 @@ openKS.controller('ResultFormCtrl', ['$scope', 'openKSResult', 'openKSDriver', '
 
     openKSResult.load(resultId, function(res) {
       $scope.resultItem = res;
-      $scope.$apply();
+
+      // When we got a driverID, we load the selected driver object.
+      if (res.driverID != undefined) {
+        openKSDriver.load(res.driverID, function(driver) {
+          $scope.selectedDriver = driver;
+          $scope.$apply();
+        })
+      }
+      else {
+        $scope.$apply();
+      }
     });
   }
 
@@ -277,6 +294,7 @@ openKS.controller('ResultFormCtrl', ['$scope', 'openKSResult', 'openKSDriver', '
   };
 
   $scope.saveResultItem = function () {
+    $scope.resultItem.driverID = $scope.selectedDriver.id;
     $scope.resultItem.save(function() {
       // We have a different behavior for new entries.
       var isNew = $scope.resultItem.isNew();

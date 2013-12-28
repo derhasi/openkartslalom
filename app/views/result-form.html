@@ -10,10 +10,11 @@
         <input type="number" ng-model="resultItem.startNo"/>
       </div>
       <div class="small-8 columns">
-        <label>Driver ID {{resultItem.driverID}}</label>
-        <input type="text" ng-model="resultItem.driverID"
-               typeahead="d.id as d.firstname + ' ' + d.lastname + ' (' + d.club + ')' for d in drivers | filter:$viewValue"
+        <label>Driver</label>
+        <input type="text" ng-model="selectedDriver"
+               typeahead="d as getDriverLabel(d) for d in drivers | filter:$viewValue"
                typeahead-editable="false"
+               typeahead-input-formatter="getDriverLabel($model)"
         />
       </div>
     </div>
