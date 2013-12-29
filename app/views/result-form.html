@@ -18,7 +18,14 @@
         />
       </div>
     </div>
-
+    <div class="row panel radius" >
+      <div ng-if="!selectedDriver.id" class="small-12 columns">
+        No driver selected.
+      </div>
+      <div ng-if="selectedDriver.id" class="small-12 columns">
+        {{selectedDriver.getPreview()}}
+      </div>
+    </div>
     <div class="row panel callout radius">
       <div class="small-4 columns">
         <label>Training</label>

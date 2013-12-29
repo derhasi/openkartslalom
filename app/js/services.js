@@ -162,6 +162,17 @@ openKS.factory('openKSDriver', ['openKSDatabase', function openKSDriverFactory(d
   // Correct the constructor pointer because it points to OpenKSUtilObj.
   OpenKSDriver.prototype.constructor = OpenKSDriver;
 
+  OpenKSDriver.prototype.getPreview = function() {
+    var output = '';
+    output += this.license;
+    output += ' - ' + this.firstname + ' ' + this.lastname;
+    output += ' (' + this.zipcode + ' ' + this.city + ')';
+    output += ' - Class: ' + this.class;
+    output += ' - Birthday: ' +  this.birthday;
+    output += ' - Club: ' + this.club;
+    return output;
+  }
+
   /**
    * Copy static methods from OpenKSUtilObj.
    */

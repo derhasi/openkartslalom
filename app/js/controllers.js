@@ -255,9 +255,13 @@ openKS.controller('ResultFormCtrl', ['$scope', 'openKSResult', 'openKSDriver', '
   });
 
   // Holds the currently selected driver object.
-  $scope.selectedDriver = {};
+  $scope.selectedDriver = undefined;
   // Provide the label of the driver in the autocomplete and the input field.
   $scope.getDriverLabel = function(d) {
+    if (d == undefined) {
+      return '';
+    }
+
     return d.firstname + ' ' + d.lastname + ' (' + d.club + ')';
   }
 
