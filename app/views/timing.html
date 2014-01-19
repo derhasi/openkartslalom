@@ -1,0 +1,26 @@
+<div ng-controller="TimingCtrl">
+  <h2>Timing</h2>
+  <div class="row panel radius">
+    <div class="small-12 columns ">
+      <h3>Ports</h3>
+      <label>Selected port: <em>{{selectedPort.path}}</em></label>
+      <form>
+        <select ng-model="selectedPort" ng-options="p.path for p in ports">
+          <option value="">-- choose port --</option>
+        </select>
+      </form>
+      <a ng-if="selectedPort && !cSerial" ng-click="connect()" class="button radius right">Connect</a>
+      <a ng-if="cSerial" ng-click="disconnect()" class="button radius right">Disconnect from '{{cSerial.connectionId}}'</a>
+      <a ng-if="cSerial && !cSerial.listening" ng-click="listen()" class="button radius right">Listen.</a>
+      <a ng-if="cSerial && cSerial.listening" ng-click="unlisten()" class="button radius secondary right">Unlisten.</a>
+    </div>
+   </div>
+  <div class="row">
+    <div class="small-12 columns">
+      <h3>Data</h3>
+      {{data}}
+    </div>
+  </div>
+
+</div>
+

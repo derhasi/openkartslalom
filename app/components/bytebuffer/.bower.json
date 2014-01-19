@@ -1,0 +1,33 @@
+{
+  "name": "bytebuffer",
+  "version": "2.3.1",
+  "author": "Daniel Wirtz <dcode@dcode.io>",
+  "description": "A full-featured ByteBuffer implementation using typed arrays.",
+  "main": "ByteBuffer.js",
+  "keywords": [
+    "net",
+    "array",
+    "buffer",
+    "arraybuffer",
+    "typed array",
+    "bytebuffer",
+    "json",
+    "websocket",
+    "webrtc"
+  ],
+  "dependencies": {
+    "long": "latest"
+  },
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/dcodeIO/ByteBuffer.js",
+  "_release": "2.3.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.3.1",
+    "commit": "708afa410a8a828617823f3d2aa51eb4d8ad8015"
+  },
+  "_source": "git://github.com/dcodeIO/ByteBuffer.js.git",
+  "_target": "~2.3.1",
+  "_originalSource": "bytebuffer",
+  "_direct": true
+}

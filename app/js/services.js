@@ -120,6 +120,13 @@ openKS.factory('openKSNavigation', function openKSNavigationFactory() {
       url: 'views/result-form.html',
       parent: 'results',
       iconClass: 'fa fa-edit'
+    },
+    {
+      key: 'timing',
+      title: 'Timing',
+      url: 'views/timing.html',
+      parent: 'home',
+      iconClass: 'fa fa-clock-o'
     }
   ];
 
