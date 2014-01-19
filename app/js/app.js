@@ -1,7 +1,12 @@
 'use strict';
 
-// Declare app level module which depends on filters, and services
-var openKS = angular.module('openKS', ['ui.bootstrap']);
-
-openKS.config([ function() {
-}]);
+define(
+  [
+    'angular',
+    'ui.boostrap',
+    'ui.bootstrap.tpls'
+  ],
+  function (angular) {
+    return angular.module('openKS' , ['ui.bootstrap']);
+  }
+);
