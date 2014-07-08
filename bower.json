@@ -7,7 +7,8 @@
     "foundation": "5.0.2",
     "font-awesome": "4.0.3",
     "angular-bootstrap": "~0.7.0",
-    "pouchdb": "~2.2.3"
+    "pouchdb": "~2.2.3",
+    "angular-pouchdb": "~0.1.5"
   },
   "ignore": [
     "**/.*",
