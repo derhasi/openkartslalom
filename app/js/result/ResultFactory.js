@@ -1,4 +1,3 @@
-'use strict';
 
 /**
  * Provides result object factory.

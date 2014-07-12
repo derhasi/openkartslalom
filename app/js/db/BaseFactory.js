@@ -1,4 +1,3 @@
-'use strict';
 
 /**
  * Provides the central database for storing drivers and (later) results data.
