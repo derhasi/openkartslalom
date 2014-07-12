@@ -17,10 +17,10 @@
         </ul>
         <section class="top-bar-section">
           <ul class="left">
-            <li class="{{getClass('home')}}"><a ng-click="setView('home')"><i class="fa fa-home"></i> <span class="hide">Home</span></a></li>
-            <li class="{{getClass('results')}}"><a ng-click="setView('results')"><i class="fa fa-trophy"></i> Results</a></li>
-            <li class="{{getClass('drivers')}}"><a ng-click="setView('drivers')"><i class="fa fa-users"></i> Drivers</a></li>
-            <li class="{{getClass('timing')}}"><a ng-click="setView('timing')"><i class="fa fa-clock-o"></i> Timing</a></li>
+            <li ui-sref-active="active"><a ui-sref="home"><i class="fa fa-home"></i> <span class="hide">Home</span></a></li>
+            <li ui-sref-active="active"><a ui-sref="results"><i class="fa fa-trophy"></i> Results</a></li>
+            <li ui-sref-active="active"><a ui-sref="drivers"><i class="fa fa-users"></i> Drivers</a></li>
+            <li ui-sref-active="active"><a ui-sref="timing"><i class="fa fa-clock-o"></i> Timing</a></li>
           </ul>
           <!-- Right Nav Section -->
           <ul class="right">
@@ -33,8 +33,8 @@
               <a ng-if="!nav.hasFuture()" class="inactive"><i class="fa fa-repeat"></i></a>
             </li>
             <li class="divider"></li>
-            <li class="{{getClass('settings')}}"><a ng-click="setView('settings')"><i class="fa fa-cog"></i> <span class="hide">Settings</span></a></li>
-            <li class="{{getClass('info')}}"><a ng-click="setView('info')"><i class="fa fa-info-circle"></i> <span class="hide">Info</span></a></li>
+            <li ui-sref-active="active"><a ui-sref="settings"><i class="fa fa-cog"></i> <span class="hide">Settings</span></a></li>
+            <li ui-sref-active="active"><a ui-sref="info"><i class="fa fa-info-circle"></i> <span class="hide">Info</span></a></li>
           </ul>
         </section>
       </nav>
@@ -49,7 +49,9 @@
     <div id="loading" ng-if="!dbReady">
       Database still initialising!!
     </div>
-    <div id="view" ng-if="dbReady" ng-include="nav.currentView.url"></div>
+    <!--<div id="view" ng-if="dbReady" ng-include="nav.currentView.url"></div>-->
+
+    <div id="view" ui-view></div>
 
     <script src="components/angular/angular.js"></script>
     <script src="components/angular-ui-router/release/angular-ui-router.js"></script>
