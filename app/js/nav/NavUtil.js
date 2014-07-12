@@ -1,4 +1,3 @@
-'use strict';
 
 /**
  * Provide an object to manage the view history.
@@ -308,3 +307,4 @@ function openKSUtilNav(templateOptions, id) {
   }
 
 };
+
