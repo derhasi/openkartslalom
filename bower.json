@@ -2,7 +2,7 @@
   "name": "openkartslalom",
   "version": "0.0.1",
   "dependencies": {
-    "angular": "1.2.3",
+    "angular": "~1.2.3",
     "idbwrapper": "1.4.1",
     "foundation": "5.0.2",
     "font-awesome": "4.0.3",
