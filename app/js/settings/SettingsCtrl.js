@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Controller for settings view.
  */

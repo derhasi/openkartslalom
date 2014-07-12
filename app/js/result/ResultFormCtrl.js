@@ -1,4 +1,4 @@
-'use strict';
+
 
 /**
  * Controller for the result form.

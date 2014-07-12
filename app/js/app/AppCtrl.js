@@ -1,4 +1,3 @@
-'use strict';
 
 /**
  * Controller for the whole html content.

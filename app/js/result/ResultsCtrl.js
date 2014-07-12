@@ -1,24 +1,24 @@
-'use strict';
+
 
 /**
- * Controller for drivers overview.
+ * Controller for result overview.
  */
-openKS.controller('DriversCtrl', ['$scope', 'openKSDriver', 'openKSNavigation', function($scope, openKSDriver, nav) {
+openKS.controller('ResultsCtrl', ['$scope', 'openKSResult', 'openKSNavigation', function($scope, openKSResult, nav) {
   $scope.loading = true;
 
-  $scope.drivers = [];
+  $scope.results = [];
 
   /**
    * Loads the all drivers asynchronously.
    */
-  $scope.loadDrivers = function() {
+  $scope.loadResults = function() {
     // We mark the scope, that we are loading the drivers list again.
     $scope.loading = true;
 
-    openKSDriver.loadAll(
-      function(drivers) {
-        // Assign the fetched drivers to our scope variable.
-        $scope.drivers = drivers;
+    openKSResult.loadAll(
+      function(results) {
+        // Assign the fetched result items to our scope variable.
+        $scope.results = results;
         // As we finished, we can unflag the loading state.
         $scope.loading = false;
         // ... as the call is async, we need to tell our scope that it has been
@@ -28,8 +28,8 @@ openKS.controller('DriversCtrl', ['$scope', 'openKSDriver', 'openKSNavigation', 
     );
   }
 
-  // Initially load the drivers on controller init.
-  $scope.loadDrivers();
+  // Initially load the results on controller init.
+  $scope.loadResults();
 
   /**
    * Wrapper for navigating to the edit view of the given entry.
@@ -37,7 +37,7 @@ openKS.controller('DriversCtrl', ['$scope', 'openKSDriver', 'openKSNavigation', 
    * @param id
    */
   $scope.editView = function (id) {
-    nav.setView('driverEdit', [id], function () {
+    nav.setView('resultEdit', [id], function () {
       $scope.$apply();
     });
   }

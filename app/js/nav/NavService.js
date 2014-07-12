@@ -1,7 +1,7 @@
 
 ( function() {
 
-  var nav = angular.module('openks.nav', []);
+  var nav = angular.module('openKS.nav', []);
 
   /**
    * Service providing the general navigation object.
