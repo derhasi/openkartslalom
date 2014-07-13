@@ -2,17 +2,16 @@
 /**
  * Controller for driver form.
  */
-openKS.controller('DriverFormCtrl', ['$scope', 'openKSDriver', 'openKSNavigation', function($scope, openKSDriver, navigation) {
+openKS.controller('DriverFormCtrl', ['$scope', 'openKSDriver', 'openKSNavigation', 'driverId',
+  function($scope, openKSDriver, navigation, driverId) {
 
   // We got a new driver on the driverAdd view.
-  if (navigation.currentView.key == 'driverAdd') {
+  if (!driverId) {
     $scope.driver = new openKSDriver();
   }
   // We got an existing driver and therefore have to retrieve the ID from the
   // navigation args.
   else {
-    var driverId = navigation.getCurrentArg(0);
-
     openKSDriver.load(driverId, function(driver) {
       $scope.driver = driver;
       $scope.$apply();

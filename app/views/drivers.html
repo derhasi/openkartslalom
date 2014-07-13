@@ -2,7 +2,7 @@
   <h2>Driver database</h2>
   <div class="row">
     <div class="small-4 columns">
-      <a ng-click="setView('driverAdd')" class="button radius"><i class="fa fa-plus"></i> Add driver</a>
+      <a ui-sref="driverAdd" class="button radius"><i class="fa fa-plus"></i> Add driver</a>
     </div>
     <div class="small-4 columns text-right">
       <a ng-click="loadDrivers()" class="button radius secondary"><i class="fa fa-refresh"></i> Reload list</a>
@@ -31,7 +31,7 @@
       <td>{{driver.club}}</td>
       <td>{{driver.zip}} {{driver.city}}</td>
       <td>{{driver.birthday}}</td>
-      <td><a ng-click="editView(driver.id)" title="Edit &quot;{{driver.firstname}} {{driver.lastname}}&quot;"><i class="fa fa-pencil"> edit</i></a></td>
+      <td><a ui-sref="driverEdit({ id: driver.id })" title="Edit &quot;{{driver.firstname}} {{driver.lastname}}&quot;"><i class="fa fa-pencil"> edit</i></a></td>
     </tr>
   </table>
 

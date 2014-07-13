@@ -3,7 +3,8 @@
 /**
  * Controller for the result form.
  */
-openKS.controller('ResultFormCtrl', ['$scope', 'openKSResult', 'openKSDriver', 'openKSNavigation', function($scope, openKSResult, openKSDriver, navigation) {
+openKS.controller('ResultFormCtrl', ['$scope', 'openKSResult', 'openKSDriver', 'resultId',
+  function($scope, openKSResult, openKSDriver, resultID) {
 
   // Provide a list of drivers for autocomplete selection.
   $scope.drivers = [];
@@ -25,15 +26,13 @@ openKS.controller('ResultFormCtrl', ['$scope', 'openKSResult', 'openKSDriver', '
   }
 
   // We got a new driver on the driverAdd view.
-  if (navigation.currentView.key == 'resultAdd') {
+  if (!resultID) {
     $scope.resultItem = new openKSResult();
   }
   // We got an existing driver and therefore have to retrieve the ID from the
   // navigation args.
   else {
-    var resultId = navigation.getCurrentArg(0);
-
-    openKSResult.load(resultId, function(res) {
+    openKSResult.load(resultID, function(res) {
       $scope.resultItem = res;
 
       // When we got a driverID, we load the selected driver object.

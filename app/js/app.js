@@ -52,6 +52,12 @@ openKS.config(function($stateProvider) {
     })
     .state('driverAdd', {
       templateUrl: 'views/driver-form.html',
+      controller: 'DriverFormCtrl',
+      resolve: {
+        driverId: function() {
+          return 0;
+        }
+      },
       data: {
         title: 'Add driver',
         breadcrumbParent: 'drivers',
@@ -60,6 +66,14 @@ openKS.config(function($stateProvider) {
     })
     .state('driverEdit', {
       templateUrl: 'views/driver-form.html',
+      controller: 'DriverFormCtrl',
+      params: ['id'],
+      resolve: {
+        driverId: function($stateParams) {
+          console.log($stateParams);
+          return parseInt($stateParams.id);
+        }
+      },
       data: {
         title: 'Edit driver',
         breadcrumbParent: 'drivers',
@@ -68,14 +82,28 @@ openKS.config(function($stateProvider) {
     })
     .state('resultAdd', {
       templateUrl: 'views/result-form.html',
+      controller: 'ResultFormCtrl',
+      resolve: {
+        resultId: function() {
+          return 0;
+        }
+      },
       data: {
         title: 'Add result',
-          breadcrumbParent: 'results',
+        breadcrumbParent: 'results',
         iconClass: 'fa fa-clock-o'
       }
     })
     .state('resultEdit', {
       templateUrl: 'views/result-form.html',
+      controller: 'ResultFormCtrl',
+      params: ['id'],
+      resolve: {
+        resultId: function($stateParams) {
+          console.log($stateParams);
+          return parseInt($stateParams.id);
+        }
+      },
       data: {
         title: 'Edit result',
         breadcrumbParent: 'results',
