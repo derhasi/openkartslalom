@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/app.css">
   </head>
   <body>
-    <header class="row">
+    <header class="row" >
       <nav class="top-bar" data-topbar>
         <ul class="title-area">
           <li class="name">
@@ -24,25 +24,25 @@
           </ul>
           <!-- Right Nav Section -->
           <ul class="right">
-            <li>
-              <a ng-if="nav.hasHistory()" ng-click="nav.goBack()" title="Go back"><i class="fa fa-undo"></i></a>
-              <a ng-if="!nav.hasHistory()" class="inactive"><i class="fa fa-undo"></i></a>
-            </li>
-            <li>
-              <a ng-if="nav.hasFuture()" ng-click="nav.goForward()" title="Go forward"><i class="fa fa-repeat"></i></a>
-              <a ng-if="!nav.hasFuture()" class="inactive"><i class="fa fa-repeat"></i></a>
-            </li>
+            <!--<li>-->
+              <!--<a ng-if="nav.hasHistory()" ng-click="nav.goBack()" title="Go back"><i class="fa fa-undo"></i></a>-->
+              <!--<a ng-if="!nav.hasHistory()" class="inactive"><i class="fa fa-undo"></i></a>-->
+            <!--</li>-->
+            <!--<li>-->
+              <!--<a ng-if="nav.hasFuture()" ng-click="nav.goForward()" title="Go forward"><i class="fa fa-repeat"></i></a>-->
+              <!--<a ng-if="!nav.hasFuture()" class="inactive"><i class="fa fa-repeat"></i></a>-->
+            <!--</li>-->
             <li class="divider"></li>
             <li ui-sref-active="active"><a ui-sref="settings"><i class="fa fa-cog"></i> <span class="hide">Settings</span></a></li>
             <li ui-sref-active="active"><a ui-sref="info"><i class="fa fa-info-circle"></i> <span class="hide">Info</span></a></li>
           </ul>
         </section>
       </nav>
-      <ul class="breadcrumbs">
-        <li ng-repeat="crumb in breadcrumbs()">
-          <a ng-click="setView(crumb.key)" class="crumb-{{crumb.key}}"><i class="{{crumb.iconClass}}"></i> {{crumb.title}}</a>
+      <ul ng-controller="NavCtrl as nav2" class="breadcrumbs">
+        <li ng-repeat="crumb in nav2.breadcrumbs">
+          <a  ui-sref="home" class="crumb-{{crumb.key}}"><i class="{{crumb.iconClass}}"></i> {{crumb.title}}</a>
         </li>
-        <li class="current"><a ng-click="setView(nav.currentView.key)"><i class="{{nav.currentView.iconClass}}"></i> {{nav.currentView.title}}</a></li>
+        <!--<li class="current"><a ng-click="setView(nav.currentView.key)"><i class="{{nav.currentView.iconClass}}"></i> {{nav.currentView.title}}</a></li>-->
       </ul>
     </header>
 
@@ -68,6 +68,8 @@
     <script src="js/driver/DriversCtrl.js"></script>
     <script src="js/driver/DriverFactory.js"></script>
     <script src="js/home/HomeCtrl.js"></script>
+    <script src="js/nav/module.js"></script>
+    <script src="js/nav/NavCtrl.js"></script>
     <script src="js/nav/NavUtil.js"></script>
     <script src="js/nav/NavService.js"></script>
     <script src="js/result/ResultFormCtrl.js"></script>
@@ -75,5 +77,6 @@
     <script src="js/result/ResultFactory.js"></script>
     <script src="js/settings/SettingsCtrl.js"></script>
     <script src="js/timing/SerialUtil.js"></script>
+    <script src="js/timing/TimingCtrl.js"></script>
   </body>
 </html>

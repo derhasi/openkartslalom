@@ -100,7 +100,6 @@ openKS.config(function($stateProvider) {
       params: ['id'],
       resolve: {
         resultId: function($stateParams) {
-          console.log($stateParams);
           return parseInt($stateParams.id);
         }
       },
