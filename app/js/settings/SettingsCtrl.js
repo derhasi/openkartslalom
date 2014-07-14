@@ -1,10 +1,10 @@
 /**
  * Controller for settings view.
  */
-openKS.controller('SettingsCtrl', [ '$scope', 'openKSNavigation', function($scope, navigation) {
+openKS.controller('SettingsCtrl', [ '$scope', 'openKSNavHistory', function($scope, history) {
 
   $scope.clearHistory = function() {
-    navigation.clear();
+    history.clearHistory();
   }
 
 }]);

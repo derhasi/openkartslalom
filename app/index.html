@@ -24,14 +24,14 @@
           </ul>
           <!-- Right Nav Section -->
           <ul class="right">
-            <!--<li>-->
-              <!--<a ng-if="nav.hasHistory()" ng-click="nav.goBack()" title="Go back"><i class="fa fa-undo"></i></a>-->
-              <!--<a ng-if="!nav.hasHistory()" class="inactive"><i class="fa fa-undo"></i></a>-->
-            <!--</li>-->
-            <!--<li>-->
-              <!--<a ng-if="nav.hasFuture()" ng-click="nav.goForward()" title="Go forward"><i class="fa fa-repeat"></i></a>-->
-              <!--<a ng-if="!nav.hasFuture()" class="inactive"><i class="fa fa-repeat"></i></a>-->
-            <!--</li>-->
+            <li>
+              <a ng-if="nav.hasHistory()" ng-click="nav.undo()" title="Go back"><i class="fa fa-undo"></i></a>
+              <a ng-if="!nav.hasHistory()" class="inactive"><i class="fa fa-undo"></i></a>
+            </li>
+            <li>
+              <a ng-if="nav.hasFuture()" ng-click="nav.redo()" title="Go forward"><i class="fa fa-repeat"></i></a>
+              <a ng-if="!nav.hasFuture()" class="inactive"><i class="fa fa-repeat"></i></a>
+            </li>
             <li class="divider"></li>
             <li ui-sref-active="active"><a ui-sref="settings"><i class="fa fa-cog"></i> <span class="hide">Settings</span></a></li>
             <li ui-sref-active="active"><a ui-sref="info"><i class="fa fa-info-circle"></i> <span class="hide">Info</span></a></li>
@@ -69,9 +69,9 @@
     <script src="js/driver/DriverFactory.js"></script>
     <script src="js/home/HomeCtrl.js"></script>
     <script src="js/nav/module.js"></script>
+    <script src="js/nav/NavHistory.js"></script>
+    <script src="js/nav/NavState.js"></script>
     <script src="js/nav/NavCtrl.js"></script>
-    <script src="js/nav/NavUtil.js"></script>
-    <script src="js/nav/NavService.js"></script>
     <script src="js/result/ResultFormCtrl.js"></script>
     <script src="js/result/ResultsCtrl.js"></script>
     <script src="js/result/ResultFactory.js"></script>

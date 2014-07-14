@@ -3,7 +3,7 @@
 /**
  * Controller for result overview.
  */
-openKS.controller('ResultsCtrl', ['$scope', 'openKSResult', 'openKSNavigation', function($scope, openKSResult, nav) {
+openKS.controller('ResultsCtrl', ['$scope', 'openKSResult', 'openKSNavState', function($scope, openKSResult, nav) {
   $scope.loading = true;
 
   $scope.results = [];
@@ -37,9 +37,7 @@ openKS.controller('ResultsCtrl', ['$scope', 'openKSResult', 'openKSNavigation', 
    * @param id
    */
   $scope.editView = function (id) {
-    nav.setView('resultEdit', [id], function () {
-      $scope.$apply();
-    });
+    nav.setView('resultEdit', {id: id});
   }
 
 }]);

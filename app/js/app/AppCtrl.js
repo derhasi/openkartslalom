@@ -2,8 +2,8 @@
 /**
  * Controller for the whole html content.
  */
-openKS.controller('AppCtrl', ['$scope', '$timeout', 'openKSDatabase', 'openKSNavigation',
-  function($scope, $timeout, db, navigation) {
+openKS.controller('AppCtrl', ['$scope', '$timeout', 'openKSDatabase',
+  function($scope, $timeout, db) {
 
   // Function to check the status of the db initialisation.
   // @todo: rewrite as trigger on openKSDatabase

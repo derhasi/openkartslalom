@@ -2,8 +2,8 @@
 /**
  * Controller for driver form.
  */
-openKS.controller('DriverFormCtrl', ['$scope', 'openKSDriver', 'openKSNavigation', 'driverId',
-  function($scope, openKSDriver, navigation, driverId) {
+openKS.controller('DriverFormCtrl', ['$scope', 'openKSDriver', 'driverId', 'openKSNavState',
+  function($scope, openKSDriver, driverId, nav) {
 
   // We got a new driver on the driverAdd view.
   if (!driverId) {
@@ -39,14 +39,10 @@ openKS.controller('DriverFormCtrl', ['$scope', 'openKSDriver', 'openKSNavigation
 
       // If the driver was new, we change the view.
       if (isNew) {
-        navigation.setView('driverEdit', [driver.id], function() {
-          $scope.$apply();
-        });
+        nav.setView('driverEdit', {id: driver.id});
       }
       else {
-        navigation.setView('drivers', [], function() {
-          $scope.$apply();
-        });
+        nav.setView('drivers', {});
       }
     });
   };
@@ -62,9 +58,7 @@ openKS.controller('DriverFormCtrl', ['$scope', 'openKSDriver', 'openKSNavigation
 
     $scope.driver.delete(function(driverObj) {
       // Change the view to the drivers list.
-      navigation.setView('drivers', [], function() {
-        $scope.$apply();
-      });
+      nav.setView('drivers', {});
     });
   }
 

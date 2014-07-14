@@ -7,8 +7,8 @@
 
   var nav = angular.module('openKS.nav');
 
-  nav.controller('NavCtrl', ['$rootScope', '$state',
-    function ($rootScope, $state) {
+  nav.controller('NavCtrl', ['$rootScope', '$state', '$scope', 'openKSNavHistory',
+    function ($rootScope, $state, $scope, history) {
 
       var self = this;
 
@@ -19,6 +19,24 @@
        * Provides a list of crumb items for the given state.
        */
       this.breadcrumbs = [];
+
+      this.hasHistory = function() {
+        return history.hasHistory();
+      }
+
+      this.hasFuture = function() {
+        return history.hasFuture();
+      }
+
+      this.undo = function() {
+        var item = history.undo().current;
+        $state.go(item.name, item.params);
+      }
+
+      this.redo = function() {
+        var item = history.undo().current;
+        $state.go(item.name, item.params);
+      }
 
       /**
        * Helper function to update the breadcrumbs for the nav controller.
@@ -59,9 +77,17 @@
       }
 
       // Whenever the state changes, we update our breadcrumbs.
-      $rootScope.$on('$stateChangeSuccess', function(){
+      $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams){
+
+        var item = {
+          name: toState.name,
+          params: toParams
+        }
+        history.add(item);
+
         updateBreadcrumbs();
-      })
+      });
+
 
     }]);
 })();
