@@ -29,12 +29,12 @@
       }
 
       this.undo = function() {
-        var item = history.undo().current;
+        var item = history.undo().skipNext().current;
         $state.go(item.name, item.params);
       }
 
       this.redo = function() {
-        var item = history.undo().current;
+        var item = history.redo().skipNext().current;
         $state.go(item.name, item.params);
       }
 

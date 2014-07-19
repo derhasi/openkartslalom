@@ -15,6 +15,7 @@
       this.history = [];
       this.current = undefined;
       this.future = [];
+      this.skip = false;
 
       /**
        * Add an item to the history as current element.
@@ -23,11 +24,28 @@
        * @returns {NavHistoryModel}
        */
       this.add = function(item) {
+        // In the case, we shall skip adding an item, we do so.
+        if (self.skip) {
+          self.skip = false;
+          return self;
+        }
+
         if (self.current != undefined) {
           var lastItem = self.current;
           self.history.push(lastItem);
         }
         self.current = item;
+        return self;
+      }
+
+      /**
+       * Marks the next add as skip element. Used if an action might trigger
+       * adding an item twice.
+       *
+       * @returns {NavHistoryModel}
+       */
+      this.skipNext = function() {
+        self.skip = true;
         return self;
       }
 

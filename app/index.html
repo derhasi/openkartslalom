@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/app.css">
   </head>
   <body>
-    <header class="row" >
+    <header class="row" ng-controller="NavCtrl as nav">
       <nav class="top-bar" data-topbar>
         <ul class="title-area">
           <li class="name">
@@ -38,8 +38,8 @@
           </ul>
         </section>
       </nav>
-      <ul ng-controller="NavCtrl as nav2" class="breadcrumbs">
-        <li ng-repeat="crumb in nav2.breadcrumbs">
+      <ul class="breadcrumbs">
+        <li ng-repeat="crumb in nav.breadcrumbs">
           <a  ui-sref="home" class="crumb-{{crumb.key}}"><i class="{{crumb.iconClass}}"></i> {{crumb.title}}</a>
         </li>
         <!--<li class="current"><a ng-click="setView(nav.currentView.key)"><i class="{{nav.currentView.iconClass}}"></i> {{nav.currentView.title}}</a></li>-->
