@@ -60,7 +60,8 @@
           crumb = {
             key: state.name,
             iconClass: state.data.iconClass,
-            title: state.data.title
+            title: state.data.title,
+            sref: state.name
           };
 
           // We add the data to the breadcrumbs.

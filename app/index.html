@@ -40,7 +40,7 @@
       </nav>
       <ul class="breadcrumbs">
         <li ng-repeat="crumb in nav.breadcrumbs">
-          <a  ui-sref="home" class="crumb-{{crumb.key}}"><i class="{{crumb.iconClass}}"></i> {{crumb.title}}</a>
+          <a  ui-sref="{{crumb.sref}}" class="crumb-{{crumb.key}}"><i class="{{crumb.iconClass}}"></i> {{crumb.title}}</a>
         </li>
         <!--<li class="current"><a ng-click="setView(nav.currentView.key)"><i class="{{nav.currentView.iconClass}}"></i> {{nav.currentView.title}}</a></li>-->
       </ul>
